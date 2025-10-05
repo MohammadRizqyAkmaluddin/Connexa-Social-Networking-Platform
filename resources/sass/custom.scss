@@ -1,0 +1,55 @@
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.navbar {
+    display: flex;
+    justify-content: left;
+    height: 100px;
+    width: 95%;
+}
+.navbar img {
+    width: 150px;
+}
+
+.register-link {
+    text-decoration: none;    
+}
+.register-link:hover {
+    text-decoration: underline;    
+}
+
+
+.button-main {
+    border: 1px solid rgba(0, 0, 0, 0.221);
+    background-color: rgba(255, 255, 255, 0.658);
+}
+.button-main:hover {
+    background-color: #ecececa7;
+    border: 1px solid rgb(58, 58, 58);  
+}
+
+.hero-section {
+    background-image: url('/IMG/asset/hands.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 700px;
+}
+
+@media (max-width: 1000px) {  
+  .hero-section {
+    height: 600px;      
+  }
+}
+
+.btn-outline-primary:hover {
+  background-color: rgba(var(--bs-primary-rgb), 0.2);
+  color: #294582;
+}
+.shadow-right {
+box-shadow: 8px 0 16px -6px rgba(0,0,0,0.35);
+  border-radius: .5rem;
+}
