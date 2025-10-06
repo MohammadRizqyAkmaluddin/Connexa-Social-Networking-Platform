@@ -14,12 +14,10 @@
 
 </head>
 <body>
-    <div class="navbar">
-        <img src="{{ asset('IMG/logos/connexa3.png') }}" alt="">
-    </div>
+    <x-navbar-logo/>
 
     <div class="login-form shadow p-4 pt-4 rounded" style="width: 500px">
-        <h1 class="mb-4 text-center">Sign Up</h1>
+        <h1 class="mb-4 text-center text-black">Sign Up</h1>
         
         @if(session('success'))
             <p style="color:green">{{session ('success') }}</p>
@@ -81,11 +79,12 @@
             <button class="btn btn-primary w-100 py-2-5 rounded-pill fw-bold" type="submit">Agree & Join</button>
         </form>
     </div>
-        <p class="mt-5 text-center">
+        <p class="mt-5 text-center ">
             Already on Connexa?
         <a href="{{ route('login.form') }}" class="register-link fw-bold text-primary m-2">Sign In</a>
         </p>
 
+        <x-footer-thin :fixedBottom="true" />
 </body>
 
 </html>

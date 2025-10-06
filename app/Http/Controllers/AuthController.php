@@ -59,7 +59,7 @@ class AuthController extends Controller
             'email'     => 'required|email',
             'password'  => 'required|min:8',
         ]);
-
+        
         $user = User::where('email', $request->email)->first();
         if (!$user || !Hash::check($request->password, $user->password)) {
             return back()->withErrors([

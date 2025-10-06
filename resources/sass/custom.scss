@@ -20,7 +20,20 @@ body{
 .register-link:hover {
     text-decoration: underline;    
 }
-
+.nav-link {
+  color: rgb(92, 92, 92);
+}
+.nav-link:hover {
+  color: black;
+}
+.nav-link-2 {
+  color: rgb(199, 199, 199); 
+  text-decoration: none;
+}
+.nav-link-2:hover {
+  color: rgb(255, 255, 255);
+  text-decoration: underline;
+}
 
 .button-main {
     border: 1px solid rgba(0, 0, 0, 0.221);
@@ -52,4 +65,33 @@ body{
 .shadow-right {
 box-shadow: 8px 0 16px -6px rgba(0,0,0,0.35);
   border-radius: .5rem;
+}
+
+
+.subsec-second {
+  margin-left: 100px;
+}
+.prev-img {
+  width: 400px;
+}
+.prev-img-2 {
+  width: 500px;
+}
+.prev-img-3 {
+  width: 700px;
+}
+
+@media (max-width: 1300px) {  
+  .subsec-second {
+    margin-left: 80px;      
+  }
+  .prev-img {
+    width: 280px;
+  }
+  .prev-img-2 {
+    width: 350px;
+  }
+  .prev-img-3 {
+    width: 550px;
+  }
 }
