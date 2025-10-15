@@ -7,6 +7,7 @@ $brokenWhite: #fafafa;
 $lightGrey: #b9b9b9;
 $darkGrey: #919191;
 $black: black;
+$main: #F3F2EE;
 
 $theme-colors: map-merge(
   $theme-colors,
@@ -16,13 +17,14 @@ $theme-colors: map-merge(
     "brokenWhite":  $brokenWhite,
     "lightGrey":    $lightGrey,
     "darkGrey":     $darkGrey,
-    "black":        $black
+    "black":        $black,
+    "main":        $main
   )
 );
 
 $custom-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 $box-shadow: $custom-shadow;
-$box-shadow-sm: 0 0 20px rgba(0, 0, 0, 0.2);
+$box-shadow-sm: 0 0 6px rgba(0, 0, 0, 0.2);
 $box-shadow-lg: 0 0 40px rgba(0, 0, 0, 0.35);
 
 

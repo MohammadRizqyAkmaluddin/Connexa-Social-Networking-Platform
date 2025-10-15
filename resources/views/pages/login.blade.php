@@ -1,22 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Afacad:ital,wght@0,400..700;1,400..700&family=Amatic+SC:wght@400;700&family=Bebas+Neue&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caudex:ital,wght@0,400;0,700;1,400;1,700&family=Covered+By+Your+Grace&family=Gabarito:wght@400..900&family=Gloock&family=Koulen&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Teko:wght@300..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{url('CSS/style.css')}}">
-    <link rel="icon" href="{{ asset('IMG/logos/connexa1.png') }}" class="img-fluid" style="width:120px;" type="image/png">
-    <title>Connexa</title>  
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-
+    <x-head title="Login" />
 </head>
 <body>
-  
-    <x-navbar-logo/>
 
+    <x-navbar-logo/>
     <div class="login-form shadow p-4 pt-4 mt-8 rounded" style="width: 350px;">
         <h1 class="mb-4 text-center text-black">Sign In</h1>
 
@@ -30,7 +19,6 @@
             <span class="mx-3 mb-1 text-muted">or</span>
             <hr class="flex-grow-1">
         </div>
-
 
         @if($errors->any())
             <div class="alert alert-danger">
@@ -63,10 +51,6 @@
     </p>
 
     <x-footer-thin :fixedBottom="true" />
-
-    
-    
-    
 
 </body>
 </html>

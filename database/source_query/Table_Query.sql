@@ -190,6 +190,28 @@ CREATE TABLE posts (
     ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=InnoDB;
 
+CREATE TABLE comments (
+    comment_id INT AUTO_INCREMENT PRIMARY KEY,
+    post_id INT,
+    user_id VARCHAR(10),
+    comment TEXT,
+
+    FOREIGN KEY (post_id) REFERENCES posts(post_id)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB;
+
+CREATE TABLE likes (
+    post_id INT,
+    user_id VARCHAR(10),
+
+    FOREIGN KEY (post_id) REFERENCES posts(post_id)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB;
+
 CREATE TABLE messages (
     message_id INT AUTO_INCREMENT PRIMARY KEY,
     sender_id VARCHAR(10),
@@ -202,6 +224,13 @@ CREATE TABLE messages (
     FOREIGN KEY (receiver_id) REFERENCES users(user_id)
     ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=InnoDB;
+
+CREATE TABLE notifications (
+    notification_id INT AUTO_INCREMENT PRIMARY KEY,
+
+
+)ENGINE=InnoDB;
+
 
 -- PROFILE
 
@@ -271,6 +300,7 @@ CREATE TABLE user_educations (
     major_id INT,
 	start_date DATE,
 	end_date DATE,
+    GPA DECIMAL(10,2),
     description TEXT,
     section_id VARCHAR(10),
     
@@ -306,3 +336,5 @@ CREATE TABLE user_experiences (
     FOREIGN KEY (section_id) REFERENCES sections(section_id)
     ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=InnoDB;
+
+

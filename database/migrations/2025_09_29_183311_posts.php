@@ -15,9 +15,10 @@ class Posts extends Migration
     {
          Schema::create('posts', function (Blueprint $table) {
             $table->increments('post_id');
+            $table->string('post_type');
             $table->string('user_id', 10);
             $table->text('description');
-            $table->text('image');
+            $table->text('image')->nullable();
             $table->engine = 'InnoDB';
 
             $table->foreign('user_id')

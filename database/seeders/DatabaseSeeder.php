@@ -43,5 +43,23 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AccessSeeder::class,
         ]);
+        $this->call([
+            UserEducationSeeder::class,
+        ]);
+        $this->call([
+            PostSeeder::class,
+        ]);
+        $this->call([
+            CommentSeeder::class,
+        ]);
+        $this->call([
+            LikeSeeder::class,
+        ]);
+        $this->call([
+            ConnectionSeeder::class,
+        ]);
+        $this->call([
+            FollowSeeder::class,
+        ]);
     }
 }

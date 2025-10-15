@@ -163,3 +163,31 @@ INSERT INTO company_roles (user_id, company_id, role) VALUES
 ('U102','C006','Founder & CEO'),
 ('U068','C007','Founder'),('U004','C007','CEO'),
 ('U101','C008','Founder'),('U092','C008','CEO');
+
+INSERT INTO user_educations (user_id, company_id, major_id, start_date, end_date, GPA, description, section_id) VALUES
+('U001','C009',1,'2023-08-01','2027-08-01',3.75,'As a Computer Science student at BINUS University, I am delving deeply into software engineering, with a focus on full-stack web development','SEC03');
+
+
+php artisan make:model page
+php artisan make:model section
+php artisan make:model employment
+php artisan make:model mode
+php artisan make:model proficiency
+php artisan make:model company
+php artisan make:model subsidiary
+php artisan make:model access
+php artisan make:model companyRoles
+php artisan make:model major
+php artisan make:model job
+php artisan make:model detailSubsec
+php artisan make:model detailPoint
+php artisan make:model applicant
+php artisan make:model follow
+php artisan make:model connection
+php artisan make:model post
+php artisan make:model message
+php artisan make:model about
+php artisan make:model userLanguage
+php artisan make:model userSkill
+php artisan make:model userCertificate
+php artisan make:model userExperience

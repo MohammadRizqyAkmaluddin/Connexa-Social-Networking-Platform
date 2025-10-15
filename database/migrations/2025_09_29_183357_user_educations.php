@@ -19,6 +19,7 @@ class UserEducations extends Migration
             $table->integer('major_id')->unsigned();
             $table->date('start_date');
             $table->date('end_date');
+            $table->decimal('GPA', 10, 2);
             $table->text('description');
             $table->string('section_id', 10);
             $table->engine = 'InnoDB';

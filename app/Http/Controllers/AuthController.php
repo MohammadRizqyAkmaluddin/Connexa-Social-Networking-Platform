@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\support\Facades\Hash;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class AuthController extends Controller
@@ -12,7 +12,7 @@ class AuthController extends Controller
     
     public function showRegisterForm()
     {
-        return view('register');
+        return view('pages.register');
     }
     public function register(Request $request)
     {
@@ -51,7 +51,7 @@ class AuthController extends Controller
 
     public function showLoginForm()
     {
-        return view('login');
+        return view('pages.login');
     }
     public function login(Request $request)
     {
@@ -68,12 +68,16 @@ class AuthController extends Controller
         }
 
         Auth::login($user);
-        
-        return redirect()->route('homepage');
+        return redirect()->route('homepage.page');
     }
+    
     public function logout()
     {
         Auth::logout();
         return redirect()->route('login.form');
     }
+
+
+
+
 }

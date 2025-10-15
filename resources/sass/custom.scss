@@ -21,11 +21,33 @@ body{
     text-decoration: underline;    
 }
 .nav-link {
-  color: rgb(92, 92, 92);
+  color: rgb(116, 116, 116);
+  position: relative;
+  transition: color 0.2s ease;
 }
-.nav-link:hover {
-  color: black;
+.nav-link i.bi {
+  line-height: 1;
+  margin-bottom: -2px;
 }
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px; /* sedikit di bawah teks */
+  width: 100%;
+  height: 2px;
+  background-color: #000000; /* warna biru Bootstrap */
+  border-radius: 2px;
+}
+
+/* opsional: ubah warna teks saat aktif */
+.nav-link.active {
+  color: #000000 !important;
+  font-weight: 500;
+}
+
+
+
 .nav-link-2 {
   color: rgb(199, 199, 199); 
   text-decoration: none;
@@ -80,6 +102,22 @@ box-shadow: 8px 0 16px -6px rgba(0,0,0,0.35);
 .prev-img-3 {
   width: 700px;
 }
+.nav-main {
+  height: 60px;
+  width: 100vw;
+  position:fixed !important;
+  z-index: 1000;
+}
+
+.content3 .sticky-fixed {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border-radius: 8px;
+  background: inherit;
+}
+.sticky-placeholder { display: none; }
+
+@media (max-width: 1150px) {  
+}
 
 @media (max-width: 1300px) {  
   .subsec-second {
@@ -94,4 +132,84 @@ box-shadow: 8px 0 16px -6px rgba(0,0,0,0.35);
   .prev-img-3 {
     width: 550px;
   }
+  .search {
+    width: 200px;
+  }
+}
+
+
+/* posisi icon */
+.search-icon {
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  pointer-events: none;
+}
+
+/* overlay gelap */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: 1040; /* di bawah navbar (1050 biar navbar tetap di atas) */
+  display: none;
+}
+
+/* navbar biar selalu di atas overlay */
+.navbar {
+  position: relative;
+  z-index: 1050;
+}
+
+/* class aktif: saat input focus */
+body.search-active #overlay {
+  display: block;
+}
+
+
+
+.no-caret::after {
+  display: none !important;
+}
+
+/* caret custom di bawah gambar */
+.custom-caret {
+  width: 0;
+  height: 0;
+  margin: 0px auto 0; /* tengah, sedikit ke bawah */
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 5px solid rgb(116, 116, 116); /* warna panah */
+}
+
+
+@media (max-width: 991.98px) { /* breakpoint lg kebawah */
+  .navbar-collapse .navbar-nav {
+    flex-direction: row !important;
+    justify-content: center; /* opsional: biar rata tengah */
+    flex-wrap: wrap; /* biar kalau gak muat, turun ke bawah */
+  }
+
+  .navbar-collapse .nav-item {
+    margin: 0 5px; /* jarak antar item */
+  }
+}
+
+.content-3 {
+  position: relative;
+  width: 400px;
+  height: 700px;
+  margin-bottom: 15px;
+}
+
+.content-4 {
+  position: sticky;
+  top: 75px;
+  width: 400px;
+  height: 400px;
 }
