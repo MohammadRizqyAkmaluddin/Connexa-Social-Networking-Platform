@@ -14,7 +14,7 @@ class PostSeeder extends Seeder
     {
         DB::table('posts')->insert([
             [
-                'post_type'       => 'Education',
+                'post_type'       => 'Educational',
                 'user_id'       => 'U001',
                 'description'   => 'Writing clean code is not just about aesthetics — it’s about responsibility.
                                     Readable code helps teams move faster and prevents future headaches,
@@ -22,7 +22,7 @@ class PostSeeder extends Seeder
                 'image'         => 'post1.jpg',
             ],
             [
-                'post_type'       => 'Education',
+                'post_type'       => 'Educational',
                 'user_id'       => 'U057',
                 'description'   => 'Lately, I’ve been exploring how AI can improve software testing efficiency.
                                     Tools like Copilot and Testim are changing how we approach QA automation.

@@ -100,5 +100,18 @@ textarea.addEventListener('input', () => {
   textarea.style.height = textarea.scrollHeight + 'px';
 });
 
+document.querySelectorAll('.toggle-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-target');
+        const desc = document.getElementById(targetId);
 
+        if (desc.classList.contains('truncated')) {
+            desc.classList.remove('truncated');
+            button.textContent = 'less';
+        } else {
+            desc.classList.add('truncated');
+            button.textContent = 'more';
+        }
+    });
+});
 

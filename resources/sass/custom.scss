@@ -213,3 +213,29 @@ body.search-active #overlay {
   width: 400px;
   height: 400px;
 }
+
+.text-truncate-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;   /* jumlah maksimal baris */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+.text-truncate-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Maksimal 2 baris */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.post-description.truncated {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Maksimal 2 baris */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.post-image {
+  max-height: 700px;
+  max-width: 550px;
+}
