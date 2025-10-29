@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class AuthController extends Controller
-{
-    
+{   
     public function showRegisterForm()
     {
         return view('pages.register');

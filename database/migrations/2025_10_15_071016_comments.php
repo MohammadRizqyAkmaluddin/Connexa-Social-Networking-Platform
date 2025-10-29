@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('comments', function(Blueprint $table) {
@@ -16,6 +13,8 @@ return new class extends Migration
             $table->integer('post_id')->unsigned();
             $table->string('user_id', 10);
             $table->text('comment');
+            $table->timestamp('created_at')->useCurrent();
+            $table->engine = 'InnoDB';
 
             $table->foreign('post_id')
                   ->references('post_id')->on('posts')
@@ -25,12 +24,7 @@ return new class extends Migration
                   ->onDelete('cascade')->onUpdate('cascade');
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        //
     }
 };

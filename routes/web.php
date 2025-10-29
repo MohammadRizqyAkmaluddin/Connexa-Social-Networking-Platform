@@ -5,6 +5,9 @@ use App\Http\Controllers\AuthController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\PostController;
 
 Route::get('/', function () {
     return view('pages.main');
@@ -14,14 +17,6 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('regi
 Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
-
-// Route::get('/homepage', function() {
-//     $suggestedUsers = User::where('user_id', '!=', Auth::id())->get();
-
-//     return view('pages.homepage', [
-//         'suggestedUsers' => $suggestedUsers
-//     ]);
-// })->name('homepage.page')->middleware('auth');
 
 Route::get('/homepage', [HomeController::class, 'index'])
     ->name('homepage.page')
@@ -51,10 +46,9 @@ Route::get('/learning', function() {
     return view('pages.learning');
 })->name('learning.page')->middleware('auth');
 
-
-// Route::get('/homepage', [HomeController::class, 'index'])
-//     ->name('homepage.page')
-//     ->middleware('auth');
+Route::post('/comments', [CommentController::class, 'store'])->name('comment.store');
+Route::post('/likes', [LikeController::class, 'store'])->name('like.store');
+Route::post('/post/store', [PostController::class, 'store'])->name('post.store');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 

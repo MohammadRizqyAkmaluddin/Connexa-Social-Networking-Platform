@@ -184,9 +184,17 @@ CREATE TABLE posts (
 	post_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id VARCHAR(10),
     description TEXT,
-    image TEXT,
     
     FOREIGN KEY (user_id) REFERENCES users(user_id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB;
+
+CREATE TABLE post_images (
+    images_id INT AUTO_INCREMENT PRIMARY KEY,
+    post_id INT,
+    image,
+
+    FOREIGN KEY (post_id) REFERENCES posts(post_id)
     ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=InnoDB;
 

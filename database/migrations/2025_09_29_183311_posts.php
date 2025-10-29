@@ -18,7 +18,6 @@ class Posts extends Migration
             $table->string('post_type');
             $table->string('user_id', 10);
             $table->text('description');
-            $table->text('image')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->engine = 'InnoDB';
 

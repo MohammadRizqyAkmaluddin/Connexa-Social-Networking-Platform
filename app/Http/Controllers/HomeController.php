@@ -16,7 +16,7 @@ class HomeController extends Controller
         $educations = $user->userEducations()->with('company')->get();
 
         // ambil semua postingan random dengan relasi lengkap
-        $posts = Post::with(['user', 'comments.user', 'likes.user'])
+        $posts = Post::with(['user', 'comments.user', 'likes.user', 'postImages'])
             ->inRandomOrder()
             ->get();
 

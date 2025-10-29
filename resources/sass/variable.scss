@@ -8,6 +8,7 @@ $lightGrey: #b9b9b9;
 $darkGrey: #919191;
 $black: black;
 $main: #F3F2EE;
+$like: #9a4949;
 
 $theme-colors: map-merge(
   $theme-colors,
@@ -18,7 +19,8 @@ $theme-colors: map-merge(
     "lightGrey":    $lightGrey,
     "darkGrey":     $darkGrey,
     "black":        $black,
-    "main":        $main
+    "main":         $main,
+    "like":         $like
   )
 );
 
@@ -105,3 +107,7 @@ $font-sizes: (
   14: 0.600rem,  
   15: 0.550rem
 );
+
+.fw-semi {
+  font-weight: 600;
+}

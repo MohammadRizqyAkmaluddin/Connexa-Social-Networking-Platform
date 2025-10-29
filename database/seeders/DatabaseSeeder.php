@@ -61,5 +61,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             FollowSeeder::class,
         ]);
+        $this->call([
+            PostImageSeeder::class,
+        ]);
     }
 }

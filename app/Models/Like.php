@@ -10,7 +10,6 @@ class Like extends Model
     use HasFactory;
 
     public $timestamps = false;
-    protected $primaryKey = null;
     public $incrementing = false;
 
     protected $fillable = [
