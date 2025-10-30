@@ -13,7 +13,8 @@ class PostController extends Controller
     {
         $request->validate([
             'description' => 'required|string',
-            'post_type' => 'required|string'
+            'post_type' => 'required|string',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:5120'
         ]);
  
         $post = new Post();
@@ -22,24 +23,17 @@ class PostController extends Controller
         $post->description = $request->description;
         $post->save();
 
-        if ($request->hasFile('images')) {
-            $counter = 1;
+        if($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $extension = $image->getClientOriginalExtension();
-
-                $fileName = 'post' . $post->post_id . '.' . $counter . '.' . $extension;
-
+                $fileName = time() . '_' . $image->getClientOriginalName();
                 $image->move(public_path('IMG/uploads/post'), $fileName);
 
-                PostImage::create([
+                PostImage::create ([
                     'post_id' => $post->post_id,
                     'image' => $fileName
                 ]);
-
-                $counter++;
             }
         }
-
 
         return redirect()->back()->with('success', 'Successfully Create Post');
     }

@@ -15,75 +15,71 @@ class PostImageSeeder extends Seeder
         DB::table('post_images')->insert([
             [
                 'post_id'   => '1',
-                'image'     => 'post1.1.png'
-            ],
-            [
-                'post_id'   => '1',
-                'image'     => 'post1.2.png'
-            ],
-            [
-                'post_id'   => '1',
-                'image'     => 'post1.3.png'
+                'image'     => 'post1.1.jpg'
             ],
             [
                 'post_id'   => '2',
-                'image'     => 'post2.1.png'
+                'image'     => 'post2.1.jpg'
             ],
             [
                 'post_id'   => '2',
-                'image'     => 'post2.2.png'
-            ],
-            [
-                'post_id'   => '2',
-                'image'     => 'post2.3.png'
-            ],
-            [
-                'post_id'   => '2',
-                'image'     => 'post2.4.png'
+                'image'     => 'post2.2.jpg'
             ],
             [
                 'post_id'   => '3',
-                'image'     => 'post3.1.png'
+                'image'     => 'post3.1.jpg'
             ],
             [
                 'post_id'   => '3',
-                'image'     => 'post3.2.png'
+                'image'     => 'post3.2.jpg'
             ],
             [
                 'post_id'   => '3',
                 'image'     => 'post3.3.png'
             ],
             [
-                'post_id'   => '3',
-                'image'     => 'post3.4.png'
-            ],
-            [
-                'post_id'   => '3',
-                'image'     => 'post3.5.png'
-            ],
-            [
-                'post_id'   => '3',
-                'image'     => 'post3.6.png'
+                'post_id'   => '4',
+                'image'     => 'post4.1.jpg'
             ],
             [
                 'post_id'   => '4',
-                'image'     => 'post4.1.png'
+                'image'     => 'post4.2.jpg'
+            ],
+            [
+                'post_id'   => '4',
+                'image'     => 'post4.3.jpg'
             ],
             [
                 'post_id'   => '5',
-                'image'     => 'post4.1.png'
+                'image'     => 'post5.1.jpg'
             ],
             [
                 'post_id'   => '6',
-                'image'     => 'post4.1.png'
+                'image'     => 'post6.1.jpg'
             ],
             [
                 'post_id'   => '7',
-                'image'     => 'post4.1.png'
+                'image'     => 'post7.1.jpg'
+            ],
+            [
+                'post_id'   => '7',
+                'image'     => 'post7.2.jpg'
+            ],
+            [
+                'post_id'   => '7',
+                'image'     => 'post7.3.jpeg'
             ],
             [
                 'post_id'   => '8',
-                'image'     => 'post4.1.png'
+                'image'     => 'post8.1.jpg'
+            ],
+            [
+                'post_id'   => '8',
+                'image'     => 'post8.2.jpg'
+            ],
+            [
+                'post_id'   => '8',
+                'image'     => 'post8.3.jpeg'
             ],
         ]);
     }

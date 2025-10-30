@@ -12,83 +12,29 @@ class LikeSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('likes')->insert ([
-            [
-                'post_id' => '1',
-                'user_id' => 'U002',
-            ],
-            [
-                'post_id' => '1',
-                'user_id' => 'U003',
-            ],
-            [
-                'post_id' => '1',
-                'user_id' => 'U005',
-            ],
-            [
-                'post_id' => '1',
-                'user_id' => 'U087',
-            ],
-            [
-                'post_id' => '1',
-                'user_id' => 'U018',
-            ],
-            [
-                'post_id' => '1',
-                'user_id' => 'U029',
-            ],
-            [
-                'post_id' => '1',
-                'user_id' => 'U030',
-            ],
-            [
-                'post_id' => '1',
-                'user_id' => 'U055',
-            ],
-            [
-                'post_id' => '2',
-                'user_id' => 'U018',
-            ],
-            [
-                'post_id' => '2',
-                'user_id' => 'U039',
-            ],
-            [
-                'post_id' => '2',
-                'user_id' => 'U040',
-            ],
-            [
-                'post_id' => '2',
-                'user_id' => 'U015',
-            ],
-            [
-                'post_id' => '2',
-                'user_id' => 'U029',
-            ],
-            [
-                'post_id' => '3',
-                'user_id' => 'U038',
-            ],
-            [
-                'post_id' => '3',
-                'user_id' => 'U019',
-            ],
-            [
-                'post_id' => '3',
-                'user_id' => 'U017',
-            ],
-            [
-                'post_id' => '3',
-                'user_id' => 'U001',
-            ],
-            [
-                'post_id' => '3',
-                'user_id' => 'U004',
-            ],
-            [
-                'post_id' => '3',
-                'user_id' => 'U009',
-            ],
-        ]);   
+        $data = [];
+
+        // Total kombinasi random yang ingin dibuat (bisa kamu ubah)
+        $totalRecords = 2000; 
+
+        for ($i = 0; $i < $totalRecords; $i++) {
+            $data[] = [
+                'post_id' => rand(1, 8),
+                'user_id' => 'U' . str_pad(rand(1, 100), 3, '0', STR_PAD_LEFT),
+            ];
+        }
+
+        // Hilangkan duplikat kombinasi (post_id + user_id)
+        $unique = [];
+        $finalData = [];
+        foreach ($data as $row) {
+            $key = $row['post_id'] . '-' . $row['user_id'];
+            if (!isset($unique[$key])) {
+                $unique[$key] = true;
+                $finalData[] = $row;
+            }
+        }
+
+        DB::table('likes')->insert($finalData);
     }
 }

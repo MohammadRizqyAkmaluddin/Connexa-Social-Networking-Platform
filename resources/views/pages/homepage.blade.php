@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<x-head title="Home" />
+<x-head title="Feeds" />
 <body class="bg-main overflow-x-hidden align-items-center mx-auto">
 
 <x-navbar-main/>
@@ -9,10 +9,10 @@
     <div class="content1"
          style="width: 280px; height: 89.5vh;
                 position: sticky; top:75.5px">
-         <div class="bg-white shadow-sm w-100 rounded pb-3">
-            <img src="{{asset('IMG/cover/' . Auth::user()->cover_image)}}" alt="" class="rounded-top w-100">
+        <div class="bg-white shadow-sm w-100 rounded pb-3">
+            <img src="{{asset('IMG/cover/' . Auth::user()->cover_image)}}" class="rounded-top w-100">
             <div class="px-4 d-block">
-                <img src="{{asset('IMG/uploads/profile/' . Auth::user()->profile_image)}}" alt="Profile" class="rounded-circle bg-white d-block" style="width:70px; margin-top:-40px">
+                <img src="{{asset('IMG/uploads/profile/' . Auth::user()->profile_image)}}" width="60" class="rounded-circle bg-white d-block" style="margin-top:-40px">
                 <h2 class="fs-6 mt-3 fw-semi">{{Auth::user()->name}}</h2>
                 <p class="fs-8 lh-1">{{ \Illuminate\Support\Str::words(Auth::user()->headline, 16, ' ...') }}</p>
                 <p class="fs-8 lh-1 text-muted">{{Auth::user()->city}}, {{Auth::user()->country}}</p>
@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-  <div class="content2 mt-8 gap-10"
+    <div class="content2 mt-8 gap-10"
          style="width: 550px;">
         <div class="shadow-sm bg-white w-100 rounded px-4 py-3" style="height: 110px;">
             <form action="{{route('post.store')}}" method="POST" enctype="multipart/form-data">
@@ -104,27 +104,23 @@
                 </div>
             </form>
         </div>
-
-                <!-- ===== ICON DILUAR MODAL ===== -->
-                <div class="d-flex justify-content-center gap-3 align-items-center">
-                    <div class="d-flex align-items-center gap-2 px-2 border-end"  style="height: 30px" id="triggerUpload">
-                        <div class="d-flex align-items-center text-muted btn gap-2" style="height: 40px" role="button" id="imageIcon2">
-                            <i class="bi bi-postcard"></i>
-                            <p class="fs-7 mt-3 align-items-center">Manage Post</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center gap-2" id="triggerUpload">
-                        <div class="d-flex align-items-center text-muted btn gap-2" style="height: 40px" role="button" id="imageIcon2">
-                            <i class="bi bi-globe"></i>
-                            <p class="fs-7 mt-3 align-items-center">Ask Community</p>
-                        </div>
-                    </div>
+        <div class="d-flex justify-content-center gap-3 align-items-center">
+            <div class="d-flex align-items-center gap-2 px-2 border-end"  style="height: 30px" id="triggerUpload">
+                <div class="d-flex align-items-center text-muted btn gap-2" style="height: 40px" role="button" id="imageIcon2">
+                    <i class="bi bi-postcard"></i>
+                    <p class="fs-7 mt-3 align-items-center">Manage Post</p>
                 </div>
-            
+            </div>
+            <div class="d-flex align-items-center gap-2" id="triggerUpload">
+                <div class="d-flex align-items-center text-muted btn gap-2" style="height: 40px" role="button" id="imageIcon2">
+                    <i class="bi bi-globe"></i>
+                    <p class="fs-7 mt-3 align-items-center">Ask Community</p>
+                </div>
+            </div>
         </div>
-        <hr class="flex-grow-1">
-
-        @foreach($posts as $post)
+    </div>
+    <hr class="flex-grow-1">
+    @foreach($posts as $post)
         <div class="shadow-sm bg-white rounded mt-3" style="height: auto; "> 
             <div class="d-flex justify-content-center gap-2 border-bottom">
                 <div class="fs-11 text-center text-muted p-1"> {{$post->post_type}} Content</div>
@@ -140,15 +136,13 @@
                 </div>
                 <div class="d-flex align-items-end gap-0">
                     <div class="mt-3 fs-8 post-description truncated" id="desc-{{ $post->post_id }}">{{ $post->description }}</div>
-                    <button class="btn btn-link p-0 text-decoration-none fs-8 text-muted toggle-btn" data-bs-target="desc-{{ $post->post_id }}">more</button>
+                    <button class="btn btn-link p-0 text-decoration-none fs-8 text-muted toggle-btn" data-target="desc-{{ $post->post_id }}">more</button>
                 </div>
             </div>
 
             <div class="post-wrapper mt-2">
                 <div class="modalTrigger" data-bs-toggle="modal" data-bs-target="#postModal{{ $post->post_id }}">
                     @php $count = $post->postImages->count(); @endphp
-
-                    {{-- 1–2 images --}}
                     @if ($count == 1)
                         <img src="{{ asset('IMG/uploads/post/' . $post->postImages[0]->image) }}" class="single-img" alt="post image">
                     @elseif ($count == 2)
@@ -157,8 +151,6 @@
                                 <img src="{{ asset('IMG/uploads/post/' . $image->image) }}" class="double-img" alt="post image">
                             @endforeach
                         </div>
-
-                    {{-- 3 images --}}
                     @elseif ($count == 3)
                         <div class="three-img-grid">
                             <img src="{{ asset('IMG/uploads/post/' . $post->postImages[0]->image) }}" class="main-img">
@@ -168,8 +160,6 @@
                                 @endforeach
                             </div>
                         </div>
-
-                    {{-- 4 images --}}
                     @elseif ($count == 4)
                         <div class="four-img-grid">
                             <img src="{{ asset('IMG/uploads/post/' . $post->postImages[0]->image) }}" class="main-img">
@@ -179,8 +169,6 @@
                                 @endforeach
                             </div>
                         </div>
-
-                    {{-- >4 images --}}
                     @elseif ($count > 4)
                         <div class="four-img-grid">
                             <img src="{{ asset('IMG/uploads/post/' . $post->postImages[0]->image) }}" class="main-img">
@@ -278,7 +266,7 @@
                                 </form>
                                 <div class="comments pt-2"> 
                                     @foreach($post->comments as $comment)
-                                        <div class="d-flex gap-3 post-modal-profile bg-white pb-1 w-100">
+                                        <div class="d-flex gap-3 bg-white pb-1 w-100">
                                             <img src="{{asset('IMG/uploads/profile/' . $comment->user->profile_image)}}" width="30" height="30" class="mt-1 b-white rounded-circle">
                                             <div class="">  
                                                 <div class="fs-9 fw-semi">{{$comment->user->name}}</div>
@@ -349,7 +337,7 @@
                 </form>
                 <div class="comments pt-2"> 
                     @foreach($post->comments as $comment)
-                        <div class="d-flex gap-3 post-modal-profile bg-white pb-1 w-100">
+                        <div class="d-flex gap-3 bg-white pb-1 w-100">
                             <img src="{{asset('IMG/uploads/profile/' . $comment->user->profile_image)}}" width="30" height="30" class="mt-1 b-white rounded-circle">
                             <div class="">  
                                 <div class="fs-9 fw-semi">{{$comment->user->name}}</div>
@@ -364,18 +352,50 @@
                 </div>
             </div>
         </div>
-        @endforeach
-    </div>
-
-    <div class="content3 mt-8"
-         style=";">
-        <div class="content-3 shadow-sm bg-white rounded p-2"> </div>
-        <div class="content-4 shadow-sm bg-white rounded p-2"> </div>
-    </div>
+    @endforeach
 </div>
 
+<div class="content3 mt-8">
+    <div class="content-3 d-block shadow-sm bg-white rounded"> 
+        <div class="company py-2 align-items-start justify-content-center mx-auto" style="width: 250px">
+            @foreach($companies as $company)
+                <div class="d-block my-3 pb-3 border rounded text-center align-items-start justify-content-center mx-auto" style="width: 230px">
+                    <img src="{{asset('IMG/uploads/cover/' . $company->cover_image)}}" class="rounded-top w-100 border-bottom">
+                    <div class="d-block" >
+                        <img src="{{asset('IMG/uploads/logo/' . $company->logo)}}" class="p-1 bg-white" width="50" style="margin-top: -20px">
+                        <h2 class="fs-8 mt-2">{{$company->name}}</h2>
+                        <p class="fs-11 lh-0 text-muted">{{$company->industry}}</p>
+                        <form action="" method="POST">
+                            @csrf
+                            <button type="submit" class="btn fs-9 text-primary border-primary py-0 px-5 bg-transparent rounded-pill">Follow</button>
+                        </form>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+    <div class="content-3 d-block shadow-sm bg-white rounded"> 
+        <div class="people py-2">
+            @foreach($peoples as $people)
+                <div class="d-flex gap-2 my-2 px-2 pb-3 border rounded text-start align-items-start justify-content-center mx-auto" style="width: 230px">
+                    <img src="{{asset('IMG/uploads/profile/' . $people->profile_image)}}" width="40" class="rounded-circle mt-3">
+                    <div class="d-block">
+                        <div class="fs-10 lh-0">{{$people->name}}</div>
+                        <div class="fs-13 lh-1 text-truncate-1 text-muted">{{$people->headline}}</div>
+                        <form action="" method="POST">
+                            @csrf
+                            <button type="submit" class="btn fs-9 text-primary border-primary py-0 px-5 bg-transparent rounded-pill"><i class="bi bi-person-plus-fill"></i> Connect</button>
+                        </form>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+    <div class="content-4 shadow-sm bg-white rounded p-2"> </div>
+</div>
 
-    <div id="overlay" aria-hidden="true"></div>
+<div id="overlay" aria-hidden="true"></div>
+
 </body>
 </html>
 

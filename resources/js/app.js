@@ -146,3 +146,42 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+
+// LIKE JSON
+
+document.querySelectorAll('.btn-like').forEach(button => {
+  button.addEventListener('click', async () => {
+    const postId = button.getAttribute('data-id');
+    const icon = button.querySelector('i');
+    const count = button.querySelector('.likes-count');
+
+    try {
+      const response = await fetch(`/posts/${postId}/like`, {
+        method: 'POST',
+        headers: {
+          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+          'Accept': 'application/json',
+        },
+      });
+
+      const data = await response.json();
+
+      if (data.status === 'success') {
+        // toggle icon
+        if (data.action === 'liked') {
+          icon.classList.remove('bi-heart');
+          icon.classList.add('bi-heart-fill', 'text-danger');
+        } else {
+          icon.classList.remove('bi-heart-fill', 'text-danger');
+          icon.classList.add('bi-heart');
+        }
+
+        // update count
+        count.textContent = data.likes_count;
+      }
+    } catch (error) {
+      console.error('Like failed:', error);
+    }
+  });
+});

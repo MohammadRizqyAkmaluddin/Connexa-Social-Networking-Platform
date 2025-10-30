@@ -5,22 +5,24 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Company;
 
 class HomeController extends Controller
 {
     public function index()
     {
-       $user = Auth::user();
+        $user = Auth::user();
 
-        // relasi pendidikan
         $educations = $user->userEducations()->with('company')->get();
 
-        // ambil semua postingan random dengan relasi lengkap
         $posts = Post::with(['user', 'comments.user', 'likes.user', 'postImages'])
             ->inRandomOrder()
             ->get();
 
-        // kirim semua data ke view
-        return view('pages.homepage', compact('user', 'educations', 'posts'));
+        $companies = Company::limit(3)->inRandomOrder()->get();
+
+        $peoples = User::limit(2)->inRandomOrder()->get();
+
+        return view('pages.homepage', compact('user', 'educations', 'posts', 'companies', 'peoples'));
     }
 }

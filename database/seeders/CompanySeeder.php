@@ -26,7 +26,7 @@ class CompanySeeder extends Seeder
             [
                 'company_id'        => 'C002',
                 'page_id'           => 'COM',
-                'name'              => 'Meta Platform',
+                'name'              => 'Meta',
                 'industry'          => 'Social Networking Software',
                 'tagline'           => 'Connection is evolving and so are we',
                 'established_date'  => '2004-02-04',
@@ -110,7 +110,7 @@ class CompanySeeder extends Seeder
             [
                 'company_id'        => 'C009',
                 'page_id'           => 'EDU',
-                'name'              => 'Bina Nusantara University',
+                'name'              => 'BINUS University',
                 'industry'          => 'Higher Education',
                 'tagline'           => 'Fostering and Empowering the Society in Building and Serving the Nation',
                 'established_date'  => '1981-06-01',
@@ -122,7 +122,7 @@ class CompanySeeder extends Seeder
             [
                 'company_id'        => 'C010',
                 'page_id'           => 'EDU',
-                'name'              => 'BINUS School Education',
+                'name'              => 'BINUS School',
                 'industry'          => 'Primary and Secondary Education',
                 'tagline'           => 'Fostering and Empowering the Society in Building and Serving the Nation',
                 'established_date'  => '2001-03-25',
