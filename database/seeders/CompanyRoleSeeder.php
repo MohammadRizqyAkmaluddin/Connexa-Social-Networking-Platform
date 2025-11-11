@@ -41,7 +41,7 @@ class CompanyRoleSeeder extends Seeder
                 'role'          => 'CEO',
             ],
             [
-                'user_id'       => 'U102',
+                'user_id'       => 'U068',
                 'company_id'    => 'C006',
                 'role'          => 'Founder & CEO',
             ],

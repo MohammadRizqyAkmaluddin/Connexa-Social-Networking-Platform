@@ -17,11 +17,9 @@ class UserEducations extends Migration
             $table->string('user_id', 10);
             $table->string('company_id', 10);
             $table->integer('major_id')->unsigned();
-            $table->date('start_date');
-            $table->date('end_date');
             $table->decimal('GPA', 10, 2);
-            $table->text('description');
-            $table->string('section_id', 10);
+            $table->date('start_date');
+            $table->date('end_date')->nullable();
             $table->engine = 'InnoDB';
 
             $table->primary(['user_id', 'major_id']);
@@ -34,9 +32,6 @@ class UserEducations extends Migration
                 ->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('major_id')
                 ->references('major_id')->on('majors')
-                ->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('section_id')
-                ->references('section_id')->on('sections')
                 ->onDelete('cascade')->onUpdate('cascade');
         });
     }

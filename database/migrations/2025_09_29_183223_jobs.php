@@ -14,14 +14,12 @@ class Jobs extends Migration
     public function up()
     {
         Schema::create('jobs', function (Blueprint $table) {
-            $table->string('job_id', 10)->primary();
+            $table->increments('job_id');
             $table->string('company_id', 10);
             $table->string('title', 50);
-            $table->text('description');
             $table->string('employment_id', 2);
             $table->string('mode_id', 2);
-            $table->integer('sallary');
-            $table->date('posted_date');
+            $table->timestamp('created_at')->useCurrent();
             $table->engine = 'InnoDB';
 
             $table->foreign('company_id')

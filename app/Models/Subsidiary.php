@@ -11,13 +11,13 @@ class Subsidiary extends Model
 
     protected $fillable = ['company_id', 'parent_id'];
 
-    public function company()
+    public function parentCompany()
     {
-        return $this->belongsTo(Company::class, 'company_id');
+        return $this->belongsTo(Company::class, 'parent_id', 'company_id');
     }
 
-    public function parent()
+    public function childCompany()
     {
-        return $this->belongsTo(Company::class, 'parent_id');
+        return $this->belongsTo(Company::class, 'company_id', 'company_id');
     }
 }

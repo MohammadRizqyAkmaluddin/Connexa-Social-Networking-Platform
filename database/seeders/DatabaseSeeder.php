@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\UserExperience;
 use Illuminate\Database\Seeder;
 use Subsidiary;
 
@@ -21,9 +22,6 @@ class DatabaseSeeder extends Seeder
         ]);
         $this->call([
             ProficiencySeeder::class,
-        ]);
-        $this->call([
-            SectionSeeder::class,
         ]);
         $this->call([
             UserSeeder::class,
@@ -63,6 +61,24 @@ class DatabaseSeeder extends Seeder
         ]);
         $this->call([
             PostImageSeeder::class,
+        ]);
+        $this->call([
+            AdsSeeder::class,
+        ]);
+        $this->call([
+            MessageSeeder::class,
+        ]);
+        $this->call([
+            OverviewSeeder::class,
+        ]);
+        $this->call([
+            JobSeeder::class,
+        ]);
+        $this->call([
+            JobSalarySeeder::class,
+        ]);
+        $this->call([
+            UserExperienceSeeder::class,
         ]);
     }
 }

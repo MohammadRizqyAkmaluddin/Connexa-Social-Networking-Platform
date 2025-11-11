@@ -52,7 +52,7 @@ class User extends Authenticatable
     }
     public function experiences()
     {
-        return $this->hasMany(UserExperience::class, 'user_id');
+        return $this->hasMany(UserExperience::class, 'user_id', 'user_id');
     }
     public function companies()
     {
@@ -60,7 +60,7 @@ class User extends Authenticatable
     }
     public function posts()
     {
-        return $this->hasMany(Post::class, 'user_id');
+        return $this->hasMany(Post::class, 'user_id', 'user_id');
     }
     public function comments()
     {
@@ -70,13 +70,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Like::class, 'user_id');
     }
-    public function sentConnections()
+    public function connectionsAsSender()
     {
-        return $this->hasMany(Connection::class, 'user_id');
+        return $this->hasMany(Connection::class, 'user_id', 'user_id');
     }
-    public function receivedConnections()
+
+    public function connectionsAsTarget()
     {
-        return $this->hasMany(Connection::class, 'user_target');
+        return $this->hasMany(Connection::class, 'user_target', 'user_id');
     }
     public function messagesSent()
     {

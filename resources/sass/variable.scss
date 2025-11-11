@@ -9,6 +9,8 @@ $darkGrey: #919191;
 $black: black;
 $main: #F3F2EE;
 $like: #9a4949;
+$notification: #d32121;
+$unread: #f3f6fa;
 
 $theme-colors: map-merge(
   $theme-colors,
@@ -21,6 +23,8 @@ $theme-colors: map-merge(
     "black":        $black,
     "main":         $main,
     "like":         $like,
+    "notification": $notification,
+    "unread": $unread,
   )
 );
 

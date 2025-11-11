@@ -15,10 +15,10 @@ body{
 }
 
 .register-link {
-    text-decoration: none;    
+    text-decoration: none;
 }
 .register-link:hover {
-    text-decoration: underline;    
+    text-decoration: underline;
 }
 .nav-link {
   color: rgb(116, 116, 116);
@@ -49,7 +49,7 @@ body{
 
 
 .nav-link-2 {
-  color: rgb(199, 199, 199); 
+  color: rgb(199, 199, 199);
   text-decoration: none;
 }
 .nav-link-2:hover {
@@ -63,7 +63,7 @@ body{
 }
 .button-main:hover {
     background-color: #ecececa7;
-    border: 1px solid rgb(58, 58, 58);  
+    border: 1px solid rgb(58, 58, 58);
 }
 
 .hero-section {
@@ -74,9 +74,9 @@ body{
     height: 700px;
 }
 
-@media (max-width: 1000px) {  
+@media (max-width: 1000px) {
   .hero-section {
-    height: 600px;      
+    height: 600px;
   }
 }
 
@@ -116,12 +116,12 @@ box-shadow: 8px 0 16px -6px rgba(0,0,0,0.35);
 }
 .sticky-placeholder { display: none; }
 
-@media (max-width: 1150px) {  
+@media (max-width: 1150px) {
 }
 
-@media (max-width: 1300px) {  
+@media (max-width: 1300px) {
   .subsec-second {
-    margin-left: 80px;      
+    margin-left: 80px;
   }
   .prev-img {
     width: 280px;
@@ -219,6 +219,13 @@ body.search-active #overlay {
   z-index: 999;
 }
 
+.connect-btn:hover{
+  background-color: #9bc9fb5d;
+}
+.follow-btn:hover{
+  background-color: #9bc9fb5d;
+}
+
 .text-truncate-1 {
   display: -webkit-box;
   -webkit-line-clamp: 1;   /* jumlah maksimal baris */
@@ -230,6 +237,12 @@ body.search-active #overlay {
 .text-truncate-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2; /* Maksimal 2 baris */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.text-truncate-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Maksimal 2 baris */
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -248,9 +261,72 @@ body.search-active #overlay {
     overflow: hidden;
 }
 
-.post-image {
-  max-height: 700px;
-  max-width: 550px;
+// COMPANY PAGE
+.company-post {
+  width: 300px;
+}
+.post-wrapper-company {
+  position: relative;
+  width: 280px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.company-post-md {
+  width: 270px;
+}
+.post-wrapper-company-md {
+  position: relative;
+  width: 240px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.company-post-sm {
+  width: 350px;
+}
+.post-wrapper-company-sm {
+  position: relative;
+  width: 290px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.post-wrapper-company-sm .image-bg,
+.post-wrapper-company-md .image-bg,
+.post-wrapper-company .image-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(15px);
+  transform: scale(1.2);
+  z-index: 0;
+}
+
+/* Gambar utama */
+.company-img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* contain supaya tidak crop, bisa juga cover tergantung keinginan */
+  border-radius: 10px;
 }
 
 .single-img {
@@ -259,27 +335,23 @@ body.search-active #overlay {
     max-height: 600px;
     object-fit: cover;
 }
-
 .double-img {
     width: 273px;
     height: 400px;
     object-fit: cover;
 }
-
 /* 3-4+ shared main image */
 .main-img {
     width: 100%;
     max-height: 600px;
     object-fit: cover;
 }
-
 /* Untuk layout 3 images */
 .half-img {
     width: 50%;
     max-height: 150px;
     object-fit: cover;
 }
-
 /* Untuk layout 4 atau lebih */
 .third-img {
     width: 33.33%;
@@ -288,8 +360,6 @@ body.search-active #overlay {
     object-fit: cover;
     display: block;
 }
-
-
 /* Overlay untuk sisa gambar */
 .overlay {
     position: absolute;
@@ -302,27 +372,23 @@ body.search-active #overlay {
     justify-content: center;
     align-items: center;
 }
-
 .bottom-flex {
     display: flex;
 }
-
 .flex-item {
     flex: 1 1 0;
     height: 150px;
     overflow: hidden;
     position: relative;
     border-radius: 0;
-    
-}
 
+}
 .flex-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 }
-
 .bottom-flex .overlay {
     position: absolute;
     inset: 0;
@@ -334,6 +400,7 @@ body.search-active #overlay {
     font-weight:700;
     font-size:1.6rem;
 }
+
 .carousel-post {
   width: 600px;
 }
@@ -383,4 +450,47 @@ body.search-active #overlay {
 }
 .show-comment.active {
   display: block;
+}
+
+
+.nav-tabs {
+  border: none;
+}
+.nav-tabs .nav-link {
+  border: none;
+  color: #7e7e7e;
+  font-weight: 500;
+  border-radius: 0;
+}
+
+/* Gaya saat aktif */
+.nav-tabs .nav-link.active {
+  border: none;
+  border-bottom: 3px solid #0d6efd; /* warna biru bootstrap */
+  color: #0d6efd;
+  background-color: transparent;
+}
+
+/* Hover effect opsional */
+.nav-tabs .nav-link:hover {
+  border-bottom: none;
+  color: #000000;
+}
+
+.role-company:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.slide-count {
+  width: auto;
+  position: absolute;
+  z-index: 99;
+  display: flex;
+  align-items: right;
+  justify-content: right;
+  margin-top: 20px;
+}
+
+.img-general {
+    object-fit: cover;
 }

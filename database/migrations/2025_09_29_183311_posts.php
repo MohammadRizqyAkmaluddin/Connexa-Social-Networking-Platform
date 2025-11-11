@@ -16,13 +16,18 @@ class Posts extends Migration
          Schema::create('posts', function (Blueprint $table) {
             $table->increments('post_id');
             $table->string('post_type');
-            $table->string('user_id', 10);
+            $table->string('user_id', 10)->nullable();
+            $table->string('company_id', 10)->nullable();
             $table->text('description');
             $table->timestamp('created_at')->useCurrent();
             $table->engine = 'InnoDB';
 
             $table->foreign('user_id')
                 ->references('user_id')->on('users')
+                ->onDelete('cascade')->onUpdate('cascade');
+                
+            $table->foreign('company_id')
+                ->references('company_id')->on('companies')
                 ->onDelete('cascade')->onUpdate('cascade');
         });
     }

@@ -17,6 +17,7 @@ class Messages extends Migration
             $table->increments('message_id');
             $table->string('sender_id', 10);
             $table->string('receiver_id', 10);
+            $table->string('status', 10)->default('New');
             $table->text('message');
             $table->timestamp('created_at')->useCurrent();
             $table->engine = 'InnoDB';

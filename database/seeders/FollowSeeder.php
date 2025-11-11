@@ -12,91 +12,29 @@ class FollowSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('follows')->insert ([
-            [
-                'user_id'       => 'U001',
-                'company_id'   => 'C001',
-            ],
-            [
-                'user_id'       => 'U001',
-                'company_id'   => 'C009',
-            ],
-            [
-                'user_id'       => 'U001',
-                'company_id'   => 'C005',
-            ],
-            [
-                'user_id'       => 'U002',
-                'company_id'   => 'C001',
-            ],
-            [
-                'user_id'       => 'U002',
-                'company_id'   => 'C002',
-            ],
-            [
-                'user_id'       => 'U002',
-                'company_id'   => 'C003',
-            ],
-            [
-                'user_id'       => 'U002',
-                'company_id'   => 'C004',
-            ],
-            [
-                'user_id'       => 'U002',
-                'company_id'   => 'C005',
-            ],
-            [
-                'user_id'       => 'U002',
-                'company_id'   => 'C006',
-            ],
-            [
-                'user_id'       => 'U002',
-                'company_id'   => 'C007',
-            ],
-            [
-                'user_id'       => 'U002',
-                'company_id'   => 'C008',
-            ],
-            [
-                'user_id'       => 'U002',
-                'company_id'   => 'C009',
-            ],
-            [
-                'user_id'       => 'U003',
-                'company_id'   => 'C001',
-            ],
-            [
-                'user_id'       => 'U003',
-                'company_id'   => 'C002',
-            ],
-            [
-                'user_id'       => 'U003',
-                'company_id'   => 'C003',
-            ],
-            [
-                'user_id'       => 'U003',
-                'company_id'   => 'C004',
-            ],
-            [
-                'user_id'       => 'U003',
-                'company_id'   => 'C005',
-            ],
-            [
-                'user_id'       => 'U003',
-                'company_id'   => 'C006',
-            ],
-            [
-                'user_id'       => 'U003',
-                'company_id'   => 'C007',
-            ],
-            [
-                'user_id'       => 'U003',
-                'company_id'   => 'C008',
-            ],
-            [
-                'user_id'       => 'U003',
-                'company_id'   => 'C009',
-            ],
-        ]);
+        $data = [];
+
+        // Total kombinasi random yang ingin dibuat (bisa kamu ubah)
+        $totalRecords = 2000; 
+
+        for ($i = 0; $i < $totalRecords; $i++) {
+            $data[] = [
+                'company_id' => 'C' . str_pad(rand(1, 13), 3, '0', STR_PAD_LEFT),
+                'user_id' => 'U' . str_pad(rand(1, 100), 3, '0', STR_PAD_LEFT),
+            ];
+        }
+
+        // Hilangkan duplikat kombinasi (post_id + user_id)
+        $unique = [];
+        $finalData = [];
+        foreach ($data as $row) {
+            $key = $row['company_id'] . '-' . $row['user_id'];
+            if (!isset($unique[$key])) {
+                $unique[$key] = true;
+                $finalData[] = $row;
+            }
+        }
+
+        DB::table('follows')->insert($finalData);
     }
 }

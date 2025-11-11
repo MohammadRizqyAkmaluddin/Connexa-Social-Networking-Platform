@@ -18,12 +18,10 @@ class UserExperiences extends Migration
             $table->string('user_id', 10);
             $table->string('company_id', 10);
             $table->string('title', 50);
-            $table->string('position', 50);
             $table->string('employment_id', 2);
             $table->string('mode_id', 2);
             $table->date('start_date');
-            $table->date('end_date');
-            $table->string('section_id', 10);
+            $table->date('end_date')->nullable();
             $table->engine = 'InnoDB';
 
             $table->foreign('employment_id')
@@ -34,9 +32,6 @@ class UserExperiences extends Migration
                 ->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('mode_id')
                 ->references('mode_id')->on('modes')
-                ->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('section_id')
-                ->references('section_id')->on('sections')
                 ->onDelete('cascade')->onUpdate('cascade');
         });
     }

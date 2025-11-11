@@ -21,11 +21,11 @@ class LikeController extends Controller
                             ->where('post_id', $postID)
                             ->first();
         if($existingLike) {
-             Like::where('user_id', $userID)
-                 ->where('post_id', $postID)
-                 ->delete();
+            Like::where('user_id', $userID)
+                ->where('post_id', $postID)
+                ->delete();
+                $message = 'Successfully unliked';
 
-    $message = 'Successfully unliked';
         } else {
             Like::create([
                 'user_id' => $userID,
@@ -33,7 +33,7 @@ class LikeController extends Controller
             ]);
             $message = 'Successfully Liked';
         }
+
         return redirect()->back()->with('success', $message);
     }
-    
 }

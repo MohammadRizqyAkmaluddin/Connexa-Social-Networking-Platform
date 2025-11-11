@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-    <x-head title="Notification" />
-<body class="bg-main">
-    <x-navbar-main/>
-    <div class="container">
+@extends('layouts.app')
 
-    </div>
-    <div id="overlay" aria-hidden="true"></div>
-</body>
-</html>
+@section('title', 'Notification')
+
+@section('content')
+@endsection

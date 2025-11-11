@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
@@ -24,9 +23,17 @@ class Company extends Model
         'cover_image'
     ];
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'company_id', 'company_id');
+    }
     public function educations()
     {
         return $this->hasMany(UserEducation::class, 'company_id', 'company_id');
+    }
+    public function experiences()
+    {
+        return $this->hasMany(UserExperience::class, 'company_id', 'company_id');
     }
     public function page()
     {
@@ -34,15 +41,19 @@ class Company extends Model
     }
     public function subsidiaries()
     {
-        return $this->hasMany(Subsidiary::class, 'parent_id');
+        return $this->hasMany(Subsidiary::class, 'parent_id', 'company_id');
     }
-    public function childCompanies()
+    public function parentRelation()
     {
-        return $this->belongsToMany(Company::class, 'subsidiary', 'parent_id', 'company_id');
+        return $this->hasOne(Subsidiary::class, 'company_id', 'company_id');
+    }
+    public function childCompany()
+    {
+        return $this->belongsTo(Company::class, 'company_id', 'company_id');
     }
     public function parentCompany()
     {
-        return $this->belongsToMany(Company::class, 'subsidiary', 'company_id', 'parent_id');
+        return $this->belongsTo(Company::class, 'parent_id', 'company_id');
     }
     public function users()
     {
@@ -50,7 +61,7 @@ class Company extends Model
     }
     public function roles()
     {
-        return $this->hasMany(CompanyRole::class, 'company_id');
+        return $this->hasMany(CompanyRole::class, 'company_id', 'company_id');
     }
     public function majors()
     {
@@ -58,10 +69,18 @@ class Company extends Model
     }
     public function jobs()
     {
-        return $this->hasMany(Job::class, 'company_id');
+        return $this->hasMany(Job::class, 'company_id', 'company_id');
     }
     public function followers()
     {
         return $this->belongsToMany(User::class, 'follows', 'company_id', 'user_id');
+    }
+    public function follows()
+    {
+        return $this->hasMany(Follow::class, 'company_id', 'company_id');
+    }
+    public function overviews()
+    {
+        return $this->hasOne(Overview::class, 'company_id', 'company_id');
     }
 }

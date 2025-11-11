@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class Companies extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('companies', function (Blueprint $table) {
@@ -22,8 +17,11 @@ class Companies extends Migration
             $table->date('established_date');
             $table->string('country', 50);
             $table->string('city', 50);
+            $table->text('website');
+            $table->integer('employee');
             $table->text('logo');
             $table->text('cover_image');
+            $table->timestamp('created_at')->useCurrent();
             $table->engine = 'InnoDB';
 
             $table->foreign('page_id')
@@ -32,13 +30,8 @@ class Companies extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        //
+
     }
 }

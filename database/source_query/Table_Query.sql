@@ -181,13 +181,14 @@ CREATE TABLE connections (
 )ENGINE=InnoDB;
 
 CREATE TABLE posts (
-	post_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id VARCHAR(10),
+    post_id INT AUTO_INCREMENT PRIMARY KEY,
+    author_id VARCHAR(10) NOT NULL,
+    author_type ENUM('user', 'company') NOT NULL,
+    post_type VARCHAR(50),
     description TEXT,
-    
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
-    ON DELETE CASCADE ON UPDATE CASCADE
-)ENGINE=InnoDB;
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
 
 CREATE TABLE post_images (
     images_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -224,6 +225,7 @@ CREATE TABLE messages (
     message_id INT AUTO_INCREMENT PRIMARY KEY,
     sender_id VARCHAR(10),
     receiver_id VARCHAR(10),
+    status VARCHAR(10),
     message TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
@@ -346,3 +348,19 @@ CREATE TABLE user_experiences (
 )ENGINE=InnoDB;
 
 
+CREATE TABLE ads (
+    ads_id INT AUTO_INCREMENT PRIMARY KEY,
+    company_id VARCHAR(10),
+    image_content VARCHAR(50),
+    link TEXT,
+
+    FOREIGN KEY (company_id) REFERENCES companies(company_id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB;
+
+CREATE TABLE 
+
+CREATE TABLE company_post (
+    post_id INT AUTO_INCREMENT PRIMARY KEY,
+    company_id VARCHAR(10),
+)ENGINE=InnoDB;

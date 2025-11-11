@@ -17,7 +17,6 @@ class UserLanguage extends Migration
             $table->string('user_id', 10);
             $table->string('language', 50);
             $table->string('proficiency_id', 10);
-            $table->string('section_id', 10);
             $table->engine = 'InnoDB';
 
             $table->foreign('user_id')
@@ -25,9 +24,6 @@ class UserLanguage extends Migration
                 ->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('proficiency_id')
                 ->references('proficiency_id')->on('proficiencies')
-                ->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('section_id')
-                ->references('section_id')->on('sections')
                 ->onDelete('cascade')->onUpdate('cascade');
         });
     }

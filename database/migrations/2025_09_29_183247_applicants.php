@@ -16,7 +16,7 @@ class Applicants extends Migration
         Schema::create('applicants', function (Blueprint $table) {
             $table->increments('applicant_id');
             $table->string('user_id', 10);
-            $table->string('job_id', 10);
+            $table->unsignedInteger('job_id');
             $table->text('resume_file');
             $table->string('status', 50)->default('On Progress');
             $table->engine = 'InnoDB';

@@ -99,6 +99,6 @@ class CommentSeeder extends Seeder
             [ 'post_id' => '8', 'user_id' => 'U023', 'comment' => 'Events like these are gold — you come for the coffee but stay for the conversations. Always learn something new from people building amazing things locally.' ],
         ];
         
-        DB::table('comments')->insert ($comments);   
+        DB::table('comments')->insert($comments);   
     }
 }

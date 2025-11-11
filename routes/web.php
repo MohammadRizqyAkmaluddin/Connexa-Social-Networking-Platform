@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Models\User;
@@ -8,6 +9,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\FollowController;
+use App\Http\Controllers\ConnectionController;
+use App\Http\Controllers\CompanyController;
 
 Route::get('/', function () {
     return view('pages.main');
@@ -46,9 +50,22 @@ Route::get('/learning', function() {
     return view('pages.learning');
 })->name('learning.page')->middleware('auth');
 
+Route::get('/company', function() {
+    return view('pages.company');
+})->name('company.page')->middleware('auth');
+
+Route::get('/company/{company_id}', [CompanyController::class, 'show'])
+    ->name('company.show')
+    ->middleware('auth');
+
+Route::post('/post/store', [PostController::class, 'store'])->name('post.store');
+Route::post('/company/{company_id}/posts', [PostController::class, 'storeCompanyPost'])->name('company.posts.store');
 Route::post('/comments', [CommentController::class, 'store'])->name('comment.store');
 Route::post('/likes', [LikeController::class, 'store'])->name('like.store');
-Route::post('/post/store', [PostController::class, 'store'])->name('post.store');
+Route::post('/follows', [FollowController::class, 'store'])->name('follow.store');
+Route::post('/connections', [ConnectionController::class, 'store'])->name('connect.store');
+Route::post('/ads', [AdsController::class, 'store'])->name('ads.store');
+
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 

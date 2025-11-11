@@ -16,14 +16,14 @@ class SubsidiarySeeder extends Seeder
             ],
             [
                 'company_id' => 'C004',
-                'parent_id'    => 'C003',
+                'parent_id'    => 'C002',
             ],
             [
                 'company_id' => 'C007',
                 'parent_id'    => 'C006',
             ],
             [
-                'company_id' => 'c008',
+                'company_id' => 'C008',
                 'parent_id'    => 'C006',
             ],
             [
