@@ -144,12 +144,12 @@
                             <div class="modal-body" id="modalBody" style="max-height: 500px; overflow-y: auto;">
                                 <div class="form-floating">
                                     <textarea
-                                    class="form-control border-0"
-                                    name="description"
-                                    id="autoResizeTextarea"
-                                    placeholder="Write something..."
-                                    style="resize: none; overflow: hidden; min-height: 100px;"
-                                    ></textarea>
+                                        class="form-control border-0"
+                                        name="description"
+                                        id="autoResizeTextarea"
+                                        placeholder="Write something..."
+                                        style="resize: none; overflow: hidden; min-height: 100px;">
+                                    </textarea>
                                     <label for="autoResizeTextarea">
                                     <p class="text-lightGrey">Your post comment...</p>
                                     </label>
@@ -199,7 +199,7 @@
                     <div class="d-block my-3 pb-3 border rounded text-center align-items-start justify-content-center mx-auto" style="width: 230px">
                         <img src="{{asset('IMG/uploads/cover/' . $company->cover_image)}}" class="rounded-top w-100 border-bottom">
                         <a href="{{ route('company.show', $company->company_id) }}" class="text-decoration-none">
-                            <div class="d-block" >
+                            <div class="d-block">
                                 <img src="{{asset('IMG/uploads/logo/' . $company->logo)}}" class="p-1 bg-white" width="50" style="margin-top: -20px">
                                 <h2 class="fs-8 mt-2 text-dark">{{$company->name}}</h2>
                                 <p class="fs-11 lh-0 text-muted">{{$company->industry}}</p>
@@ -232,7 +232,7 @@
                                         ->exists(); @endphp
                     <div class="d-block gap-2 my-2 px-2 pb-3 border rounded text-start align-items-start justify-content-center mx-auto" style="width: 230px">
                         <a href="" class="d-flex text-decoration-none">
-                            <img src="{{asset('IMG/uploads/profile/' . $people->profile_image)}}" width="40" height="40" class=" me-2 mt-1 rounded-circle" >
+                            <img src="{{asset('IMG/uploads/profile/' . $people->profile_image)}}" width="40" height="40" class=" me-2 mt-1 rounded-circle img-general" >
                             <div class="d-block">
                                 <div class="fs-10 lh-0 text-dark">{{$people->name}}</div>
                                 <div class="fs-13 lh-0 text-truncate-1 text-muted">{{$people->headline}}</div>

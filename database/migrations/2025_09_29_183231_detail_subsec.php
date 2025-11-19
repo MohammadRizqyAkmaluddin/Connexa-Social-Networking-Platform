@@ -15,9 +15,13 @@ class DetailSubsec extends Migration
     {
         Schema::create('detail_subsec', function (Blueprint $table) {
             $table->increments('sub_section_id');
-            $table->integer('job_id');
+            $table->integer('job_id')->unsigned();
             $table->string('sub_title', 50);
             $table->engine = 'InnoDB';
+
+            $table->foreign('job_id')
+                  ->references('job_id')->on('jobs')
+                  ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

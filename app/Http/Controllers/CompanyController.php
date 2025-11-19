@@ -47,17 +47,15 @@ class CompanyController extends Controller
             ])
             ->where('company_id', $company_id)
             ->firstOrFail();
-        
+
+        // data binus & harvard student (biarkan tetap)
         $binusStudent = User::whereHas('experiences', function ($exp) use ($company_id) {
                 $exp->where('company_id', $company_id);
             })
             ->whereHas('userEducations', function ($edu) {
                 $edu->where('company_id', 'C009');
             })
-            ->with([
-                'experiences.company',
-                'userEducations.company'
-            ])
+            ->with(['experiences.company', 'userEducations.company'])
             ->inRandomOrder()
             ->get();
 
@@ -67,15 +65,57 @@ class CompanyController extends Controller
             ->whereHas('userEducations', function ($edu) {
                 $edu->where('company_id', 'C011');
             })
-            ->with([
-                'experiences.company',
-                'userEducations.company'
-            ])
+            ->with(['experiences.company', 'userEducations.company'])
             ->inRandomOrder()
             ->get();
 
-        return view('pages.company-profile', compact('company', 'binusStudent', 'harvardStudent'));
+        // === Tambahan: perhitungan data bar chart pendidikan ===
+        // Ambil semua user yang punya experience di company ini
+        $users = User::whereHas('experiences', function ($exp) use ($company_id) {
+                $exp->where('company_id', $company_id);
+            })
+            ->with('userEducations.company')
+            ->get();
+
+        $totalUsers = $users->count(); // total unik user kerja di company ini
+
+        $educationCounts = [];
+
+        foreach ($users as $user) {
+            // ambil kampus unik per user (biar ga dobel Bachelor & Master di kampus sama)
+            $uniqueEduCompanies = $user->userEducations
+                                ->whereIn('company_id', ['C009', 'C010', 'C011'])
+                                ->pluck('company.name')
+                                ->unique();
+
+            foreach ($uniqueEduCompanies as $eduCompanyName) {
+                if (!isset($educationCounts[$eduCompanyName])) {
+                    $educationCounts[$eduCompanyName] = 0;
+                }
+                $educationCounts[$eduCompanyName]++;
+            }
+        }
+
+        // hitung persentase
+        $educationPercentages = [];
+        foreach ($educationCounts as $univ => $count) {
+            $educationPercentages[$univ] = $totalUsers > 0
+                ? round(($count / $totalUsers) * 100, 1)
+                : 0;
+        }
+
+        // kalau mau urut dari yang paling banyak ke paling sedikit
+        arsort($educationPercentages);
+
+        return view('pages.company-profile', compact(
+            'company',
+            'binusStudent',
+            'harvardStudent',
+            'educationPercentages',
+            'totalUsers'
+        ));
     }
+
 
 
 

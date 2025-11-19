@@ -13,6 +13,7 @@ class Job extends Model
         'company_id', 'title', 'employment_id', 'mode_id'
     ];
 
+
     public function company()
     {
         return $this->belongsTo(Company::class, 'company_id', 'company_id');
@@ -37,8 +38,12 @@ class Job extends Model
     {
         return $this->hasMany(DetailSubsec::class, 'job_id', 'job_id');
     }
-    public function jobSalary()
+    public function jobsaved()
     {
-        return $this->hasMany(JobSalary::class, 'job_id', 'job_id');
+        return $this->hasMany(JobSaved::class, 'job_id', 'job_id');
+    }
+    public function interested()
+    {
+        return $this->hasMany(Interested::class, 'job_id', 'job_id');
     }
 }

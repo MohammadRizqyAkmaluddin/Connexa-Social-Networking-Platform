@@ -55,10 +55,6 @@ class Company extends Model
     {
         return $this->belongsTo(Company::class, 'parent_id', 'company_id');
     }
-    public function users()
-    {
-        return $this->belongsToMany(User::class, 'access_management', 'company_id', 'user_id');
-    }
     public function roles()
     {
         return $this->hasMany(CompanyRole::class, 'company_id', 'company_id');
@@ -83,4 +79,14 @@ class Company extends Model
     {
         return $this->hasOne(Overview::class, 'company_id', 'company_id');
     }
+    public function interested()
+    {
+        return $this->hasMany(Interested::class, 'company_id', 'company_id');
+    }
+    public function accessUsers()
+{
+    return $this->belongsToMany(User::class, 'access_management', 'company_id', 'user_id');
+}
+
+
 }

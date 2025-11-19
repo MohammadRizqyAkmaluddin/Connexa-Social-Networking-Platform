@@ -113,8 +113,140 @@
                         </ul>
 
                     </li>
-                    <li class="nav-item border-start ps-3">
-                        <a class="nav-link fw-light text-center fs-12 {{ request()->is('business') ? 'active' : '' }}" href="{{ route('business.page') }}"><i class="bi bi-bar-chart-line-fill d-block fs-5"></i>Business</a>
+                    <li class="nav-item dropdown d-lg-flex d-none">
+                        <a class="nav-link border-start ps-4 dropdown-toggle no-caret fw-light text-center fs-12 {{ request()->is('business') ? 'active' : '' }}" href="{{ route('business.page') }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-bar-chart-line-fill d-block fs-5"></i>Business
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm" style="top:62px">
+                            @if($companies->count() > 0)
+                            <div class="dropdown-sections d-flex p-4" style="width: 550px">
+                                <div class="w-50 pe-5 border-end">
+                                        <div class="d-block justify-content-between mb-3">
+                                            <h2 class="fs-6 mb-0 py-auto">Page Management list</h2>
+                                            @if($companies->count() > 4)
+                                                <a class="text-lightGrey fs-10 mb-0 text-decoration-none" href="{{route('business.page')}}"
+                                                    onmouseover="this.querySelector('p').style.textDecoration='underline'"
+                                                    onmouseout="this.querySelector('p').style.textDecoration='none'">
+                                                    <p>Show all {{$companies->count()}}</p>
+                                                </a>
+                                            @endif
+                                        </div>
+                                        @foreach($companies->take(4) as $company)
+                                            <a class="dropdown-item d-flex align-items-center py-2"
+                                            href="{{route('manage.show', $company->company_id)}}">
+                                                <img src="{{asset('IMG/uploads/logo/' . $company->logo)}}"
+                                                    style="width: 30px; height: 30px" class="me-2">
+                                                <div>
+                                                    <p class="mb-0 fs-8 fw-semibold">{{$company->name}}</p>
+                                                    <p class="mb-0 fs-9 fw-light text-muted">{{$company->sector}}</p>
+                                                </div>
+                                            </a>
+                                        @endforeach
+                                </div>
+                                <div class="w-50 ms-5">
+                                    <h2 class="fs-6 mb-3">Business & Others</h2>
+                                    <ul class="list-unstyled mt-5">
+                                        <li>
+                                            <a href="#" class="text-decoration-none d-block text-dark"
+                                                onmouseover="this.querySelector('h2').style.textDecoration='underline'"
+                                                onmouseout="this.querySelector('h2').style.textDecoration='none'">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <i class="bi bi-badge-ad-fill text-lightPrimary"></i>
+                                                    <h2 class=" fw-semibold fs-7 mb-0">Advertise</h2>
+                                                </div>
+                                                <p class="text-muted fw-light fs-11">Boost your business sales</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="text-decoration-none d-block text-dark"
+                                                onmouseover="this.querySelector('h2').style.textDecoration='underline'"
+                                                onmouseout="this.querySelector('h2').style.textDecoration='none'">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <i class="bi bi-mortarboard-fill text-lightPrimary"></i>
+                                                    <h2 class=" fw-semibold fs-7 mb-0">Learn with Connexa</h2>
+                                                </div>
+                                                <p class="text-muted fw-light fs-11">Courses to develop your employee</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="text-decoration-none d-block text-dark"
+                                                onmouseover="this.querySelector('h2').style.textDecoration='underline'"
+                                                onmouseout="this.querySelector('h2').style.textDecoration='none'">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <i class="bi bi-capslock-fill text-lightPrimary"></i>
+                                                    <h2 class=" fw-semibold fs-7 mb-0">Recruit Skilled Workers</h2>
+                                                </div>
+                                                <p class="text-muted fw-light fs-11">Find, attract and recruit talent</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="text-decoration-none d-block text-dark"
+                                                onmouseover="this.querySelector('h2').style.textDecoration='underline'"
+                                                onmouseout="this.querySelector('h2').style.textDecoration='none'">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <i class="bi bi-buildings-fill text-lightPrimary"></i>
+                                                    <h2 class=" fw-semibold fs-7 mb-0">Create New Company Page</h2>
+                                                </div>
+                                                <p class="text-muted fw-light fs-11 lh-1">Page for any scale of your company</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            @else
+                            <div class="dropdown-sections d-flex p-4" style="width: 300px">
+                                <div class="mx-auto">
+                                    <h2 class="fs-6 mb-3">Business & Others</h2>
+                                    <ul class="list-unstyled mt-5">
+                                        <li>
+                                            <a href="#" class="text-decoration-none d-block text-dark"
+                                                onmouseover="this.querySelector('h2').style.textDecoration='underline'"
+                                                onmouseout="this.querySelector('h2').style.textDecoration='none'">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <i class="bi bi-badge-ad-fill text-lightPrimary"></i>
+                                                    <h2 class=" fw-semibold fs-7 mb-0">Advertise</h2>
+                                                </div>
+                                                <p class="text-muted fw-light fs-11">Boost your business sales</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="text-decoration-none d-block text-dark"
+                                                onmouseover="this.querySelector('h2').style.textDecoration='underline'"
+                                                onmouseout="this.querySelector('h2').style.textDecoration='none'">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <i class="bi bi-mortarboard-fill text-lightPrimary"></i>
+                                                    <h2 class=" fw-semibold fs-7 mb-0">Learn with Connexa</h2>
+                                                </div>
+                                                <p class="text-muted fw-light fs-11">Courses to develop your employee</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="text-decoration-none d-block text-dark"
+                                                onmouseover="this.querySelector('h2').style.textDecoration='underline'"
+                                                onmouseout="this.querySelector('h2').style.textDecoration='none'">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <i class="bi bi-capslock-fill text-lightPrimary"></i>
+                                                    <h2 class=" fw-semibold fs-7 mb-0">Recruit Skilled Workers</h2>
+                                                </div>
+                                                <p class="text-muted fw-light fs-11">Find, attract and recruit talent</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="text-decoration-none d-block text-dark"
+                                                onmouseover="this.querySelector('h2').style.textDecoration='underline'"
+                                                onmouseout="this.querySelector('h2').style.textDecoration='none'">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <i class="bi bi-buildings-fill text-lightPrimary"></i>
+                                                    <h2 class=" fw-semibold fs-7 mb-0">Create New Company Page</h2>
+                                                </div>
+                                                <p class="text-muted fw-light fs-11 lh-1">Page for any scale of your company</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            @endif
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link fw-light text-center fs-11 {{ request()->is('learning') ? 'active' : '' }}" href="{{ route('learning.page') }}"><i class="bi bi-person-video3 d-block fs-5"></i></i>Learning</a>

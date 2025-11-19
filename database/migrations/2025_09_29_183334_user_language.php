@@ -14,7 +14,7 @@ class UserLanguage extends Migration
     public function up()
     {
          Schema::create('user_language', function (Blueprint $table) {
-            $table->string('user_id', 10);
+            $table->string('user_id', 10)->primary();
             $table->string('language', 50);
             $table->string('proficiency_id', 10);
             $table->engine = 'InnoDB';

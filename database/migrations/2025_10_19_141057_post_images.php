@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('post_images', function(Blueprint $table){
             $table->increments('images_id');
-            $table->integer('post_id');
+            $table->integer('post_id')->unsigned();
             $table->text('image');
+            $table->engine = 'InnoDB';
 
             $table->foreign('post_id')
-                  ->references('posts')->on('post_id')
+                  ->references('post_id')->on('posts')
                   ->onDelete('cascade')->onUpdate('cascade');
         });
 

@@ -54,10 +54,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserExperience::class, 'user_id', 'user_id');
     }
-    public function companies()
-    {
-        return $this->belongsToMany(Company::class, 'access_management', 'user_id', 'company_id');
-    }
     public function posts()
     {
         return $this->hasMany(Post::class, 'user_id', 'user_id');
@@ -74,7 +70,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Connection::class, 'user_id', 'user_id');
     }
-
     public function connectionsAsTarget()
     {
         return $this->hasMany(Connection::class, 'user_target', 'user_id');
@@ -93,14 +88,24 @@ class User extends Authenticatable
     }
     public function applicants()
     {
-        return $this->hasMany(Applicant::class, 'user_id');
-    }
-    public function access()
-    {
-        return $this->hasMany(AccessManagement::class, 'company_id');
+        return $this->hasMany(Applicant::class, 'user_id', 'user_id');
     }
     public function companyRoles()
     {
-        return $this->hasMany(CompanyRole::class, 'user_id');
+        return $this->hasMany(CompanyRole::class, 'user_id', 'user_id');
     }
+    public function jobsaved()
+    {
+        return $this->hasMany(JobSaved::class, 'user_id', 'user_id');
+    }
+    public function interested()
+    {
+        return $this->hasMany(Interested::class, 'user_id', 'user_id');
+    }
+    public function accessCompanies()
+{
+    return $this->belongsToMany(Company::class, 'access_management', 'user_id', 'company_id');
+}
+
+
 }

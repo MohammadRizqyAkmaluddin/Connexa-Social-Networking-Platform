@@ -9,12 +9,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sessions', function (Blueprint $table) {
-            $table->string('id', 191)->primary(); 
+            $table->string('id', 191)->primary();
             $table->string('user_id', 10)->nullable()->index();
             $table->string('ip_address', 45)->nullable();
             $table->text('user_agent')->nullable();
-            $table->longText('payload'); 
+            $table->longText('payload');
             $table->integer('last_activity')->index();
+
+            $table->foreign('user_id')
+                  ->references('user_id')->on('users');
         });
     }
 

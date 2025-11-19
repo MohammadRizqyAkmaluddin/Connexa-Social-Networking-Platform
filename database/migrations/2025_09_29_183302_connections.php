@@ -21,7 +21,6 @@ class Connections extends Migration
             $table->engine = 'InnoDB';
 
             $table->primary(['user_id', 'user_target']);
-
             $table->foreign('user_id')
                 ->references('user_id')->on('users')
                 ->onDelete('cascade')->onUpdate('cascade');

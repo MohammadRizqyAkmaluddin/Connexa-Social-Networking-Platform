@@ -11,7 +11,7 @@ class AdsSeeder extends Seeder
     {
         DB::table('ads')->insert([
             [
-                'company_id'    => 'C008.',
+                'company_id'    => 'C008',
                 'link'          => 'https://www.gojek.com/en-id',
                 'image_content' => 'gojek.jpg'
             ],

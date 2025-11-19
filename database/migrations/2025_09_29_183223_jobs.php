@@ -19,6 +19,7 @@ class Jobs extends Migration
             $table->string('title', 50);
             $table->string('employment_id', 2);
             $table->string('mode_id', 2);
+            $table->longText('job_details')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->engine = 'InnoDB';
 

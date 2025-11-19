@@ -46,5 +46,12 @@ class JobController extends Controller
         }
     }
 
-    
+    public function index()
+    {
+        $jobs = Job::with('company','mode', 'employment', 'salary', 'detailSubsecs')
+                   ->latest()
+                   ->paginate(10);
+        return view('pages.jobs', compact('jobs'));
+    }
+
 }

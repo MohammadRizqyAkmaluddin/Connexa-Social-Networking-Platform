@@ -12,6 +12,7 @@ class Companies extends Migration
             $table->string('company_id', 10)->primary();
             $table->string('page_id', 3);
             $table->string('name', 50);
+            $table->string('sector', 50);
             $table->string('industry', 50);
             $table->string('tagline', 250);
             $table->date('established_date');

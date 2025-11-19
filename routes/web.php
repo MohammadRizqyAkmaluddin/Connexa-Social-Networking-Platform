@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\AdsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -12,6 +13,9 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\ConnectionController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\InterestedController;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\JobSavedController;
 
 Route::get('/', function () {
     return view('pages.main');
@@ -25,10 +29,6 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 Route::get('/homepage', [HomeController::class, 'index'])
     ->name('homepage.page')
     ->middleware('auth');
-
-Route::get('/jobs', function() {
-    return view('pages.jobs');
-})->name('jobs.page')->middleware('auth');
 
 Route::get('/business', function() {
     return view('pages.business');
@@ -58,13 +58,20 @@ Route::get('/company/{company_id}', [CompanyController::class, 'show'])
     ->name('company.show')
     ->middleware('auth');
 
+Route::get('/jobs', [JobController::class, 'index'])->name('jobs.page')->middleware('auth');
+Route::get('/business', [BusinessController::class, 'index'])->name('business.page')->middleware('auth');
+Route::get('/manage/{company_id}', [BusinessController::class, 'show'])->name('manage.show')->middleware('auth');
+
 Route::post('/post/store', [PostController::class, 'store'])->name('post.store');
 Route::post('/company/{company_id}/posts', [PostController::class, 'storeCompanyPost'])->name('company.posts.store');
 Route::post('/comments', [CommentController::class, 'store'])->name('comment.store');
 Route::post('/likes', [LikeController::class, 'store'])->name('like.store');
 Route::post('/follows', [FollowController::class, 'store'])->name('follow.store');
+Route::post('/save', [JobSavedController::class, 'store'])->name('save.store');
+Route::post('/interest', [InterestedController::class, 'store'])->name('interest.store');
 Route::post('/connections', [ConnectionController::class, 'store'])->name('connect.store');
 Route::post('/ads', [AdsController::class, 'store'])->name('ads.store');
+
 
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

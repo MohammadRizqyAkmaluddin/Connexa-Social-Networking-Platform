@@ -9,7 +9,6 @@ use App\Models\Company;
 use App\Models\Connection;
 use App\Models\Ads;
 use App\Models\Message;
-use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -52,7 +51,7 @@ class HomeController extends Controller
             })
             ->limit(4)
             ->get();
-        
+
         $ads = Ads::limit(1)->inRandomOrder()->get();
 
         $latestMessagesIds = Message::selectRaw('
@@ -83,7 +82,7 @@ class HomeController extends Controller
     });
 
     $connection = Connection::get();
-        
+
 
         return view('pages.homepage', compact('user', 'educations', 'posts', 'companies', 'peoples', 'ads', 'chats', 'connection'));
     }

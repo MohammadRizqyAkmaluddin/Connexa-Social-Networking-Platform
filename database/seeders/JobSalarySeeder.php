@@ -46,6 +46,28 @@ class JobSalarySeeder extends Seeder
             ['job_id' => 48, 'min_salary' => 16000000, 'max_salary' => 28000000],
             ['job_id' => 50, 'min_salary' => 21000000, 'max_salary' => 36000000],
             ['job_id' => 51, 'min_salary' => 3500000,  'max_salary' => 6000000],
+            ['job_id' => 58, 'min_salary' => 25000000, 'max_salary' => 38000000],
+            ['job_id' => 60, 'min_salary' => 12000000, 'max_salary' => 18000000],
+            ['job_id' => 62, 'min_salary' => 20000000, 'max_salary' => 33000000],
+            ['job_id' => 66, 'min_salary' => 18000000, 'max_salary' => 30000000],
+            ['job_id' => 68, 'min_salary' => 22000000, 'max_salary' => 34000000],
+            ['job_id' => 70, 'min_salary' => 15000000, 'max_salary' => 24000000],
+            ['job_id' => 72, 'min_salary' => 9000000,  'max_salary' => 15000000],
+            ['job_id' => 73, 'min_salary' => 2000000, 'max_salary' => 2800000],
+            ['job_id' => 74, 'min_salary' => 8000000,  'max_salary' => 13000000],
+            ['job_id' => 77, 'min_salary' => 7000000,  'max_salary' => 10000000],
+            ['job_id' => 79, 'min_salary' => 14000000, 'max_salary' => 23000000],
+            ['job_id' => 82, 'min_salary' => 10000000, 'max_salary' => 16000000],
+            ['job_id' => 86, 'min_salary' => 17000000, 'max_salary' => 28000000],
+            ['job_id' => 90, 'min_salary' => 15000000, 'max_salary' => 26000000],
+            ['job_id' => 92, 'min_salary' => 8000000,  'max_salary' => 12000000],
+            ['job_id' => 95, 'min_salary' => 11000000, 'max_salary' => 19000000],
+            ['job_id' => 63, 'min_salary' => 2500000, 'max_salary' => 3500000],
+            ['job_id' => 67, 'min_salary' => 2300000, 'max_salary' => 3600000],
+            ['job_id' => 75, 'min_salary' => 2500000, 'max_salary' => 3500000],
+            ['job_id' => 78, 'min_salary' => 2200000, 'max_salary' => 3000000],
+            ['job_id' => 80, 'min_salary' => 2300000, 'max_salary' => 3300000],
+
 
         ];
 

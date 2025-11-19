@@ -1072,7 +1072,7 @@ class UserSeeder extends Seeder
                 'password' => '$2y$10$d4it.de0T9ma7loO434H4.QjPjsZ/ciF4tAt/i6llyQI5BHkAG0Ze',
                 'headline' => 'Lecturer at Binus University | Data Engineer at Tokopedia | Experienced in ETL pipeline development and cloud data warehousing | Advocates for practical learning and industry partnerships',
                 'profile_image' => 'female19.jpg',
-                'cover_image' => 'basic_cover12',
+                'cover_image' => 'basic_cover12.jpg',
             ],
             [
                 'user_id' => 'U077',

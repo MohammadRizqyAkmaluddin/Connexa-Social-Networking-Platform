@@ -14,7 +14,7 @@ class About extends Migration
     public function up()
     {
          Schema::create('about', function (Blueprint $table) {
-            $table->string('user_id', 10);
+            $table->string('user_id', 10)->primary();
             $table->text('description');
             $table->engine = 'InnoDB';
 

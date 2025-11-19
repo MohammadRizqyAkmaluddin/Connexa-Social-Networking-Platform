@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('likes', function(Blueprint $table) {
             $table->integer('post_id')->unsigned();
             $table->string('user_id', 10);
-
+            $table->engine = 'InnoDB';
+            
+            $table->primary(['post_id', 'user_id']);
             $table->foreign('post_id')
                   ->references('post_id')->on('posts')
                   ->onDelete('cascade')->onUpdate('cascade');

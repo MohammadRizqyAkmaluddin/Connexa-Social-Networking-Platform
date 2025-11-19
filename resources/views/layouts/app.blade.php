@@ -8,9 +8,10 @@
 </head>
 <body class="bg-main overflow-x-hidden align-items-center mx-auto">
     <x-navbar-main/>
- 
+
     <main>
         @yield('content')
     </main>
+    
 </body>
 </html>

@@ -1,5 +1,5 @@
 @foreach($posts as $post)
-    <div class="shadow-sm bg-white rounded mt-3" style="height: auto; "> 
+    <div class="shadow-sm bg-white rounded mt-3" style="height: auto; ">
         <div class="d-flex justify-content-center gap-2 border-bottom">
             <div class="fs-11 text-center text-muted p-1"> {{$post->post_type}} Content</div>
         </div>
@@ -7,14 +7,14 @@
             <div class="d-flex mt-2 gap-3">
                 @if($post->user)
                 <img src="{{asset('IMG/uploads/profile/' . $post->user->profile_image)}}" width="40" height="40" class="mt-1 b-white rounded-circle">
-                <div>  
+                <div>
                     <div class="fs-6 fw-semi">{{$post->user->name}}</div>
                     <div class="fs-11 text-muted lh-1 text-truncate-1">{{$post->user->headline}}</div>
                     <div class="fs-11 text-muted">{{$post->created_at->diffForHumans()}}</div>
                 </div>
                 @elseif($post->company)
                     <img src="{{asset('IMG/uploads/logo/' . $post->company->logo)}}" width="40" height="40" class="mt-1 b-white">
-                    <div>  
+                    <div>
                         <div class="fs-6 fw-semi">{{$post->company->name}}</div>
                         <div class="fs-11 text-muted lh-1 text-truncate-1">{{$post->company->industry}}</div>
                         <div class="fs-11 text-muted">{{$post->created_at->diffForHumans()}}</div>
@@ -75,7 +75,7 @@
                 @endif
             </div>
 
-            
+
             <div class="modal align-items-center justify-content-center" tabindex="-1" id="postModal{{ $post->post_id }}">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 1000px;">
                     <div class="modal-content">
@@ -107,14 +107,14 @@
                             <div class="d-flex pt-3 gap-3 post-modal-profile bg-white pb-3 w-100">
                                 @if($post->user)
                                     <img src="{{asset('IMG/uploads/profile/' . $post->user->profile_image)}}" width="50" height="50" class="mt-1 b-white rounded-circle">
-                                    <div>  
+                                    <div>
                                         <div class="fs-6 fw-semi">{{$post->user->name}}</div>
                                         <div class="fs-11 text-muted lh-1 text-truncate-1">{{$post->user->headline}}</div>
                                         <div class="fs-11 text-muted">{{$post->created_at->diffForHumans()}}</div>
                                     </div>
                                 @elseif($post->company)
                                     <img src="{{asset('IMG/uploads/logo/' . $post->company->logo)}}" width="50" height="50" class="mt-1 b-white">
-                                    <div>  
+                                    <div>
                                         <div class="fs-6 fw-semi">{{$post->company->name}}</div>
                                         <div class="fs-11 text-muted lh-1 text-truncate-1">{{$post->company->industry}}</div>
                                         <div class="fs-11 text-muted">{{$post->created_at->diffForHumans()}}</div>
@@ -132,8 +132,8 @@
                                 <div class="d-flex justify-content-center align-items-center">
                                     @foreach ($post->likes->take(3) as $index=>$like)
                                         @if ($like->user)
-                                            <img src="{{ asset('IMG/uploads/profile/' . $like->user->profile_image) }}" 
-                                                alt="{{ $like->user->name }}" 
+                                            <img src="{{ asset('IMG/uploads/profile/' . $like->user->profile_image) }}"
+                                                alt="{{ $like->user->name }}"
                                                 class="rounded-circle border bg-white border-white mb-1" width="20" height="20"
                                                 style="padding:1px ;margin-left: {{ $index > 0 ? '-10px' : '0' }}; z-index: {{ 10 - $index }};">
                                         @endif
@@ -142,29 +142,29 @@
                                     <p class="fs-8 mt-3 ps-2 text-muted border-start">{{$post->comments->count()}} Comments</p>
                                 </div>
                             </div>
-                            
+
                             <form action="{{route ('comment.store')}}" method="POST" class="bg-white d-flex align-items-start gap-2 pb-2">
                                 @csrf
                                 <input type="hidden" name="post_id" value="{{$post->post_id}}">
-                                <img src="{{asset('IMG/uploads/profile/' . $user->profile_image)}}" 
+                                <img src="{{asset('IMG/uploads/profile/' . $user->profile_image)}}"
                                     alt="" width="35" height="35" class="bg-white rounded-circle mt-1">
 
                                 <div class="flex-grow-1 position-relative">
-                                    <textarea 
-                                        class="form-control comment-textarea" 
+                                    <textarea
+                                        class="form-control comment-textarea"
                                         name="comment"
                                         placeholder="Write a comment..."
                                         rows="1"
                                         style="overflow:hidden; resize:none; min-height:30px;"></textarea>
                                     <button type="submit" class="btn btn-primary btn-sm rounded-pill px-3 comment-btn mt-5">Comment</button>
                                 </div>
-                                
+
                             </form>
-                            <div class="comments pt-2"> 
+                            <div class="comments pt-2">
                                 @foreach($post->comments as $comment)
                                     <div class="d-flex gap-3 bg-white pb-1 w-100">
                                         <img src="{{asset('IMG/uploads/profile/' . $comment->user->profile_image)}}" width="30" height="30" class="mt-1 b-white rounded-circle">
-                                        <div class="">  
+                                        <div class="">
                                             <div class="fs-9 fw-semi">{{$comment->user->name}}</div>
                                             <div class="d-flex justify-content-between">
                                                 <div class="fs-13 text-muted text-truncate-short">{{$comment->user->headline}}</div>
@@ -183,7 +183,7 @@
         </div>
         <div class="d-flex justify-content-between align-items-center px-3">
             <div class="d-flex justify-content-between align-items-center text-center gap-4 fw-bold">
-                @php    
+                @php
                     $isLiked = $post->likes->contains('user_id', Auth::user()->user_id);
                 @endphp
                 <form action="{{route('like.store')}}" method="POST">
@@ -203,8 +203,8 @@
             <div class="d-flex justify-content-center align-items-center">
                 @foreach ($post->likes->take(3) as $index=>$like)
                     @if ($like->user)
-                        <img src="{{ asset('IMG/uploads/profile/' . $like->user->profile_image) }}" 
-                            alt="{{ $like->user->name }}" 
+                        <img src="{{ asset('IMG/uploads/profile/' . $like->user->profile_image) }}"
+                            alt="{{ $like->user->name }}"
                             class="rounded-circle border bg-white border-white mb-1" width="20" height="20"
                             style="padding:1px ;margin-left: {{ $index > 0 ? '-10px' : '0' }}; z-index: {{ 10 - $index }};">
                     @endif
@@ -217,25 +217,25 @@
             <form action="{{route ('comment.store')}}" method="POST" class="bg-white d-flex align-items-start gap-2 pb-2">
                 @csrf
                 <input type="hidden" name="post_id" value="{{$post->post_id}}">
-                <img src="{{asset('IMG/uploads/profile/' . $user->profile_image)}}" 
+                <img src="{{asset('IMG/uploads/profile/' . $user->profile_image)}}"
                     alt="" width="35" height="35" class="bg-white rounded-circle mt-1">
 
                 <div class="flex-grow-1 position-relative">
-                    <textarea 
-                        class="form-control comment-textarea" 
+                    <textarea
+                        class="form-control comment-textarea"
                         name="comment"
                         placeholder="Write a comment..."
                         rows="1"
                         style="overflow:hidden; resize:none; min-height:30px;"></textarea>
                     <button type="submit" class="btn btn-primary btn-sm rounded-pill px-3 comment-btn mt-5">Comment</button>
                 </div>
-                
+
             </form>
-            <div class="comments pt-2"> 
+            <div class="comments pt-2">
                 @foreach($post->comments as $comment)
                     <div class="d-flex gap-3 bg-white pb-1 w-100">
                         <img src="{{asset('IMG/uploads/profile/' . $comment->user->profile_image)}}" width="30" height="30" class="mt-1 b-white rounded-circle">
-                        <div class="">  
+                        <div class="">
                             <div class="fs-9 fw-semi">{{$comment->user->name}}</div>
                             <div class="d-flex justify-content-between">
                                 <div class="fs-13 text-muted text-truncate-short">{{$comment->user->headline}}</div>

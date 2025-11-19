@@ -25,7 +25,6 @@ class Posts extends Migration
             $table->foreign('user_id')
                 ->references('user_id')->on('users')
                 ->onDelete('cascade')->onUpdate('cascade');
-                
             $table->foreign('company_id')
                 ->references('company_id')->on('companies')
                 ->onDelete('cascade')->onUpdate('cascade');
