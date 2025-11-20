@@ -187,112 +187,77 @@
                 </div>
                 <div class="tab-pane fade show active" id="recruitment-tab-pane" role="tabpanel" aria-labelledby="recruitment-tab" tabindex="0">
                     @if($company->jobs->isNotEmpty())
-                    <div class="bg-white shadow-sm w-100 rounded align-items-center mx-auto" style="margin-top: 10px">
-                        <div class="d-block px-7 py-4">
-                            <h2 class="fs-5 mb-3 d-flex">Active Posted Jobs <p class="text-muted fw-light fs-7 mt-1 ms-2">( {{$company->jobs->count()}} Jobs )</p></h2>
+                        <div class="bg-white shadow-sm w-100 rounded align-items-center mx-auto" style="margin-top: 10px">
+                            <div class="d-block px-7 py-4">
+                                <h2 class="fs-5 mb-3 d-flex">Active Posted Jobs <p class="text-muted fw-light fs-7 mt-1 ms-2">( {{$company->jobs->count()}} Jobs )</p></h2>
 
-                            <div class="d-flex p-4 scroll-area inner-shadow" style="overflow-x:auto;">
-                                <div class="d-flex gap-3" >
-                                @foreach($company->jobs->take(5) as $job)
-                                    <a href="#" class="d-flex shadow-sm-hover align-items-center text-decoration-none text-dark border rounded" style="width: 300px">
-                                        <div class="d-flex align-items-start justify-content-center py-3 px-3">
-                                            <img src="{{ asset('IMG/uploads/logo/' . $company->logo) }}" width="40" height="40" class="me-3 mb-3">
-                                            <div class="d-block">
-                                                <h2 class="fs-6 mb-0 text-truncate-1">{{ $job->title }}</h2>
-                                                <div class="d-flex align-items-center text-muted">
-                                                    <p class="fs-13 mb-0">{{ $company->city }}</p>
-                                                    <i class="bi bi-dot"></i>
-                                                    <p class="fs-13 mb-0">{{$job->created_at->diffForHumans()}}</p>
+                                <div class="d-flex p-4 scroll-area inner-shadow" style="overflow-x:auto;">
+                                    <div class="d-flex gap-3" >
+                                    @foreach($company->jobs->take(5) as $job)
+                                        <a href="#" class="d-flex shadow-sm-hover align-items-center text-decoration-none text-dark border rounded" style="width: 300px">
+                                            <div class="d-flex align-items-start justify-content-center py-3 px-3">
+                                                <img src="{{ asset('IMG/uploads/logo/' . $company->logo) }}" width="40" height="40" class="me-3 mb-3">
+                                                <div class="d-block">
+                                                    <h2 class="fs-6 mb-0 text-truncate-1">{{ $job->title }}</h2>
+                                                    <div class="d-flex align-items-center text-muted">
+                                                        <p class="fs-13 mb-0">{{ $company->city }}</p>
+                                                        <i class="bi bi-dot"></i>
+                                                        <p class="fs-13 mb-0">{{$job->created_at->diffForHumans()}}</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                @endforeach
+                                        </a>
+                                    @endforeach
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     @elseif($company->jobs->isEmpty())
-                    <div class="bg-white shadow-sm w-100 rounded align-items-center mx-auto" style="margin-top: 10px">
-                        <div class="d-block text-center px-7 py-5">
-                            <img src="{{asset('IMG/asset/briefcase.png')}}" width="50px">
-                            <p class="fw-semibold mt-4 mb-0">{{$company->name}} is not currently recruiting employees</p>
-                            <p class="fs-10 text-muted">get job vacancy notifications update from this company by clicking interest</p>
+                        <div class="bg-white shadow-sm w-100 rounded align-items-center mx-auto" style="margin-top: 10px">
+                            <div class="d-block text-center px-7 py-5">
+                                <img src="{{asset('IMG/asset/briefcase.png')}}" width="50px">
+                                <p class="fw-semibold mt-4 mb-0">Not yet posted any jobs</p>
+                            </div>
                         </div>
-                    </div>
                     @endif
 
-                    <div class="bg-white rounded p-4  shadow-sm" style="height: 538px; overflow-y:auto; margin-top: 10px">
-                        <div class="d-block">
-                            <div class="d-flex gap-4">
-                                <div class="d-block align-items-center border p-4">
-                                    <div class="d-block">
-                                        <img src="{{ asset('IMG/uploads/logo/' . $company->logo) }}" width="150" class="border p-2 bg-white mb-3">
-                                    </div>
-                                    <h2 class="mb-3">{{$company->name}}</h2>
-                                    {{-- <p>{{$company->tagline}}</p> --}}
-                                    <div class="d-block">
-                                        <div class="d-block mb-3">
-                                            <div class="d-flex">
-                                                <h3 class="fs-9 mb-0">Industry</h3>
-                                                <button class="fs-10 py-0 border-0 align-items-start mb-1 bg-transparent"><i class="bi bi-pencil-square text-muted"></i></button>
-                                            </div>
-                                            <p class="mb-0 fs-12 text-muted">{{$company->industry}}</p>
-                                        </div>
-                                        <div class="d-block mb-3">
-                                            <div class="d-flex">
-                                                <h3 class="fs-9 mb-0">Headquarter</h3>
-                                                <button class="fs-10 py-0 border-0 align-items-start mb-1 bg-transparent"><i class="bi bi-pencil-square text-muted"></i></button>
-                                            </div>
-                                            <p class="mb-0 fs-12 text-muted">{{$company->city}} | {{$company->country}}</p>
-                                        </div>
-                                        <div class="d-block mb-3">
-                                            <div class="d-flex">
-                                                <h3 class="fs-9 mb-0">Website</h3>
-                                                <button class="fs-10 py-0 border-0 align-items-start mb-1 bg-transparent"><i class="bi bi-pencil-square text-muted"></i></button>
-                                            </div>
-                                            <p class="mb-0 fs-12 text-muted">{{$company->website}}</p>
-                                        </div>
-                                        <div class="d-block">
-                                            <div class="d-flex">
-                                                <h3 class="fs-9 mb-0">Comapny Size</h3>
-                                                <button class="fs-10 py-0 border-0 align-items-start mb-1 bg-transparent"><i class="bi bi-pencil-square text-muted"></i></button>
-                                            </div>
-                                            <p class="mb-0 fs-12 text-muted">{{number_format($company->employee)}}+ total employees</p>
-                                        </div>
-                                    </div>
+                    <div class="bg-white rounded px-7 py-5 shadow-sm" style="height: 538px; overflow-y:auto; margin-top: 10px">
+                        <h2 class="mb-0 fs-5">Create Jobs</h2>
+                        <p class="mb-0 fs-7 text-muted">Open recruitment for specific position</p>
+                        <form action="" method="POST" class="mt-5 d-flex gap-3 border">
+                            @csrf
+                            <input type="hidden" name="company_id" value="{{$company->company_id}}">
+                            <div class="d-block gap-3">
+                                <div class="mb-2">
+                                    <label for="exampleFormControlInput1" class="form-label fs-8 mb-1 text-mutedbold fw-semibold">Title</label>
+                                    <input type="text" class="form-control fs-7" id="exampleFormControlInput1" placeholder="Title">
                                 </div>
-                                <div class="d-block align-items-center">
-                                    <div class="d-block p-3">
-                                        <div class="d-flex">
-                                            <h3 class="fs-9 mb-0">Overview</h3>
-                                            <button class="fs-10 py-0 border-0 align-items-start mb-1 bg-transparent"><i class="bi bi-pencil-square text-muted"></i></button>
-                                        </div>
-                                        <p class="mb-0 fs-8 text-muted text-justify">{{$company->overviews->overview}}</p>
+                                <div class="d-flex gap-3">
+                                    <div>
+                                    <label for="exampleFormControlInput1" class="form-label fs-8 mb-1 text-mutedbold fw-semibold">Mode</label>
+                                    <select class="form-select fs-7" aria-label="Default select example">
+                                        <option selected>Select</option>
+                                        @foreach($mode as $mod)
+                                            <option value="{{$mod->mode_id}}">{{$mod->mode}}</option>
+                                        @endforeach
+                                    </select>
                                     </div>
-                                    <div class="d-block p-3">
-                                        <div class="d-flex">
-                                            <h3 class="fs-9 mb-3">Boards of directors</h3>
-                                            <button class="fs-10 py-0 border-0 align-items-start mb-1 bg-transparent"><i class="bi bi-pencil-square text-muted"></i></button>
-                                        </div>
-                                        <div class="d-flex gap-3">
-                                            @foreach($company->roles as $role)
-                                                <div class="d-block align-items-center text-center border ">
-                                                    <div style="width:150px; height:150px; overflow:hidden; margin:0 auto;">
-                                                        <img src="{{ asset('IMG/uploads/profile/' . $role->user->profile_image) }}"
-                                                            style="width:100%; height:100%; object-fit:cover;">
-                                                    </div>
-                                                    <div class="d-block py-2">
-                                                        <h2 class="fs-7 mb-0">{{$role->user->name}}</h2>
-                                                        <h2 class="fs-8 mb-0 text-muted fw-light">{{$role->role}}</h2>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
+                                    <div>
+                                    <label for="exampleFormControlInput1" class="form-label fs-8 mb-1 text-mutedbold fw-semibold">Employment</label>
+                                    <select class="form-select fs-7" aria-label="Default select example">
+                                        <option selected>Select</option>
+                                        @foreach($employment as $em)
+                                            <option value="{{$em->employment_id}}">{{$em->employment_type}}</option>
+                                        @endforeach
+                                    </select>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label fs-8 mb-1 text-mutedbold fw-semibold">Example textarea</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="posts-tab-pane" role="tabpanel" aria-labelledby="posts-tab" tabindex="0">
