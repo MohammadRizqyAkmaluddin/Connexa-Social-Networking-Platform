@@ -16,12 +16,12 @@ class PostController extends Controller
             'post_type' => 'required|string',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:5120'
         ]);
- 
+
         $post = new Post();
         $post->post_type = $request->post_type;
         $post->user_id = Auth::user()->user_id;
         $post->description = $request->description;
-        $post->save();
+        $post->save();  
 
         if($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {

@@ -18,7 +18,12 @@ class Applicants extends Migration
             $table->string('user_id', 10);
             $table->unsignedInteger('job_id');
             $table->text('resume_file');
-            $table->string('status', 50)->default('On Progress');
+            $table->text('portfolio_file')->nullable();
+            $table->text('cover_letter')->nullable();
+            $table->string('status')->default('On Progress');
+            $table->string('progress')->default('Review');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
             $table->engine = 'InnoDB';
 
             $table->foreign('user_id')

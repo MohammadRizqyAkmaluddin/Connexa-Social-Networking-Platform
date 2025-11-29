@@ -8,6 +8,7 @@ class JobSalary extends Model
 {
     protected $table = 'job_salary';
     protected $primaryKey = 'job_id';
+    public $timestamps = false;
 
     protected $fillable = ['job_id', 'min_salary', 'max_salary'];
 

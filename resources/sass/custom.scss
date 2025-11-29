@@ -67,13 +67,7 @@ body{
     border: 1px solid rgb(58, 58, 58);
 }
 
-.hero-section {
-    background-image: url('/IMG/asset/hands.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 700px;
-}
+
 
 @media (max-width: 1000px) {
   .hero-section {
@@ -524,3 +518,75 @@ body.search-active #overlay {
   scrollbar-width: thin;
   scrollbar-color: #cbcabd7d #ffffff;
 }
+
+
+.upload-btn {
+    cursor: pointer;
+}
+
+.file-badge {
+    color: white;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 8px;
+}
+.badge-pdf {
+    background-color: #dc3545; /* merah */
+}
+.badge-doc {
+    background-color: #0d6efd; /* biru bootstrap */
+}
+
+#fileNameContainer {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+}
+
+#formFile {
+    display: none;
+}
+
+
+.file-badge2 {
+    color: white;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 8px;
+}
+.badge-pdf2 {
+    background-color: #dc3545; /* merah */
+}
+.badge-doc2 {
+    background-color: #0d6efd; /* biru bootstrap */
+}
+
+#fileNamePortfolio {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+}
+
+#portfolio {
+    display: none;
+}
+
+.chat-style {
+    height: 120px;
+}
+
+.shadow-hover {
+    transition: box-shadow 0.1s ease-in-out;
+}
+.shadow-hover:hover {
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+}
+

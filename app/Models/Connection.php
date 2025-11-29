@@ -13,11 +13,11 @@ class Connection extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 
     public function target()
     {
-        return $this->belongsTo(User::class, 'user_target');
+        return $this->belongsTo(User::class, 'user_target', 'user_id');
     }
 }

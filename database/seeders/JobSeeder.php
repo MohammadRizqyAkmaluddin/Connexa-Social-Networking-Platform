@@ -9,6 +9,9 @@ class JobSeeder extends Seeder
 {
     public function run(): void
     {
+
+        $job_detail = '<p><strong>Job Description</strong></p><ul><li>Install and setup laptop with Windows operating system</li><li>Configure computer hardware, software, and IT office devices (printers, CCTV, etc.)</li><li>Replacing laptop and computer hardware (HDD/SSD, RAM, Keyboard, etc.)</li><li>Diagnosing and troubleshooting issues on laptops and computers</li><li>Updating database of laptop devices<br>&nbsp;</li></ul><p><strong>Qualifications</strong></p><ul><li>Able to install and replace laptop and computer hardware (HDD/SSD, RAM, keyboards, etc.)</li><li>Familiar with installing Windows operating system</li><li>Able to operate Ms. Office for data collection</li><li>Honest and have a good communication skill</li></ul>';
+
         $jobSeeder =
         [
             ['company_id' => 'C001', 'title' => 'Software Engineer', 'employment_id' => 'FT', 'mode_id' => 'HY'],
@@ -128,9 +131,12 @@ class JobSeeder extends Seeder
             ['company_id' => 'C032', 'title' => 'Marine Engineering Intern', 'employment_id' => 'IN', 'mode_id' => 'RE'],
             ['company_id' => 'C033', 'title' => 'Electronics Systems Intern', 'employment_id' => 'IN', 'mode_id' => 'OS'],
             ['company_id' => 'C033', 'title' => 'Software & Embedded Intern', 'employment_id' => 'IN', 'mode_id' => 'HY'],
-
         ];
 
+
+        foreach ($jobSeeder as &$job) {
+            $job['job_details'] = $job_detail;
+        }
 
         DB::table('jobs')->insert($jobSeeder);
     }

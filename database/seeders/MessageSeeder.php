@@ -12,8 +12,9 @@ class MessageSeeder extends Seeder
     {
         $messages = [
             ['sender_id' => 'U002', 'receiver_id' => 'U001', 'status' => 'Read', 'message' => 'Good morning Rizqy'],
-            ['sender_id' => 'U002', 'receiver_id' => 'U001', 'status' => 'Read', 'message' => 'Oh hi Laura, good morning'],
+            ['sender_id' => 'U001', 'receiver_id' => 'U002', 'status' => 'Read', 'message' => 'Oh hi Laura, good morning'],
             ['sender_id' => 'U001', 'receiver_id' => 'U002', 'status' => 'Read', 'message' => 'Is there anything i can help you with?'],
+            ['sender_id' => 'U002', 'receiver_id' => 'U001', 'status' => 'New', 'message' => 'Hi cul'],
             ['sender_id' => 'U002', 'receiver_id' => 'U001', 'status' => 'New', 'message' => 'Can you help me with a web development project?'],
             ['sender_id' => 'U004', 'receiver_id' => 'U001', 'status' => 'New', 'message' => 'Hi Rizqy, I would like to invite you to the State Palace on August 29th.'],
             ['sender_id' => 'U035', 'receiver_id' => 'U001', 'status' => 'Read', 'message' => 'Hello Rizqy, i am David Müller nice to connect with you'],

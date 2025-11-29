@@ -8,6 +8,14 @@ use App\Models\User;
 
 class CompanyController extends Controller
 {
+
+    public function index ()
+    {
+        $companies = Company::with('follows')->get();
+
+        return view('pages.suggestion', compact('companies'));
+    }
+
     public function store (Request $request)
     {
         $request->validate([

@@ -18,6 +18,7 @@ class Connections extends Migration
             $table->string('user_target', 10);
             $table->string('status', 50)->default('Pending');
             $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
             $table->engine = 'InnoDB';
 
             $table->primary(['user_id', 'user_target']);

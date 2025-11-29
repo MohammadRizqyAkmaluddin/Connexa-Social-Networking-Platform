@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
                 'password'      => '$2y$10$d4it.de0T9ma7loO434H4.QjPjsZ/ciF4tAt/i6llyQI5BHkAG0Ze',
                 'headline'      => 'Bina Nusantara University || Computer Science Undergraduate Student',
                 'profile_image' => 'laura.jpg',
-                'cover_image'   => 'laura.jpg',
+                'cover_image'   => 'basic_cover2.jpg',
             ],
             [
                 'user_id'       => 'U003',

@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class AuthController extends Controller
-{   
+{
     public function showRegisterForm()
     {
         return view('pages.register');
     }
+
     public function register(Request $request)
     {
         $request->validate([
@@ -43,6 +44,8 @@ class AuthController extends Controller
             'dob'           => $dob,
             'email'         => $request->email,
             'password'      => Hash::make($request->password),
+            'profile_image' => 'default_profile.jpg',
+            'cover_image'   => 'default_cover.jpg',
         ]);
 
         return redirect()->route('register.form')->with('success', 'Registration successful!');
@@ -58,7 +61,7 @@ class AuthController extends Controller
             'email'     => 'required|email',
             'password'  => 'required|min:8',
         ]);
-        
+
         $user = User::where('email', $request->email)->first();
         if (!$user || !Hash::check($request->password, $user->password)) {
             return back()->withErrors([
@@ -69,7 +72,7 @@ class AuthController extends Controller
         Auth::login($user);
         return redirect()->route('homepage.page');
     }
-    
+
     public function logout()
     {
         Auth::logout();

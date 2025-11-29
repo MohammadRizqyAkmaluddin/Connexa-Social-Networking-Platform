@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Job extends Model
 {
     protected $primaryKey = 'job_id';
-    protected $keyType = 'string';
+    protected $table = 'jobs';
+
 
     protected $fillable = [
-        'company_id', 'title', 'employment_id', 'mode_id'
+        'company_id', 'title', 'employment_id', 'mode_id', 'job_details',
     ];
 
 
@@ -30,7 +31,7 @@ class Job extends Model
     {
         return $this->hasOne(JobSalary::class, 'job_id', 'job_id');
     }
-    public function applicants()
+    public function applicant()
     {
         return $this->hasMany(Applicant::class, 'job_id', 'job_id');
     }

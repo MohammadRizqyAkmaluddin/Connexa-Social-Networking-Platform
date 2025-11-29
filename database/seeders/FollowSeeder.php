@@ -14,12 +14,11 @@ class FollowSeeder extends Seeder
     {
         $data = [];
 
-        // Total kombinasi random yang ingin dibuat (bisa kamu ubah)
-        $totalRecords = 2000; 
+        $totalRecords = 5000;
 
         for ($i = 0; $i < $totalRecords; $i++) {
             $data[] = [
-                'company_id' => 'C' . str_pad(rand(1, 13), 3, '0', STR_PAD_LEFT),
+                'company_id' => 'C' . str_pad(rand(1, 33), 3, '0', STR_PAD_LEFT),
                 'user_id' => 'U' . str_pad(rand(1, 100), 3, '0', STR_PAD_LEFT),
             ];
         }

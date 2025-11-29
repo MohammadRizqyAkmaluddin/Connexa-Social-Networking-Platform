@@ -40,15 +40,15 @@ class User extends Authenticatable
     }
     public function languages()
     {
-        return $this->hasMany(UserLanguage::class, 'user_id');
+        return $this->hasMany(UserLanguage::class, 'user_id', 'user_id');
     }
     public function skills()
     {
-        return $this->hasMany(UserSkill::class, 'user_id');
+        return $this->hasMany(UserSkill::class, 'user_id', 'user_id');
     }
     public function certificates()
     {
-        return $this->hasMany(UserCertificate::class, 'user_id');
+        return $this->hasMany(UserCertificate::class, 'user_id', 'user_id');
     }
     public function experiences()
     {
@@ -103,9 +103,13 @@ class User extends Authenticatable
         return $this->hasMany(Interested::class, 'user_id', 'user_id');
     }
     public function accessCompanies()
-{
-    return $this->belongsToMany(Company::class, 'access_management', 'user_id', 'company_id');
-}
+    {
+        return $this->belongsToMany(Company::class, 'access_management', 'user_id', 'company_id');
+    }
+    public function resumes()
+    {
+        return $this->hasMany(UserResume::class, 'user_id', 'user_id');
+    }
 
 
 }

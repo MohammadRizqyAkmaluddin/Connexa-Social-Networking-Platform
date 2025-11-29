@@ -43,23 +43,52 @@
 
                     {{-- Pagination Elements --}}
                     @foreach ($elements as $element)
-                        {{-- "Three Dots" Separator --}}
-                        @if (is_string($element))
-                            <li class="page-item disabled" aria-disabled="true"><span class="page-link">{{ $element }}</span></li>
-                        @endif
+                        {{-- Pagination Elements --}}
+@php
+    $current = $paginator->currentPage();
+    $last = $paginator->lastPage();
+    $start = max(1, $current - 2);
+    $end = min($last, $current + 2);
+@endphp
 
-                        {{-- Array Of Links --}}
-                        @if (is_array($element))
-                        <div class="d-flex gap-1 align-items-center">
-                            @foreach ($element as $page => $url)
-                                @if ($page == $paginator->currentPage())
-                                    <li class="page-item active" aria-current="page"><span class="page-link bg-dark border-0 rounded-circle fs-7 fw-semibold text-center p-1" style="width: 30px;">{{ $page }}</span></li>
-                                @else
-                                    <li class="page-item"><a class="page-link rounded-circle border-0 text-mutedbold fw-semibold fs-7 text-center "  href="{{ $url }}">{{ $page }}</a></li>
-                                @endif
-                            @endforeach
-                            </div>
-                        @endif
+<div class="d-flex gap-1 align-items-center">
+
+    {{-- Always show page 1 --}}
+    @if ($start > 1)
+        <li class="page-item">
+            <a class="page-link rounded-circle border-0 text-mutedbold fw-semibold fs-7 text-center" href="{{ $paginator->url(1) }}">1</a>
+        </li>
+
+        @if ($start > 2)
+            <li class="page-item disabled"><span class="page-link border-0 bg-transparent">...</span></li>
+        @endif
+    @endif
+
+    {{-- Pages around current --}}
+    @for ($i = $start; $i <= $end; $i++)
+        @if ($i == $current)
+            <li class="page-item active" aria-current="page">
+                <span class="page-link bg-dark border-0 rounded-circle fs-7 fw-semibold text-center p-1" style="width: 30px;">{{ $i }}</span>
+            </li>
+        @else
+            <li class="page-item">
+                <a class="page-link rounded-circle border-0 text-mutedbold fw-semibold fs-7 text-center" href="{{ $paginator->url($i) }}">{{ $i }}</a>
+            </li>
+        @endif
+    @endfor
+
+    {{-- Always show last page --}}
+    @if ($end < $last)
+        @if ($end < $last - 1)
+            <li class="page-item disabled"><span class="page-link border-0 bg-transparent">...</span></li>
+        @endif
+
+        <li class="page-item">
+            <a class="page-link rounded-circle border-0 text-mutedbold fw-semibold fs-7 text-center" href="{{ $paginator->url($last) }}">{{ $last }}</a>
+        </li>
+    @endif
+</div>
+
                     @endforeach
 
                     {{-- Next Page Link --}}

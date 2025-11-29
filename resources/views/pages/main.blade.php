@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<x-head/>
-<body class="overflow-x-hidden align-items-center mx-auto">
 
+<head>
+
+    <x-head/>
+</head>
+<body class="overflow-x-hidden align-items-center mx-auto">
+    <style>
+        .hero-section {
+            background-image: url('/IMG/asset/hands.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 700px;
+        }
+    </style>
     <x-navbar-first />
-    
+
     <div class="row w-100 h-75 border-bottom">
         <div class="col-5 mx-auto border-end mt-10">
             <div class="d-lg-none mx-auto justify-content-center ms-2 mt-10">
@@ -197,4 +209,3 @@
 </body>
 </html>
 
-            

@@ -18,7 +18,10 @@ class ViewServiceProvider extends ServiceProvider
                 ? $user->accessCompanies()->with('overviews', 'roles', 'jobs')->get()
                 : collect();
 
+            
             $view->with('companies', $companies);
         });
     }
+
+
 }

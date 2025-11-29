@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 
 class ConnectionSeeder extends Seeder
 {
@@ -12,117 +13,50 @@ class ConnectionSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('connections')->insert ([
-            [
-                'user_id'       => 'U001',
-                'user_target'   => 'U002',
-                'status'        => 'Success',
-            ],
-            [
-                'user_id'       => 'U001',
-                'user_target'   => 'U003',
-                'status'        => 'Success',
-            ],
-            [
-                'user_id'       => 'U001',
-                'user_target'   => 'U004',
-                'status'        => 'Success',
-            ],
-            [
-                'user_id'       => 'U001',
-                'user_target'   => 'U030',
-                'status'        => 'Success',
-            ],
-            [
-                'user_id'       => 'U001',
-                'user_target'   => 'U031',
-                'status'        => 'Success',
-            ],
-            [
-                'user_id'       => 'U001',
-                'user_target'   => 'U032',
-                'status'        => 'Success',
-            ],
-            [
-                'user_id'       => 'U001',
-                'user_target'   => 'U033',
-                'status'        => 'Success',
-            ],
-            [
-                'user_id'       => 'U001',
-                'user_target'   => 'U034',
-                'status'        => 'Success',
-            ],
-            [
-                'user_id'       => 'U001',
-                'user_target'   => 'U035',
-                'status'        => 'Success',
-            ],
-            [
-                'user_id'       => 'U001',
-                'user_target'   => 'U036',
-                'status'        => 'Success',
-            ],
-            [
-                'user_id'       => 'U001',
-                'user_target'   => 'U037',
-                'status'        => 'Success',
-            ],
-            [
-                'user_id'       => 'U001',
-                'user_target'   => 'U038',
-                'status'        => 'Success',
-            ],
-            [
-                'user_id'       => 'U001',
-                'user_target'   => 'U039',
-                'status'        => 'Success',
-            ],
-            [
-                'user_id'       => 'U001',
-                'user_target'   => 'U040',
-                'status'        => 'Success',
-            ],
-            [
-                'user_id'       => 'U001',
-                'user_target'   => 'U041',
-                'status'        => 'Success',
-            ],
-            [
-                'user_id'       => 'U001',
-                'user_target'   => 'U042',
-                'status'        => 'Success',
-            ],
-            [
-                'user_id'       => 'U001',
-                'user_target'   => 'U043',
-                'status'        => 'Success',
-            ],
-            [
-                'user_id'       => 'U001',
-                'user_target'   => 'U011',
-                'status'        => 'Pending',
-            ],
-            [
-                'user_id'       => 'U001',
-                'user_target'   => 'U065',
-                'status'        => 'Pending',
-            ],
-            [
-                'user_id'       => 'U001',
-                'user_target'   => 'U050',
-                'status'        => 'Pending',
-            ],
-            [
-                'user_id'       => 'U001',
-                'user_target'   => 'U013',
-                'status'        => 'Pending',
-            ],
-            [
-                'user_id'       => 'U001',
-                'user_target'   => 'U090',
-                'status'        => 'Pending',
-            ],
-        ]);
+        $faker = Faker::create();
+
+        $statusList = ['Pending', 'Success'];
+
+        // generate user list U001 - U100
+        $users = [];
+        for ($i = 1; $i <= 100; $i++) {
+            $users[] = 'U' . str_pad($i, 3, '0', STR_PAD_LEFT);
+        }
+
+        // buat semua kombinasi user → target (kecuali diri sendiri)
+        $combinations = [];
+
+        foreach ($users as $user) {
+            foreach ($users as $target) {
+                if ($user !== $target) {
+                    $combinations[] = [
+                        'user_id'     => $user,
+                        'user_target' => $target,
+                    ];
+                }
+            }
+        }
+
+        // acak semua kombinasi
+        shuffle($combinations);
+
+        // tentukan mau insert berapa record
+        $totalInsert = 1500; // bisa sesuai kebutuhan
+
+        for ($i = 0; $i < $totalInsert; $i++) {
+
+            $pair = $combinations[$i];
+
+            $created_at = $faker->dateTimeBetween('-1 month', 'now');
+
+            DB::table('connections')->insert([
+                'user_id'      => $pair['user_id'],
+                'user_target'  => $pair['user_target'],
+                'status'       => $faker->randomElement($statusList),
+                'created_at'   => $created_at,
+                'updated_at'   => $faker->dateTimeBetween($created_at, 'now'),
+            ]);
+        }
     }
+
 }

@@ -10,7 +10,7 @@
             <div class="bg-white shadow-sm w-100 rounded-top pb-3 mb-3">
                 <img src="{{asset('IMG/cover/' . Auth::user()->cover_image)}}" class="rounded-top w-100">
                 <div class="px-4 d-block">
-                    <img src="{{asset('IMG/uploads/profile/' . Auth::user()->profile_image)}}" width="60" class="rounded-circle bg-white d-block" style="margin-top:-40px">
+                    <img src="{{asset('IMG/uploads/profile/' . Auth::user()->profile_image)}}" class="rounded-circle bg-white d-block" style="margin-top:-40px; width: 60px; height: 60px; object-fit:cover">
                     <h2 class="fs-6 mt-3 fw-semi">{{Auth::user()->name}}</h2>
                     <p class="fs-8 lh-1">{{ \Illuminate\Support\Str::words(Auth::user()->headline, 16, ' ...') }}</p>
                     <p class="fs-8 lh-1 text-muted">{{Auth::user()->city}}, {{Auth::user()->country}}</p>
@@ -48,7 +48,7 @@
             <div class="bg-white shadow-sm w-100 rounded p-2 mb-3">
                 <div class="d-flex justify-content-between">
                     <h2 class="fs-8">Conversations</h2>
-                    <a href="#" class="text-decoration-none text-muted fs-10">View all</a>
+                    <a href="{{route('message.page')}}" class="text-decoration-none text-muted fs-10">View all</a>
                 </div>
                 @if($chats->count() > 0)
                 @foreach ($chats->take(4) as $chat)
@@ -76,8 +76,12 @@
 
                         <div class="flex-grow-1">
                             <h2 class="fs-9 lh-0 mb-0">{{ $chat['user']->name }}</h2>
-                            <p class="fs-13 lh-1 {{ $isUnread ? 'text-dark fw-semibold' : 'text-muted' }} text-truncate-2 mb-0">
-                                {{ $chat['message']->message }}
+                            <p class="fs-13 lh-1 {{ $isUnread ? 'text-dark fw-semibold' : 'text-muted' }} text-truncate-2 mb-0" style="width:180px">
+                                @if($chat['message']->receiver_id == $authId)
+                                    {{ Str::before($chat['user']->name, ' ') }}: {{ $chat['message']->message }}
+                                @else
+                                    You: {{ $chat['message']->message }}
+                                @endif
                             </p>
                         </div>
 
@@ -97,7 +101,9 @@
                 <form action="{{route('post.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="d-flex gap-2 my-auto mx-auto text-center align-items-center">
-                        <img src="{{asset('IMG/uploads/profile/' . $user->profile_image)}}" alt="" width="50" class="rounded-circle">
+                        <div>
+                        <img src="{{asset('IMG/uploads/profile/' . $user->profile_image)}}" class="rounded-circle" style="width: 50px; height: 50px; object-fit:cover">
+                        </div>
                         <button
                             type="button"
                             class="btn btn-white text-start text-darkGrey px-4 py-3 w-100 border-darkGrey rounded-pill"
@@ -191,8 +197,8 @@
         <div class="content-3 d-block shadow-sm bg-white rounded">
             <div class="company py-2 align-items-start justify-content-center mx-auto" style="width: 250px">
                 <div class="d-flex justify-content-between">
-                    <h2 class="fs-8">Companies Suggestion</h2>
-                    <a href="{{ route('company.page') }}" class="text-decoration-none text-muted fs-10">View all</a>
+                    <h2 class="fs-8">Suggestion</h2>
+                    <a href="{{ route('network.page') }}" class="text-decoration-none text-muted fs-10">View all</a>
                 </div>
                 @foreach($companies as $company)
                     @php $isFollowed = $company->follows->contains('user_id', Auth::user()->user_id); @endphp
@@ -218,21 +224,16 @@
                         </form>
                     </div>
                 @endforeach
-            </div>
-        </div>
-        <div class="content-3 d-block shadow-sm bg-white rounded">
-            <div class="people py-2 px-2">
-                <div class="d-flex justify-content-between">
-                    <h2 class="fs-8">Peoples Suggestion</h2>
-                    <a href="#" class="text-decoration-none text-muted fs-10">View all</a>
-                </div>
+                <div class="pt-3 border-top">
                 @foreach($peoples as $people)
                     @php $isRequested = \App\Models\Connection::where('user_id', Auth::user()->user_id)
                                         ->where('user_target', $people->user_id)
                                         ->exists(); @endphp
-                    <div class="d-block gap-2 my-2 px-2 pb-3 border rounded text-start align-items-start justify-content-center mx-auto" style="width: 230px">
-                        <a href="" class="d-flex text-decoration-none">
-                            <img src="{{asset('IMG/uploads/profile/' . $people->profile_image)}}" width="40" height="40" class=" me-2 mt-1 rounded-circle img-general" >
+                    <div class="d-block gap-2 mb-1 py-2 px-2 pb-3 border rounded text-start align-items-start justify-content-center mx-auto" style="width: 230px">
+                        <a href="" class="d-flex text-decoration-none align-items-start">
+                            <div>
+                            <img src="{{asset('IMG/uploads/profile/' . $people->profile_image)}}"class="me-2 bg-primary rounded-circle" style="width: 40px; height: 40px; object-fit:cover; margin-bottom:-5px">
+                            </div>
                             <div class="d-block">
                                 <div class="fs-10 lh-0 text-dark">{{$people->name}}</div>
                                 <div class="fs-13 lh-0 text-truncate-1 text-muted">{{$people->headline}}</div>
@@ -242,18 +243,19 @@
                             @csrf
                             <input type="hidden" name="user_id" value="{{$people->user_id}}">
                             @if($isRequested)
-                                <button type="submit" class="btn connect-btn fs-9 text-primary border-primary py-0 px-5 rounded-pill"><i class="bi bi-clock-history"></i> Pending</button>
+                                <button type="submit" class="btn connect-btn fs-9 text-primary border-primary py-0 px-5 ms-7 rounded-pill"><i class="bi bi-clock-history"></i> Pending</button>
                             @else
-                                <button type="submit" class="btn connect-btn fs-9 text-primary border-primary py-0 px-5 ms-8 rounded-pill"><i class="bi bi-person-plus-fill"></i> Connect</button>
+                                <button type="submit" class="btn connect-btn fs-9 text-primary border-primary py-0 px-5 ms-7 rounded-pill"><i class="bi bi-person-plus-fill"></i> Connect</button>
                             @endif
                         </form>
                     </div>
                 @endforeach
+                </div>
             </div>
         </div>
         <div class="content-4 shadow-sm bg-white rounded">
             @foreach($ads as $ad)
-                <a href="{{$ad->link}}"><img src="{{asset('IMG/uploads/ads/' . $ad->image_content)}}" class="rounded" width="270" height="400" style=""></a>
+                <a href="{{$ad->link}}"><img src="{{asset('IMG/uploads/ads/' . $ad->image_content)}}" class="rounded" width="270" height="400" style="object-fit:cover"></a>
             @endforeach
         </div>
     </div>

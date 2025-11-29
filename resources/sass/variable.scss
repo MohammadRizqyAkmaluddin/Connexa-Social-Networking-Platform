@@ -12,6 +12,7 @@ $like: #9a4949;
 $notification: #d32121;
 $unread: #f3f6fa;
 $mutedbold: #5e5e5e;
+$mutedlight: #ababab;
 
 $theme-colors: map-merge(
   $theme-colors,
@@ -27,6 +28,7 @@ $theme-colors: map-merge(
     "notification": $notification,
     "unread":       $unread,
     "mutedbold":    $mutedbold,
+    "mutedlight":   $mutedlight,
   )
 );
 

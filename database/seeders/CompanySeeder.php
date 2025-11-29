@@ -474,7 +474,7 @@ class CompanySeeder extends Seeder
                 'website'           => 'https://www.indonesian-aerospace.com/',
                 'employee'          => '4200',
                 'logo'              => 'dirgantara.jpg',
-                'cover_image'       => 'dirgantara-cover.jpg',
+                'cover_image'       => 'default_cover.jpg',
             ],
             [
                 'company_id'        => 'C032',
@@ -489,7 +489,7 @@ class CompanySeeder extends Seeder
                 'website'           => 'https://www.pal.co.id/',
                 'employee'          => '2800',
                 'logo'              => 'pal.jpg',
-                'cover_image'       => 'pal-cover.jpg',
+                'cover_image'       => 'default_cover.jpg',
             ],
             [
                 'company_id'        => 'C033',
@@ -504,7 +504,7 @@ class CompanySeeder extends Seeder
                 'website'           => 'https://www.len.co.id/',
                 'employee'          => '1800',
                 'logo'              => 'len.jpg',
-                'cover_image'       => 'len-cover.jpg',
+                'cover_image'       => 'default_cover.jpg',
             ],
 
 

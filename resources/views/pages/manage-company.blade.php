@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade" id="configuration-tab-pane" role="tabpanel" aria-labelledby="configuration-tab" tabindex="0">
+                <div class="tab-pane fade show active" id="configuration-tab-pane" role="tabpanel" aria-labelledby="configuration-tab" tabindex="0">
                     <div class="content1" >
                         <div class="shadow-sm mb-3" style="margin-bottom:-10px">
                             <img src="{{asset('IMG/uploads/cover/' . $company->cover_image)}}" class="rounded w-100 border-none p-0">
@@ -185,7 +185,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade show active" id="recruitment-tab-pane" role="tabpanel" aria-labelledby="recruitment-tab" tabindex="0">
+                <div class="tab-pane fade" id="recruitment-tab-pane" role="tabpanel" aria-labelledby="recruitment-tab" tabindex="0">
                     @if($company->jobs->isNotEmpty())
                         <div class="bg-white shadow-sm w-100 rounded align-items-center mx-auto" style="margin-top: 10px">
                             <div class="d-block px-7 py-4">
@@ -224,40 +224,52 @@
                     <div class="bg-white rounded px-7 py-5 shadow-sm" style="height: 538px; overflow-y:auto; margin-top: 10px">
                         <h2 class="mb-0 fs-5">Create Jobs</h2>
                         <p class="mb-0 fs-7 text-muted">Open recruitment for specific position</p>
-                        <form action="" method="POST" class="mt-5 d-flex gap-3 border">
+
+                        <form action="{{ route('job.store') }}" method="POST">
                             @csrf
                             <input type="hidden" name="company_id" value="{{$company->company_id}}">
                             <div class="d-block gap-3">
                                 <div class="mb-2">
                                     <label for="exampleFormControlInput1" class="form-label fs-8 mb-1 text-mutedbold fw-semibold">Title</label>
-                                    <input type="text" class="form-control fs-7" id="exampleFormControlInput1" placeholder="Title">
+                                    <input type="text" name="title" class="form-control fs-7" id="exampleFormControlInput1" placeholder="Title">
                                 </div>
                                 <div class="d-flex gap-3">
                                     <div>
-                                    <label for="exampleFormControlInput1" class="form-label fs-8 mb-1 text-mutedbold fw-semibold">Mode</label>
-                                    <select class="form-select fs-7" aria-label="Default select example">
-                                        <option selected>Select</option>
-                                        @foreach($mode as $mod)
-                                            <option value="{{$mod->mode_id}}">{{$mod->mode}}</option>
-                                        @endforeach
-                                    </select>
+                                        <label for="exampleFormControlInput1" class="form-label fs-8 mb-1 text-mutedbold fw-semibold">Mode</label>
+                                        <select name="mode_id" class="form-select fs-7" aria-label="Default select example">
+                                            <option value="" selected disabled>Select</option>
+                                            @foreach($mode as $mod)
+                                                <option value="{{$mod->mode_id}}">{{$mod->mode}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div>
-                                    <label for="exampleFormControlInput1" class="form-label fs-8 mb-1 text-mutedbold fw-semibold">Employment</label>
-                                    <select class="form-select fs-7" aria-label="Default select example">
-                                        <option selected>Select</option>
-                                        @foreach($employment as $em)
-                                            <option value="{{$em->employment_id}}">{{$em->employment_type}}</option>
-                                        @endforeach
-                                    </select>
+                                        <label for="exampleFormControlInput1" class="form-label fs-8 mb-1 text-mutedbold fw-semibold">Employment</label>
+                                        <select name="employment_id" class="form-select fs-7" aria-label="Default select example">
+                                            <option value="" selected disabled>Select</option>
+                                            @foreach($employment as $em)
+                                                <option value="{{$em->employment_id}}">{{$em->employment_type}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="exampleFormControlInput1" class="form-label fs-8 mb-1 text-mutedbold fw-semibold">Min Salary</label>
+                                        <input type="number" name="min_salary" class="form-control fs-7"  placeholder="RP 3.000.000">
+                                    </div>
+                                    <div>
+                                        <label for="exampleFormControlInput1" class="form-label fs-8 mb-1 text-mutedbold fw-semibold">Max Salary</label>
+                                        <input type="number" name="max_salary" class="form-control fs-7"  placeholder="RP 5.000.000">
                                     </div>
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlTextarea1" class="form-label fs-8 mb-1 text-mutedbold fw-semibold">Example textarea</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                            </div>
+
+                            <label for="job_details">Job Details</label>
+                            <textarea name="job_details" id="editor" class="form-control">{!! old('job_details') !!}</textarea>
+
+                            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+
                         </form>
+
                     </div>
                 </div>
                 <div class="tab-pane fade" id="posts-tab-pane" role="tabpanel" aria-labelledby="posts-tab" tabindex="0">
@@ -342,4 +354,5 @@
             </div>
         </div>
     </div>
+
 @endsection

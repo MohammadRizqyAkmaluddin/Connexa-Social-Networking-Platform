@@ -1,4 +1,6 @@
 import './bootstrap';
+import './texteditor';
+import './upload';
 import '../sass/app.scss';
 import * as bootstrap from 'bootstrap';
 
@@ -187,12 +189,52 @@ document.querySelectorAll('.btn-like').forEach(button => {
 });
 
 
-$('#autoResizeTextarea').summernote({
-        height: 250,
-        toolbar: [
-            ['style', ['bold', 'italic', 'underline', 'clear']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['insert', ['link']],
-            ['view', ['codeview']]
-        ]
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    // ============================
+    // 1. OPEN MODAL
+    // ============================
+    document.querySelectorAll('.open-second').forEach(btn => {
+        btn.addEventListener('click', function () {
+            let id = this.dataset.id;
+            let modal2 = new bootstrap.Modal(document.getElementById('jobModalSecond' + id));
+            modal2.show();
+        });
     });
+
+    // ============================
+    // 2. RESET FORM KETIKA MODAL DITUTUP
+    // ============================
+    document.querySelectorAll('.modal').forEach(modal => {
+        modal.addEventListener('hidden.bs.modal', function () {
+
+            // reset form di dalam modal
+            let form = modal.querySelector('form');
+            if (form) form.reset();
+
+            // hapus nama file yang tampil
+            modal.querySelectorAll('[id^="fileName"]').forEach(el => el.innerHTML = '');
+            modal.querySelectorAll('[id^="fileNamePortfolio"]').forEach(el => el.innerHTML = '');
+        });
+    });
+
+    // ============================
+    // 3. SYNC CKEDITOR KE TEXTAREA SAAT SUBMIT
+    // ============================
+    document.querySelectorAll('.apply-form').forEach(form => {
+        form.addEventListener('submit', function () {
+
+            let textarea = form.querySelector('textarea[id^="editor-"]');
+            if (textarea && window.editors && window.editors[textarea.id]) {
+                textarea.value = window.editors[textarea.id].getData();
+            }
+
+        });
+    });
+
+});
+
+
+
+

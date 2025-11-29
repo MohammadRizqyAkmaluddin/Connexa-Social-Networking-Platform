@@ -84,9 +84,9 @@ class Company extends Model
         return $this->hasMany(Interested::class, 'company_id', 'company_id');
     }
     public function accessUsers()
-{
-    return $this->belongsToMany(User::class, 'access_management', 'company_id', 'user_id');
-}
+    {
+        return $this->belongsToMany(User::class, 'access_management', 'company_id', 'user_id');
+    }
 
 
 }

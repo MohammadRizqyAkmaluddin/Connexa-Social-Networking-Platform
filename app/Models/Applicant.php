@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Applicant extends Model
 {
-    protected $fillable = ['user_id', 'job_id', 'resume_file', 'status'];
+    protected $table = 'applicants';
+
+    protected $fillable = ['user_id', 'job_id', 'resume_file', 'portfolio_file', 'cover_letter','status'];
 
     public function user()
     {

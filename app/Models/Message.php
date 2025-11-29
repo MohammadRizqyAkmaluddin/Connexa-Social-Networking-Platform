@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
     protected $primaryKey = 'message_id';
-    protected $fillable = ['sender_id', 'receiver_id', 'message', 'status'];
+    public $timestamps = true;
+    protected $fillable = ['sender_id', 'receiver_id', 'message', 'status', 'created_at', 'updated_at'];
 
     public function sender()
     {
