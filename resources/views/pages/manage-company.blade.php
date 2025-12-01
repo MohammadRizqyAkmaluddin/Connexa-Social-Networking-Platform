@@ -193,21 +193,21 @@
 
                                 <div class="d-flex p-4 scroll-area inner-shadow" style="overflow-x:auto;">
                                     <div class="d-flex gap-3" >
-                                    @foreach($company->jobs->take(5) as $job)
-                                        <a href="#" class="d-flex shadow-sm-hover align-items-center text-decoration-none text-dark border rounded" style="width: 300px">
-                                            <div class="d-flex align-items-start justify-content-center py-3 px-3">
-                                                <img src="{{ asset('IMG/uploads/logo/' . $company->logo) }}" width="40" height="40" class="me-3 mb-3">
-                                                <div class="d-block">
-                                                    <h2 class="fs-6 mb-0 text-truncate-1">{{ $job->title }}</h2>
-                                                    <div class="d-flex align-items-center text-muted">
-                                                        <p class="fs-13 mb-0">{{ $company->city }}</p>
-                                                        <i class="bi bi-dot"></i>
-                                                        <p class="fs-13 mb-0">{{$job->created_at->diffForHumans()}}</p>
+                                        @foreach($company->jobs->take(5) as $job)
+                                            <a href="{{route('recruitment.show', $job->job_id)}}" class="d-flex shadow-sm-hover align-items-center text-decoration-none text-dark border rounded" style="width: 300px">
+                                                <div class="d-flex align-items-start justify-content-center py-3 px-3">
+                                                    <img src="{{ asset('IMG/uploads/logo/' . $company->logo) }}" width="40" height="40" class="me-3 mb-3">
+                                                    <div class="d-block">
+                                                        <h2 class="fs-6 mb-0 text-truncate-1">{{ $job->title }}</h2>
+                                                        <div class="d-flex align-items-center text-muted">
+                                                            <p class="fs-13 mb-0">{{ $company->city }}</p>
+                                                            <i class="bi bi-dot"></i>
+                                                            <p class="fs-13 mb-0">{{$job->created_at->diffForHumans()}}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </a>
-                                    @endforeach
+                                            </a>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -221,7 +221,7 @@
                         </div>
                     @endif
 
-                    <div class="bg-white rounded px-7 py-5 shadow-sm" style="height: 538px; overflow-y:auto; margin-top: 10px">
+                    <div class="bg-white rounded px-7 py-5 shadow-sm" style="height: 480px; overflow-y:auto; margin-top: 10px">
                         <h2 class="mb-0 fs-5">Create Jobs</h2>
                         <p class="mb-0 fs-7 text-muted">Open recruitment for specific position</p>
 

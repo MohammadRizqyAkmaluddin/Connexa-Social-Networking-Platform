@@ -19,6 +19,7 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\JobSavedController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RecruitmentController;
 
 Route::get('/', function () {
     return view('pages.main');
@@ -59,6 +60,7 @@ Route::get('/jobs/{job_id}', [JobController::class, 'show'])->name('job.page')->
 Route::get('/business', [BusinessController::class, 'index'])->name('business.page')->middleware('auth');
 Route::get('/message', [MessageController::class, 'index'])->name('message.page')->middleware('auth');
 Route::get('/manage/{company_id}', [BusinessController::class, 'show'])->name('manage.show')->middleware('auth');
+Route::get('/recruitment/{job_id}', [RecruitmentController::class, 'show'])->name('recruitment.show')->middleware('auth');
 Route::get('/application/{job_id}', [AppliedController::class, 'show'])->name('application.show')->middleware('auth');
 
 Route::post('/message/store', [MessageController::class, 'store'])->name('message.store')->middleware('auth');

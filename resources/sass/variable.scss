@@ -8,8 +8,12 @@ $lightGrey: #b9b9b9;
 $darkGrey: #919191;
 $black: black;
 $main: #F3F2EE;
+$main2: #eae9e6;
 $like: #9a4949;
 $notification: #d32121;
+$rejected: #ece1e12d;
+$progress: #f0f4ff2d;
+$pass: #e9f5dd;
 $unread: #f3f6fa;
 $mutedbold: #5e5e5e;
 $mutedlight: #ababab;
@@ -24,7 +28,11 @@ $theme-colors: map-merge(
     "darkGrey":     $darkGrey,
     "black":        $black,
     "main":         $main,
+    "main2":         $main2,
     "like":         $like,
+    "pass":         $pass,
+    "progress":     $progress,
+    "rejected":     $rejected,
     "notification": $notification,
     "unread":       $unread,
     "mutedbold":    $mutedbold,
