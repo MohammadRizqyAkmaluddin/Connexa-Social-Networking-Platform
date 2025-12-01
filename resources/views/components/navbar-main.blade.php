@@ -63,13 +63,27 @@
                         <a class="nav-link fw-light text-center fs-12 {{ request()->is('homepage') ? 'active' : '' }}" href="{{ route('homepage.page') }}"><i class="bi bi-house-door-fill d-block fs-5"></i>Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fw-light text-center fs-12 {{ request()->is('network') ? 'active' : '' }}" href="{{ route('network.page') }}"><i class="bi bi-people-fill d-block fs-5"></i>Network</a>
+                        <a class="nav-link d-flex fw-light text-center fs-12 {{ request()->is('network') ? 'active' : '' }}" href="{{ route('network.page') }}">
+                            <div class="d-block">
+                                <i class="bi bi-people-fill d-block fs-5"></i>Network
+                            </div>
+                            @if($invitationCount > 0)
+                                <span class="badge d-flex justify-content-center bg-danger fs-10 rounded-circle text-center align-items-center" style="height:15px; width:15px; margin-left: -13px">{{ $invitationCount }}</span>
+                            @endif
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link fw-light text-center fs-12 {{ request()->is('jobs') ? 'active' : '' }}" href="{{ route('jobs.page') }}"><i class="bi bi-briefcase-fill d-block fs-5"></i>Jobs</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link fw-light text-center fs-12 {{ request()->is('message') ? 'active' : '' }}" href="{{ route('message.page') }}"><i class="bi bi-chat-dots-fill d-block fs-5"></i>Message</a>
+                    <li class="nav-item align-items-end">
+                        <a class="nav-link d-flex fw-light text-center fs-12 {{ request()->is('message') ? 'active' : '' }}" href="{{ route('message.page') }}">
+                            <div class="d-block">
+                            <i class="bi bi-chat-dots-fill d-block fs-5"></i>Message
+                            </div>
+                            @if($unreadUsersCount > 0)
+                                <span class="badge d-flex justify-content-center bg-danger fs-10 rounded-circle text-center align-items-center" style="height:15px; width:15px; margin-left: -15px">{{ $unreadUsersCount }}</span>
+                            @endif
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link fw-light text-center fs-12 {{ request()->is('notification') ? 'active' : '' }}" href="{{ route('notification.page') }}"><i class="bi bi-bell-fill d-block fs-5"></i>Notification</a>

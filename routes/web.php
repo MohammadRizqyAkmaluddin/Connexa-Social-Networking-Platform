@@ -18,6 +18,7 @@ use App\Http\Controllers\InterestedController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\JobSavedController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('pages.main');
@@ -48,6 +49,7 @@ Route::get('/learning', function() {
     return view('pages.learning');
 })->name('learning.page')->middleware('auth');
 
+Route::get('/user/{user_id}', [UserController::class, 'show'])->name('user.page')->middleware();
 
 Route::get('/network', [ConnectionController::class, 'index'])->name('network.page')->middleware();
 Route::get('/company/{company_id}', [CompanyController::class, 'show'])->name('company.show')->middleware('auth');

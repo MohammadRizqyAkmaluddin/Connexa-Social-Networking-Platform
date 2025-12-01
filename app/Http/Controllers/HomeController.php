@@ -55,31 +55,31 @@ class HomeController extends Controller
         $ads = Ads::limit(1)->inRandomOrder()->get();
 
         $latestMessagesIds = Message::selectRaw('
-        CASE
-            WHEN sender_id = ? THEN receiver_id
-            ELSE sender_id
-        END as other_user_id,
-        MAX(message_id) as last_message_id
-    ', [$user->user_id])
-    ->where(function ($q) use ($user) {
-        $q->where('sender_id', $user->user_id)
-          ->orWhere('receiver_id', $user->user_id);
-    })
-    ->groupBy('other_user_id')
-    ->get()
-    ->pluck('last_message_id');
+            CASE
+                WHEN sender_id = ? THEN receiver_id
+                ELSE sender_id
+            END as other_user_id,
+            MAX(message_id) as last_message_id
+        ', [$user->user_id])
+        ->where(function ($q) use ($user) {
+            $q->where('sender_id', $user->user_id)
+            ->orWhere('receiver_id', $user->user_id);
+        })
+        ->groupBy('other_user_id')
+        ->get()
+        ->pluck('last_message_id');
 
         $chats = Message::with(['sender', 'receiver'])
-    ->whereIn('message_id', $latestMessagesIds)
-    ->orderByDesc('created_at')
-    ->limit(4)
-    ->get()
-    ->map(function($msg) use ($user) {
-        return [
-            'user' => $msg->sender_id == $user->user_id ? $msg->receiver : $msg->sender,
-            'message' => $msg
-        ];
-    });
+            ->whereIn('message_id', $latestMessagesIds)
+            ->orderByDesc('created_at')
+            ->limit(4)
+            ->get()
+            ->map(function($msg) use ($user) {
+                return [
+                    'user' => $msg->sender_id == $user->user_id ? $msg->receiver : $msg->sender,
+                    'message' => $msg
+                ];
+        });
 
     $connection = Connection::get();
 

@@ -11,10 +11,8 @@ class Proficiency extends Model
     public $incrementing = false;
     public $timestamps = false;
 
-    protected $fillable = ['proficiency_id', 'proficiency'];
-
     public function userLanguages()
     {
-        return $this->hasMany(UserLanguage::class, 'proficiency_id');
+        return $this->hasMany(UserLanguage::class, 'proficiency_id', 'proficiency_id');
     }
 }

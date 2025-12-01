@@ -38,7 +38,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserEducation::class, 'user_id', 'user_id');
     }
-    public function languages()
+    public function userLanguages()
     {
         return $this->hasMany(UserLanguage::class, 'user_id', 'user_id');
     }
@@ -110,6 +110,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserResume::class, 'user_id', 'user_id');
     }
-
-
+    public function about()
+    {
+        return $this->hasOne(UserAbout::class, 'user_id', 'user_id');
+    }
 }

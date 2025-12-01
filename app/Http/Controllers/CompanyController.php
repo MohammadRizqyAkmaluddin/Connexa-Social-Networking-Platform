@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class CompanyController extends Controller
 {
 
     public function index ()
     {
-        $companies = Company::with('follows')->get();
+        $userId = Auth::user()->user_id;
+
+        $companies = Company::with('follows')
+            ->get();
 
         return view('pages.suggestion', compact('companies'));
     }

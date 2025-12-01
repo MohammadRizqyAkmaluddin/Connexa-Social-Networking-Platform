@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 
 class UserExperienceSeeder extends Seeder
 {
@@ -301,8 +302,14 @@ class UserExperienceSeeder extends Seeder
             ['user_id'=>'U011','company_id'=>'C023','title'=>'Terminal Service Agent','employment_id'=>'PT','mode_id'=>'HY','start_date'=>'2022-09-01','end_date'=>null],
             ['user_id'=>'U068','company_id'=>'C023','title'=>'Fleet Scheduling Officer','employment_id'=>'FT','mode_id'=>'RE','start_date'=>'2020-10-01','end_date'=>null],
             ['user_id'=>'U032','company_id'=>'C023','title'=>'Operations Analyst','employment_id'=>'CO','mode_id'=>'HY','start_date'=>'2021-12-01','end_date'=>'2023-01-01'],
-
         ];
+
+        $faker = Faker::create();
+
+        foreach ($experienceSeeder as &$exp)
+        {
+            $exp['description'] = "<p>{$faker->paragraph(3)}</p> <p>{$faker->paragraph(4)}</p>";
+        }
 
         DB::table('user_experiences')->insert($experienceSeeder);
     }

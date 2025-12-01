@@ -22,15 +22,17 @@ class UserEducation extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
-
     public function company()
     {
         return $this->belongsTo(Company::class, 'company_id', 'company_id');
     }
-
     public function major()
     {
         return $this->belongsTo(Major::class, 'major_id', 'major_id');
+    }
+    public function skill()
+    {
+        return $this->hasMany(UserSkill::class, 'education_id', 'education_id');
     }
 }
 

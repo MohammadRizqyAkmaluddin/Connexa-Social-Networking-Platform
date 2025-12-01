@@ -29,4 +29,8 @@ class UserExperience extends Model
     {
         return $this->belongsTo(Mode::class, 'mode_id', 'mode_id');
     }
+    public function skill()
+    {
+        return $this->hasMany(UserSkill::class, 'experience_id', 'experience_id');
+    }
 }

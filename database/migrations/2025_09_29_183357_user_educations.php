@@ -14,6 +14,7 @@ class UserEducations extends Migration
     public function up()
     {
         Schema::create('user_educations', function (Blueprint $table) {
+            $table->increments('education_id');
             $table->string('user_id', 10);
             $table->string('company_id', 10);
             $table->integer('major_id')->unsigned();
@@ -21,8 +22,6 @@ class UserEducations extends Migration
             $table->date('start_date');
             $table->date('end_date')->nullable();
             $table->engine = 'InnoDB';
-
-            $table->primary(['user_id', 'major_id']);
 
             $table->foreign('user_id')
                 ->references('user_id')->on('users')

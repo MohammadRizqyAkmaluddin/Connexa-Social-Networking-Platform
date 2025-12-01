@@ -35,7 +35,12 @@ class DatabaseSeeder extends Seeder
             JobSeeder::class,
             JobSalarySeeder::class,
             UserExperienceSeeder::class,
-            ApplicantSeeder::class
+            ApplicantSeeder::class,
+            UserAboutSeeder::class,
+            UserSkillSeeder::class,
+            LanguageSeeder::class,
+            UserLanguageSeeder::class,
+            InterestedSeeder::class
         ]);
     }
 }

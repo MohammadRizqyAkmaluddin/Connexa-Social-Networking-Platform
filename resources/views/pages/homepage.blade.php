@@ -8,22 +8,24 @@
             style="width: 280px; height: 89.5vh;
                     position: sticky; top:75.5px">
             <div class="bg-white shadow-sm w-100 rounded-top pb-3 mb-3">
-                <img src="{{asset('IMG/cover/' . Auth::user()->cover_image)}}" class="rounded-top w-100">
-                <div class="px-4 d-block">
-                    <img src="{{asset('IMG/uploads/profile/' . Auth::user()->profile_image)}}" class="rounded-circle bg-white d-block" style="margin-top:-40px; width: 60px; height: 60px; object-fit:cover">
-                    <h2 class="fs-6 mt-3 fw-semi">{{Auth::user()->name}}</h2>
-                    <p class="fs-8 lh-1">{{ \Illuminate\Support\Str::words(Auth::user()->headline, 16, ' ...') }}</p>
-                    <p class="fs-8 lh-1 text-muted">{{Auth::user()->city}}, {{Auth::user()->country}}</p>
-                    @php
-                        $edu = $user->userEducations->sortByDesc('start_date')->first();
-                    @endphp
-                    <div class="d-flex text-center align-items-center mx-auto my-auto">
-                        <img src="{{ asset('IMG/uploads/logo/' . $edu->company->logo) }}"
-                            alt="Logo" width="50" height="50"
-                            class="rounded me-3" style="object-fit: cover;">
-                        <h2 class="fs-9 mt-2">{{$edu->company->name}}</h2>
+                <a href="{{route('user.page', Auth::user()->user_id)}}" class="text-decoration-none text-dark">
+                    <img src="{{asset('IMG/cover/' . Auth::user()->cover_image)}}" class="rounded-top w-100">
+                    <div class="px-4 d-block">
+                        <img src="{{asset('IMG/uploads/profile/' . Auth::user()->profile_image)}}" class="rounded-circle bg-white d-block" style="margin-top:-40px; width: 70px; height: 70px; object-fit:cover">
+                        <h2 class="fs-6 mt-3 fw-semi">{{Auth::user()->name}}</h2>
+                        <p class="fs-8 lh-1">{{ \Illuminate\Support\Str::words(Auth::user()->headline, 16, ' ...') }}</p>
+                        <p class="fs-8 lh-1 text-muted">{{Auth::user()->city}}, {{Auth::user()->country}}</p>
+                        @php
+                            $edu = $user->userEducations->sortByDesc('start_date')->first();
+                        @endphp
+                        <div class="d-flex text-center align-items-center mx-auto my-auto">
+                            <img src="{{ asset('IMG/uploads/logo/' . $edu->company->logo) }}"
+                                alt="Logo" width="40" height="40"
+                                class="rounded me-3" style="object-fit: cover;">
+                            <h2 class="fs-9 mt-2">{{$edu->company->name}}</h2>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="bg-white shadow-sm w-100 rounded p-2 mb-3">
                 <div class="d-flex justify-content-between">
@@ -230,7 +232,7 @@
                                         ->where('user_target', $people->user_id)
                                         ->exists(); @endphp
                     <div class="d-block gap-2 mb-1 py-2 px-2 pb-3 border rounded text-start align-items-start justify-content-center mx-auto" style="width: 230px">
-                        <a href="" class="d-flex text-decoration-none align-items-start">
+                        <a href="{{route('user.page', $people->user_id)}}" class="d-flex text-decoration-none align-items-start">
                             <div>
                             <img src="{{asset('IMG/uploads/profile/' . $people->profile_image)}}"class="me-2 bg-primary rounded-circle" style="width: 40px; height: 40px; object-fit:cover; margin-bottom:-5px">
                             </div>

@@ -4,23 +4,25 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UserLanguage extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-         Schema::create('user_language', function (Blueprint $table) {
-            $table->string('user_id', 10)->primary();
-            $table->string('language', 50);
+         Schema::create('user_languages', function (Blueprint $table) {
+            $table->increments('user_language_id');
+            $table->string('user_id', 10);
+            $table->integer('language_id')->unsigned();
             $table->string('proficiency_id', 10);
             $table->engine = 'InnoDB';
 
             $table->foreign('user_id')
                 ->references('user_id')->on('users')
+                ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('language_id')
+                ->references('language_id')->on('languages')
                 ->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('proficiency_id')
                 ->references('proficiency_id')->on('proficiencies')
@@ -30,11 +32,9 @@ class UserLanguage extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         //
     }
-}
+};

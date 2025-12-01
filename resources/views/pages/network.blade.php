@@ -44,7 +44,7 @@
                             @if($followed->count() > 0)
                             @foreach($followed as $follow)
                                 <div class="d-flex mt-3 align-items-center border-bottom pb-3">
-                                    <a href="#" class="d-flex align-items-center gap-2 text-decoration-none text-dark w-100"
+                                    <a href="{{route('company.show', $follow->company->company_id)}}" class="d-flex align-items-center gap-2 text-decoration-none text-dark w-100"
                                         onmouseover="this.querySelector('h2').style.textDecoration='underline'"
                                         onmouseout="this.querySelector('h2').style.textDecoration='none'">
                                         <img src="{{asset('IMG/uploads/logo/' . $follow->company->logo)}}" style="width: 50px; height:50px; object-fit:cover;">
@@ -84,10 +84,10 @@
                             @foreach($connection as $user)
                             @if($user->user->user_id != Auth::user()->user_id)
                                 <div class="d-flex mt-3 align-items-center border-bottom pb-3">
-                                    <a href="#" class="d-flex align-items-center gap-2 text-decoration-none text-dark w-100"
+                                    <a href="{{route('user.page', $user->user->user_id)}}" class="d-flex align-items-center gap-2 text-decoration-none text-dark w-100"
                                         onmouseover="this.querySelector('h2').style.textDecoration='underline'"
                                         onmouseout="this.querySelector('h2').style.textDecoration='none'">
-                                        <img src="{{asset('IMG/uploads/profile/' . $user->user->profile_image)}}" style="width: 50px; height:50px; object-fit:cover;">
+                                        <img src="{{asset('IMG/uploads/profile/' . $user->user->profile_image)}}" class="rounded-circle" style="width: 50px; height:50px; object-fit:cover;">
                                         <div class="d-block">
                                             <h2 class="fs-7 mb-1">{{$user->user->name}}</h2>
                                             <p class="fs-11 text-muted lh-1 text-truncate-2 mb-0">{{$user->user->headline}}</p>
@@ -99,7 +99,7 @@
                                     <a href="#" class="d-flex align-items-center gap-2 text-decoration-none text-dark w-100"
                                         onmouseover="this.querySelector('h2').style.textDecoration='underline'"
                                         onmouseout="this.querySelector('h2').style.textDecoration='none'">
-                                        <img src="{{asset('IMG/uploads/profile/' . $user->target->profile_image)}}" style="width: 50px; height:50px; object-fit:cover;">
+                                        <img src="{{asset('IMG/uploads/profile/' . $user->target->profile_image)}}" class="rounded-circle" style="width: 50px; height:50px; object-fit:cover;">
                                         <div class="d-block">
                                             <h2 class="fs-7 mb-1">{{$user->target->name}}</h2>
                                             <p class="fs-11 text-muted lh-1 text-truncate-2 mb-0">{{$user->target->headline}}</p>
@@ -129,10 +129,10 @@
                             @if($pending->count() > 0)
                             @foreach($pending as $user)
                                 <div class="d-flex mt-3 align-items-center border-bottom pb-3">
-                                    <a href="#" class="d-flex align-items-center gap-2 text-decoration-none text-dark w-100"
+                                    <a href="{{route('user.page', $user->target->user_id)}}" class="d-flex align-items-center gap-2 text-decoration-none text-dark w-100"
                                         onmouseover="this.querySelector('h2').style.textDecoration='underline'"
                                         onmouseout="this.querySelector('h2').style.textDecoration='none'">
-                                        <img src="{{asset('IMG/uploads/profile/' . $user->target->profile_image)}}" style="width: 50px; height:50px; object-fit:cover;">
+                                        <img src="{{asset('IMG/uploads/profile/' . $user->target->profile_image)}}" class="rounded-circle" style="width: 50px; height:50px; object-fit:cover;">
                                         <div class="d-block">
                                             <h2 class="fs-7 mb-1">{{$user->target->name}}</h2>
                                             <p class="fs-11 text-muted lh-1 text-truncate-2 mb-0">{{$user->target->headline}}</p>
@@ -170,7 +170,7 @@
                 @if($invitation->count() > 0)
                     @foreach($invitation->take(2) as $invite)
                         <div class="d-flex mt-3 align-items-center">
-                            <a href="#" class="d-flex align-items-center gap-2 text-decoration-none text-dark w-100"
+                            <a href="{{route('user.page', $invite->user->user_id)}}" class="d-flex align-items-center gap-2 text-decoration-none text-dark w-100"
                                 onmouseover="this.querySelector('h2').style.textDecoration='underline'"
                                 onmouseout="this.querySelector('h2').style.textDecoration='none'">
                                 <img src="{{asset('IMG/uploads/profile/' . $invite->user->profile_image)}}" class="rounded-circle" style="width: 50px; height:50px; object-fit:cover;">
@@ -202,7 +202,7 @@
                             @if($invitation->count() > 0)
                             @foreach($invitation as $invite)
                                 <div class="d-flex mt-3 align-items-center border-bottom pb-3">
-                                    <a href="#" class="d-flex align-items-center gap-2 text-decoration-none text-dark w-100"
+                                    <a href="{{route('user.page', $invite->user->user_id)}}" class="d-flex align-items-center gap-2 text-decoration-none text-dark w-100"
                                         onmouseover="this.querySelector('h2').style.textDecoration='underline'"
                                         onmouseout="this.querySelector('h2').style.textDecoration='none'">
                                         <img src="{{asset('IMG/uploads/profile/' . $invite->user->profile_image)}}" class="rounded-circle" style="width: 50px; height:50px; object-fit:cover;">
@@ -236,7 +236,7 @@
                         @php $isFollowed = $company->follows->contains('user_id', Auth::user()->user_id); @endphp
                         <div class="col-6 col-md-4 experience-company"
                             style="{{ $index >= 9 ? 'display:none;' : '' }}">
-                            <a href="#" class="rounded shadow-hover bg-white border d-block text-decoration-none" style="height:100%; width:200px;">
+                            <a href="{{route('company.show', $company->company_id)}}" class="rounded shadow-hover bg-white border d-block text-decoration-none" style="height:100%; width:200px;">
                                 <div class="d-block pb-3 text-center">
                                     <img src="{{ asset('IMG/uploads/cover/' . $company->cover_image) }}"
                                         class="rounded-top" width="100%" style="object-fit: cover;">
@@ -286,7 +286,7 @@
                     @foreach($users as $index => $user)
                         <div class="col-6 col-md-4 experience-people"
                             style="{{ $index >= 9 ? 'display:none;' : '' }}">
-                            <a href="#" class="rounded bg-white shadow-hover border d-block text-decoration-none" style="height:100%; width:200px;">
+                            <a href="{{route('user.page', $user->user_id)}}" class="rounded bg-white shadow-hover border d-block text-decoration-none" style="height:100%; width:200px;">
                                 <div class="d-block pb-3">
                                     <img src="{{ asset('IMG/cover/' . $user->cover_image) }}"
                                         class="rounded-top" width="100%" style="object-fit: cover;">
