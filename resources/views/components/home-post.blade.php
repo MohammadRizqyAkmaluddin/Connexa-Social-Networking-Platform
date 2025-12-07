@@ -75,9 +75,8 @@
                 @endif
             </div>
 
-
             <div class="modal align-items-center justify-content-center" tabindex="-1" id="postModal{{ $post->post_id }}">
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 1000px;">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable scroll-area" style="max-width: 1000px;">
                     <div class="modal-content">
                     <div class="modal-body d-flex gap-3 p-0" style="overflow-y: auto;">
                         @if($count > 1)

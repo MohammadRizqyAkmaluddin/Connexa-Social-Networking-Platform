@@ -87,7 +87,7 @@
                                             <input type="hidden" name="receiver_id" value="{{$user->user->user_id}}">
                                             <input type="hidden" name="status" value="New">
                                             <input type="hidden" name="active_tab2" value="{{$user->user->user_id}}">
-                                            <div class="chat-input bg-white p-3 border-top align-items-end">
+                                            <div class="chat-input bg-white p-3 border-top align-items-end justify-content-end">
                                                 <textarea type="text" name="message" class="form-control fs-7 scroll-area chat-style" placeholder="Type a message..." ></textarea>
                                                 <button type="submit" class="border-0 px-4 mt-2 py-1 bg-primary text-light rounded-pill">Send</button>
                                             </div>

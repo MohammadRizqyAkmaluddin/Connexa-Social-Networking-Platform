@@ -51,7 +51,7 @@
         </div>
         @endif
 
-        @if($user->experiences)
+        @if($user->experiences->isNotEmpty())
         <div class="mt-3 px-5 pb-4 py-3 bg-white shadow-sm rounded">
             <h2 class="fs-5 mb-4 pt-3">Experience</h2>
             @foreach($user->experiences as $index => $experience)

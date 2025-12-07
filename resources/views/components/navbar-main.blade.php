@@ -68,7 +68,7 @@
                                 <i class="bi bi-people-fill d-block fs-5"></i>Network
                             </div>
                             @if($invitationCount > 0)
-                                <span class="badge d-flex justify-content-center bg-danger fs-10 rounded-circle text-center align-items-center" style="height:15px; width:15px; margin-left: -13px">{{ $invitationCount }}</span>
+                                <span class="badge d-flex justify-content-center bg-danger fs-14 rounded-circle text-center align-items-center" style="height:15px; width:15px; margin-left: -13px">{{ $invitationCount }}</span>
                             @endif
                         </a>
                     </li>

@@ -244,7 +244,7 @@
                                 <h2 class="fs-5 mb-4">Board of directors</h2>
                                 <div class="d-block">
                                     @foreach($company->roles as $role)
-                                    <a class="d-block text-center border text-decoration-none role-company mt-3" href="#">
+                                    <a class="d-block text-center border text-decoration-none role-company mt-3" href="{{route('user.page', $role->user->user_id)}}">
                                         <div style="width:150px; height:150px; overflow:hidden; margin:0 auto;">
                                             <img src="{{ asset('IMG/uploads/profile/' . $role->user->profile_image) }}"
                                                 style="width:100%; height:100%; object-fit:cover;">
@@ -260,7 +260,7 @@
                                 <h2 class="fs-5 mb-4">Board of directors</h2>
                                 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
                                     @foreach($company->roles as $role)
-                                    <a class="d-block text-center border text-decoration-none role-company" href="#">
+                                    <a class="d-block text-center border text-decoration-none role-company" href="{{route('user.page', $role->user->user_id)}}">
                                         <div style="width:150px; height:150px; overflow:hidden; margin:0 auto;">
                                             <img src="{{ asset('IMG/uploads/profile/' . $role->user->profile_image) }}"
                                                 style="width:100%; height:100%; object-fit:cover;">

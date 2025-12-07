@@ -127,8 +127,8 @@
                 </div>
             </div>
 
-            <div class="d-block text-start border-top pt-3">
-                <h2 class="fs-7 mb-1">All Applicants</h2>
+            <div class="d-block text-start border-top pt-4">
+                <h2 class="fs-7 mb-3">All Applicants</h2>
                 <div class="px-3 pb-2 rounded">
 
                     <div class="row">
@@ -179,7 +179,7 @@
                     </div>
 
 
-                    <div class="mt-auto pt-3">
+                    <div class="mt-auto pt-4">
                         {{ $applicants->links('pagination::bootstrap-5') }}
                     </div>
 
@@ -188,11 +188,22 @@
                         <div class="modal-dialog modal-lg modal-dialog-start">
                             <div class="modal-content px-5 pt-3">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5 d-flex align-items-center gap-2 mb-0" id="exampleModalToggleLabel3">Applicants {{$app->user->name}}</h1>
+                                    <h1 class="modal-title fs-5 d-flex align-items-center gap-2 mb-0" id="exampleModalToggleLabel3">Manage Application</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div class="modal-body scroll-area" style="overflow-y: auto; height:700px" >
-
+                                <div class="modal-body scroll-area align-items-center justify-content-center text-center w-100" style="overflow-y: auto; height:700px" >
+                                    <div class="mb-3 align-items-center justify-content-center text-center">
+                                        <div class="d-block">
+                                        <img src="{{asset('IMG/uploads/profile/' . $app->user->profile_image)}}"
+                                            class="rounded-circle mb-3"
+                                            style="width: 140px; height:140px; object-fit:cover;">
+                                        <div class="">
+                                            <h2 class="mb-1 fs-5">{{$app->user->name}}</h2>
+                                            <p class="mb-0 fs-9 lh-1">{{$app->user->headline}}</p>
+                                        </div>
+                                        </div>
+                                        <a href="{{route('user.page', $app->user->user_id)}}" class="text-decoration-none text-light bg-primary">Check Profile</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

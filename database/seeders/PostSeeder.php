@@ -22,14 +22,14 @@ class PostSeeder extends Seeder
                 'post_type'       => 'Educational',
                 'user_id'       => NULL,
                 'company_id'       => 'C001',
-                'description'   => 'Lately, I’ve been exploring how AI can improve software testing efficiency.
+                'description'   => 'Exploring how AI can improve software testing efficiency.
                                     Tools like Copilot and Testim are changing how we approach QA automation.
                                     The future of testing is definitely smarter.',
             ],
             [
                 'post_type'       => 'Achievement',
-                'user_id'       => NULL,
-                'company_id'       => 'C001',
+                'user_id'       => 'U041',
+                'company_id'       => NULL,
                 'description'   => 'Thrilled to share that I’ve officially passed the AWS Certified Solutions Architect – Associate exam!
                                     The journey wasn’t easy, but it was worth every late-night study session.
                                     Excited to apply these cloud architecture skills in real-world projects.',
@@ -38,14 +38,14 @@ class PostSeeder extends Seeder
                 'post_type'       => 'Achievement',
                 'user_id'       => NULL,
                 'company_id'       => 'C007',
-                'description'   => 'I’m proud to announce that our team successfully launched the new HR Management System for our client this week!
+                'description'   => 'Proud to announce that our team successfully launched the new HR Management System for our client this week!
                                     Months of hard work, collaboration, and debugging finally paid off.
                                     Huge thanks to everyone who made this project a success! 🎉',
             ],
             [
                 'post_type'       => 'Career',
-                'user_id'       => NULL,
-                'company_id'       => 'C007',
+                'user_id'       => 'U010',
+                'company_id'       => NULL,
                 'description'   => 'After three amazing years at TechCore Solutions, I’m excited to start a new chapter as a Backend Engineer at Tokopedia.
                                     I’m grateful for all the growth and mentorship I’ve experienced so far.
                                     Here’s to new challenges and continuous learning!',

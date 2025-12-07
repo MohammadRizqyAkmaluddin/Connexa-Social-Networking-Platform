@@ -50,6 +50,7 @@ class HomeController extends Controller
                     ->where('status', 'success');
             })
             ->limit(4)
+            ->inRandomOrder()
             ->get();
 
         $ads = Ads::limit(1)->inRandomOrder()->get();
@@ -81,7 +82,12 @@ class HomeController extends Controller
                 ];
         });
 
-    $connection = Connection::get();
+        $connection = Connection::with('user', 'target')
+            ->where('user_id', $user->user_id)
+            ->where('status', 'Success')
+            ->orWhere('user_target', $user->user_id)
+            ->where('status', 'Success')
+            ->get();
 
 
         return view('pages.homepage', compact('user', 'educations', 'posts', 'companies', 'peoples', 'ads', 'chats', 'connection'));
