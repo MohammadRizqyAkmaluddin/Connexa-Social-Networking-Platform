@@ -39,7 +39,7 @@
                 </div>
             </div>
 
-            <div class="border-top border-bottom py-5 my-5">
+            <div class="d-block border-top border-bottom py-5 my-5">
                 <h2 class="fs-6 mb-4">Application Progress</h2>
                 @if ($appliedJob->status == 'Pass')
 
@@ -135,8 +135,13 @@
                                 <p class="mb-0 fs-7 text-lightGrey fw-normal">Hired</p>
                             </div>
                         </div>
-                        <h3 class="fs-7 mb-0">Detail Status:</h3>
-                        <p class="fs-8 mb-3 d-flex">Rejected | HR Interview</p>
+                        <div class="d-flex gap-3">
+                            <div class="d-block w-75">
+                                <h3 class="fs-7 mb-0">Detail Status:</h3>
+                                <p class="fs-8 mb-3">Rejected | HR Interview</p>
+                            </div>
+                            <h2 class="fs-8 mb-0 fw-light border-start ps-3">Unfortunately, {{$appliedJob->job->company->name}} has decided not to move forward with your {{$appliedJob->job->title}} application at this time.</h2>
+                        </div>
 
                     @elseif ($appliedJob->progress == 'Test')
 
@@ -179,8 +184,13 @@
                                 <p class="mb-0 fs-7 text-lightGrey fw-normal">Hired</p>
                             </div>
                         </div>
-                        <h3 class="fs-7 mb-0">Detail Status:</h3>
-                        <p class="fs-8 mb-3 d-flex">Rejected | Technical Test</p>
+                        <div class="d-flex gap-3">
+                            <div class="d-block w-75">
+                                <h3 class="fs-7 mb-0">Detail Status:</h3>
+                                <p class="fs-8 mb-3">Rejected | Technical Test</p>
+                            </div>
+                            <h2 class="fs-8 mb-0 fw-light border-start ps-3">Unfortunately, {{$appliedJob->job->company->name}} has decided not to move forward with your {{$appliedJob->job->title}} application at this time.</h2>
+                        </div>
 
                     @elseif ($appliedJob->progress == 'Review')
 
@@ -222,9 +232,14 @@
                                 <p class="mb-0 fs-7 text-lightGrey fw-normal">Hired</p>
                             </div>
                         </div>
-                        <h3 class="fs-7 mb-0">Detail Status:</h3>
-                        <p class="fs-8 mb-3 d-flex">Rejected | Application Review</p>
 
+                        <div class="d-flex gap-3">
+                            <div class="d-block w-75">
+                                <h3 class="fs-7 mb-0">Detail Status:</h3>
+                                <p class="fs-8 mb-3">Rejected | Application Review</p>
+                            </div>
+                            <h2 class="fs-8 mb-0 fw-light border-start ps-3">Unfortunately, {{$appliedJob->job->company->name}} has decided not to move forward with your {{$appliedJob->job->title}} application at this time.</h2>
+                        </div>
                     @endif
 
                 @elseif ($appliedJob->status == 'On Progress')
@@ -297,7 +312,7 @@
                                 <p class="mb-0 fs-7 text-success fw-semibold">Application Review</p>
                                 <p class="text-muted fs-13">{{ $appliedJob->created_at->format('d/m/Y') }}</p>
                             </div>
-                            <div class="d-block align-items-center text-start ">
+                            <div class="d-block align-items-center text-start justify-content-center">
                                 <div class="d-flex align-items-center" style="margin-right:-35px">
                                     <i class="bi bi-circle-fill fs-9 text-primary"></i>
                                     <div class="bg-lightGrey w-100" style="height:2px"></div>

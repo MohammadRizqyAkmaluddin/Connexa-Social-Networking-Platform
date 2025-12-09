@@ -52,4 +52,29 @@ class RecruitmentController extends Controller
         return view('pages.recruitment', compact('job', 'majors', 'applicants'));
     }
 
+    public function updateApplication(Request $request)
+    {
+        $applicant_id = $request->applicant_id;
+        $progress = $request->progress;
+        $status = $request->status;
+
+        Applicant::where('applicant_id', $applicant_id)
+            ->update([
+                'progress' => $progress,
+                'status'   => $status
+            ]);
+
+        return redirect()->back()->with('success', 'updated');
+    }
+
+    public function rejectApplication(Request $request)
+    {
+        $applicant_id = $request->applicant_id;
+
+        Applicant::where('applicant_id', $applicant_id)
+            ->update(['status'   => 'Rejected']);
+
+        return redirect()->back()->with('success', 'updated');
+    }
+
 }

@@ -63,6 +63,9 @@ Route::get('/manage/{company_id}', [BusinessController::class, 'show'])->name('m
 Route::get('/recruitment/{job_id}', [RecruitmentController::class, 'show'])->name('recruitment.show')->middleware('auth');
 Route::get('/application/{job_id}', [AppliedController::class, 'show'])->name('application.show')->middleware('auth');
 
+Route::post('/recruitment/update-progress', [RecruitmentController::class, 'updateApplication'])->name('progress.update');
+Route::post('/recruitment/update-reject', [RecruitmentController::class, 'rejectApplication'])->name('reject.update');
+
 Route::post('/message/store', [MessageController::class, 'store'])->name('message.store')->middleware('auth');
 Route::post('/message/update-status', [MessageController::class, 'updateStatus'])->name('message.updateStatus')->middleware('auth');
 Route::post('/post/store', [PostController::class, 'store'])->name('post.store');

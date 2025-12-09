@@ -10,6 +10,7 @@ $black: black;
 $main: #F3F2EE;
 $main2: #eae9e6;
 $like: #9a4949;
+$reject: #d43d3d93;
 $notification: #d32121;
 $rejected: #ece1e12d;
 $progress: #f0f4ff2d;
@@ -28,7 +29,8 @@ $theme-colors: map-merge(
     "darkGrey":     $darkGrey,
     "black":        $black,
     "main":         $main,
-    "main2":         $main2,
+    "reject":       $reject,
+    "main2":        $main2,
     "like":         $like,
     "pass":         $pass,
     "progress":     $progress,
