@@ -40,7 +40,7 @@ class ApplicantSeeder extends Seeder
 
         shuffle($combinations);
 
-        $totalInsert = 1000;
+        $totalInsert = 2000;
 
         for ($i = 0; $i < $totalInsert; $i++) {
 

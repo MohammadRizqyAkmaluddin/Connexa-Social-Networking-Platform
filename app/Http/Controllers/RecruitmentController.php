@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Job;
 use App\Models\Major;
 use App\Models\Applicant;
+use App\Models\Notification;
 
 class RecruitmentController extends Controller
 {
@@ -57,6 +58,10 @@ class RecruitmentController extends Controller
         $applicant_id = $request->applicant_id;
         $progress = $request->progress;
         $status = $request->status;
+        $title = $request->title;
+        $description = $request->description;
+        $category = $request->category;
+        $user_id = $request->user_id;
 
         Applicant::where('applicant_id', $applicant_id)
             ->update([
@@ -64,16 +69,35 @@ class RecruitmentController extends Controller
                 'status'   => $status
             ]);
 
+        Notification::create([
+            'title'         => $title,
+            'applicant_id'  => $applicant_id,
+            'description'   => $description,
+            'category'      => $category,
+            'user_id'       => $user_id,
+        ]);
+
         return redirect()->back()->with('success', 'updated');
     }
 
     public function rejectApplication(Request $request)
     {
         $applicant_id = $request->applicant_id;
+        $title = $request->title;
+        $description = $request->description;
+        $category = $request->category;
+        $user_id = $request->user_id;
 
         Applicant::where('applicant_id', $applicant_id)
             ->update(['status'   => 'Rejected']);
 
+        Notification::create([
+            'title'         => $title,
+            'applicant_id'  => $applicant_id,
+            'description'  => $description,
+            'category'      => $category,
+            'user_id'       => $user_id,
+        ]);
         return redirect()->back()->with('success', 'updated');
     }
 

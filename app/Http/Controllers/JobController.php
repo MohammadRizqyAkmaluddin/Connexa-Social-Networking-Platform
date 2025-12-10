@@ -28,7 +28,10 @@ class JobController extends Controller
             'max_salary'    => 'required|numeric|gte:min_salary',
             'job_details'   => 'nullable|string'
         ]);
+
         DB::beginTransaction();
+
+        try {
 
             $job = Job::create([
                 'company_id'    => $request->company_id,
@@ -37,17 +40,25 @@ class JobController extends Controller
                 'mode_id'       => $request->mode_id,
                 'job_details'   => $request->job_details,
             ]);
+
             JobSalary::create([
                 'job_id'     => $job->job_id,
                 'min_salary' => $request->min_salary,
                 'max_salary' => $request->max_salary,
             ]);
 
-
             DB::commit();
 
             return redirect()->back()->with('success', 'Job and salary created successfully!');
+
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+
+            return redirect()->back()->with('error', 'Failed to create job: ' . $e->getMessage());
+        }
     }
+
 
     public function index(Request $request)
     {

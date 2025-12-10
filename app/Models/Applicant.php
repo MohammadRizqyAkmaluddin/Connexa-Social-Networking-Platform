@@ -18,5 +18,9 @@ class Applicant extends Model
     {
         return $this->belongsTo(Job::class, 'job_id', 'job_id');
     }
+    public function notification()
+    {
+        return $this->hasMany(Notification::class, 'application_id', 'application_id');
+    }
 }
 

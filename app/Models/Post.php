@@ -15,10 +15,10 @@ class Post extends Model
     public $timestamps = false;
     public $incrementing = true;
 
-    protected $fillable = 
+    protected $fillable =
     [
         'post_type',
-        'user_id', 
+        'user_id',
         'description',
         'created_at'
     ];
@@ -46,5 +46,9 @@ class Post extends Model
     public function getCreatedAtAttribute($value)
     {
         return Carbon::parse($value);
+    }
+    public function notification()
+    {
+        return $this->hasMany(Notification::class, 'post_id', 'post_id');
     }
 }

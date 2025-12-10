@@ -792,7 +792,7 @@ class UserEducationSeeder extends Seeder
             ],
             [
                 'user_id'       => 'U051',
-                'company_id'    => 'C012',
+                'company_id'    => 'C009',
                 'major_id'      => 30,
                 'GPA'           => 3.91,
                 'start_date'    => '2021-09-01',
@@ -802,7 +802,7 @@ class UserEducationSeeder extends Seeder
             // === U052 ===
             [
                 'user_id'       => 'U052',
-                'company_id'    => 'C011',
+                'company_id'    => 'C010',
                 'major_id'      => 7,
                 'GPA'           => 3.72,
                 'start_date'    => '2012-08-01',
@@ -810,7 +810,7 @@ class UserEducationSeeder extends Seeder
             ],
             [
                 'user_id'       => 'U052',
-                'company_id'    => 'C012',
+                'company_id'    => 'C009',
                 'major_id'      => 18,
                 'GPA'           => 3.88,
                 'start_date'    => '2017-09-01',
@@ -818,7 +818,7 @@ class UserEducationSeeder extends Seeder
             ],
             [
                 'user_id'       => 'U052',
-                'company_id'    => 'C013',
+                'company_id'    => 'C011',
                 'major_id'      => 32,
                 'GPA'           => 3.95,
                 'start_date'    => '2021-09-01',
@@ -844,7 +844,7 @@ class UserEducationSeeder extends Seeder
             ],
             [
                 'user_id'       => 'U053',
-                'company_id'    => 'C013',
+                'company_id'    => 'C011',
                 'major_id'      => 31,
                 'GPA'           => 3.92,
                 'start_date'    => '2021-09-01',
@@ -862,7 +862,7 @@ class UserEducationSeeder extends Seeder
             ],
             [
                 'user_id'       => 'U054',
-                'company_id'    => 'C012',
+                'company_id'    => 'C009',
                 'major_id'      => 15,
                 'GPA'           => 3.81,
                 'start_date'    => '2017-09-01',
@@ -870,7 +870,7 @@ class UserEducationSeeder extends Seeder
             ],
             [
                 'user_id'       => 'U054',
-                'company_id'    => 'C013',
+                'company_id'    => 'C011',
                 'major_id'      => 33,
                 'GPA'           => 3.94,
                 'start_date'    => '2021-09-01',
@@ -888,7 +888,7 @@ class UserEducationSeeder extends Seeder
             ],
             [
                 'user_id'       => 'U055',
-                'company_id'    => 'C012',
+                'company_id'    => 'C009',
                 'major_id'      => 21,
                 'GPA'           => 3.88,
                 'start_date'    => '2018-09-01',
@@ -896,7 +896,7 @@ class UserEducationSeeder extends Seeder
             ],
             [
                 'user_id'       => 'U055',
-                'company_id'    => 'C013',
+                'company_id'    => 'C011',
                 'major_id'      => 34,
                 'GPA'           => 3.97,
                 'start_date'    => '2021-09-01',
@@ -922,7 +922,7 @@ class UserEducationSeeder extends Seeder
             ],
             [
                 'user_id'       => 'U056',
-                'company_id'    => 'C013',
+                'company_id'    => 'C011',
                 'major_id'      => 32,
                 'GPA'           => 3.95,
                 'start_date'    => '2021-09-01',
@@ -940,7 +940,7 @@ class UserEducationSeeder extends Seeder
             ],
             [
                 'user_id'       => 'U057',
-                'company_id'    => 'C012',
+                'company_id'    => 'C009',
                 'major_id'      => 17,
                 'GPA'           => 3.86,
                 'start_date'    => '2018-09-01',
@@ -948,7 +948,7 @@ class UserEducationSeeder extends Seeder
             ],
             [
                 'user_id'       => 'U057',
-                'company_id'    => 'C013',
+                'company_id'    => 'C011',
                 'major_id'      => 31,
                 'GPA'           => 3.94,
                 'start_date'    => '2021-09-01',
@@ -966,7 +966,7 @@ class UserEducationSeeder extends Seeder
             ],
             [
                 'user_id'       => 'U058',
-                'company_id'    => 'C012',
+                'company_id'    => 'C009',
                 'major_id'      => 20,
                 'GPA'           => 3.90,
                 'start_date'    => '2017-09-01',
@@ -974,7 +974,7 @@ class UserEducationSeeder extends Seeder
             ],
             [
                 'user_id'       => 'U058',
-                'company_id'    => 'C013',
+                'company_id'    => 'C011',
                 'major_id'      => 30,
                 'GPA'           => 3.98,
                 'start_date'    => '2021-09-01',

@@ -184,6 +184,7 @@
                     </div>
 
                     @foreach($job->applicant as $app)
+
                     <div class="modal fade" id="applicant{{$app->applicant_id}}" aria-hidden="true" aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
                         <div class="modal-dialog modal-lg modal-dialog-start">
                             <div class="modal-content px-5 pt-3">
@@ -192,7 +193,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body scroll-area align-items-center justify-content-center text-center w-100" style="overflow-y: auto; height:680px" >
-                                    <div class="mb-3 align-items-center justify-content-center text-center">
+                                    <div class="align-items-center justify-content-center text-center">
                                         <div class="d-block">
                                             <img src="{{asset('IMG/uploads/profile/' . $app->user->profile_image)}}"
                                                 class="rounded-circle mb-3"
@@ -203,7 +204,7 @@
                                                 <a href="{{route('user.page', $app->user->user_id)}}" class="text-decoration-none text-light bg-primary py-2 px-3 rounded-pill fs-7 fw-bold">Check profile</a>
                                             </div>
                                         </div>
-                                        <div class="d-block border-top border-bottom py-5 my-5 justify-content-center align-items-center mx-auto text-center">
+                                        <div class="d-block border-top py-5 mt-5 justify-content-center align-items-center mx-auto text-center">
                                             <h2 class="fs-6 mb-4">Application Progress</h2>
                                             @if ($app->status == 'Pass')
 
@@ -460,11 +461,19 @@
                                                         <form action="{{route('reject.update')}}" method="POST">
                                                             @csrf
                                                             <input type="hidden" name="applicant_id" value="{{$app->applicant_id}}">
+                                                            <input type="hidden" name="category" value="Application">
+                                                            <input type="hidden" name="user_id" value="{{$app->user_id}}">
+                                                            <input type="hidden" name="title" value="Application update for &lt;strong&gt;{{ $app->job->title }}&lt;/strong&gt; at &lt;strong&gt;{{ $app->job->company->name }}&lt;/strong&gt;">
+                                                            <input type="hidden" name="description" value="You did not pass the {{$app->progress}} qualification stage">
                                                             <button class="btn btn-outline-danger fs-7">Reject Application</button>
                                                         </form>
                                                         <form action="{{route('progress.update')}}" method="POST">
                                                             @csrf
                                                             <input type="hidden" name="applicant_id" value="{{$app->applicant_id}}">
+                                                            <input type="hidden" name="category" value="Application">
+                                                            <input type="hidden" name="user_id" value="{{$app->user_id}}">
+                                                            <input type="hidden" name="title" value="Application update for &lt;strong&gt;{{ $app->job->title }}&lt;/strong&gt; at &lt;strong&gt;{{ $app->job->company->name }}&lt;/strong&gt;">
+                                                            <input type="hidden" name="description" value="You have passed the {{$app->progress}} qualification stage, check your application progress for the next step">
                                                             <input type="hidden" name="progress" value="Interview">
                                                             <input type="hidden" name="status" value="Pass">
                                                             <button class="btn btn-outline-primary fs-7">Proceed Next Step</button>
@@ -523,11 +532,19 @@
                                                         <form action="{{route('reject.update')}}" method="POST">
                                                             @csrf
                                                             <input type="hidden" name="applicant_id" value="{{$app->applicant_id}}">
+                                                            <input type="hidden" name="category" value="Application">
+                                                            <input type="hidden" name="user_id" value="{{$app->user_id}}">
+                                                            <input type="hidden" name="title" value="Application update for &lt;strong&gt;{{ $app->job->title }}&lt;/strong&gt; at &lt;strong&gt;{{ $app->job->company->name }}&lt;/strong&gt;">
+                                                            <input type="hidden" name="description" value="You did not pass the {{$app->progress}} qualification stage">
                                                             <button class="btn btn-outline-danger fs-7">Reject Application</button>
                                                         </form>
                                                         <form action="{{route('progress.update')}}" method="POST">
                                                             @csrf
                                                             <input type="hidden" name="applicant_id" value="{{$app->applicant_id}}">
+                                                            <input type="hidden" name="category" value="Application">
+                                                            <input type="hidden" name="user_id" value="{{$app->user_id}}">
+                                                            <input type="hidden" name="title" value="Application update for &lt;strong&gt;{{ $app->job->title }}&lt;/strong&gt; at &lt;strong&gt;{{ $app->job->company->name }}&lt;/strong&gt;">
+                                                            <input type="hidden" name="description" value="You have passed the {{$app->progress}} qualification stage, check your application progress for the next step">
                                                             <input type="hidden" name="progress" value="Interview">
                                                             <input type="hidden" name="status" value="On Progress">
                                                             <button class="btn btn-outline-primary fs-7">Proceed Next Step</button>
@@ -585,11 +602,19 @@
                                                         <form action="{{route('reject.update')}}" method="POST">
                                                             @csrf
                                                             <input type="hidden" name="applicant_id" value="{{$app->applicant_id}}">
+                                                            <input type="hidden" name="category" value="Application">
+                                                            <input type="hidden" name="user_id" value="{{$app->user_id}}">
+                                                            <input type="hidden" name="title" value="Application update for &lt;strong&gt;{{ $app->job->title }}&lt;/strong&gt; at &lt;strong&gt;{{ $app->job->company->name }}&lt;/strong&gt;">
+                                                            <input type="hidden" name="description" value="You did not pass the {{$app->progress}} qualification stage">
                                                             <button class="btn btn-outline-danger fs-7">Reject Application</button>
                                                         </form>
                                                         <form action="{{route('progress.update')}}" method="POST">
                                                             @csrf
                                                             <input type="hidden" name="applicant_id" value="{{$app->applicant_id}}">
+                                                            <input type="hidden" name="category" value="Application">
+                                                            <input type="hidden" name="user_id" value="{{$app->user_id}}">
+                                                            <input type="hidden" name="title" value="Application update for &lt;strong&gt;{{ $app->job->title }}&lt;/strong&gt; at &lt;strong&gt;{{ $app->job->company->name }}&lt;/strong&gt;">
+                                                            <input type="hidden" name="description" value="You have passed the {{$app->progress}} qualification stage, check your application progress for the next step">
                                                             <input type="hidden" name="progress" value="Test">
                                                             <input type="hidden" name="status" value="On Progress">
                                                             <button class="btn btn-outline-primary fs-7">Proceed Next Step</button>
@@ -600,6 +625,54 @@
                                             @endif
                                         </div>
                                     </div>
+                                    @foreach($app->user->userEducations as $education)
+                                     @php
+                                        $start = \Carbon\Carbon::parse($education->start_date);
+                                        $end   = $education->end_date
+                                                    ? \Carbon\Carbon::parse($education->end_date)
+                                                    : \Carbon\Carbon::now();
+
+                                        // Hitung total bulan (dijamin integer)
+                                        $totalMonths = $start->diffInMonths($end);
+
+                                        // Pecah jadi tahun dan bulan
+                                        $diffYears  = intdiv($totalMonths, 12);     // pembagian bulat
+                                        $diffMonths = $totalMonths % 12;
+
+                                        // Format durasi
+                                        $duration = '';
+                                        if ($diffYears > 0) {
+                                            $duration .= $diffYears.' yr'.($diffYears > 1 ? 's ' : ' ');
+                                        }
+                                        if ($diffMonths > 0) {
+                                            $duration .= $diffMonths.' mo'.($diffMonths > 1 ? 's' : '');
+                                        }
+                                        $duration = trim($duration);
+                                    @endphp
+                                    <a href="{{route('company.show', $education->company->company_id)}}" class="d-flex text-start gap-2 text-decoration-none text-dark align-items-start {{$index > 0 ? 'border-top pt-2 mt-2' : ''}}">
+                                        <img src="{{asset('IMG/uploads/logo/'.$education->company->logo)}}" width="50" height="50">
+                                        <div class="d-block">
+                                            <h2 class="fs-6 mb-0">{{$education->company->name}}</h2>
+                                            <div class="d-flex">
+                                                <p class="fs-8 mb-0">{{$education->major->major}}</p>
+                                                <i class="bi bi-dot fs-8 text-muted"></i>
+                                                <p class="fs-8 mb-0">GPA {{$education->GPA}} / 4.00</p>
+                                            </div>
+                                            <div class="d-flex gap-1">
+                                                <p class="fs-8 text-muted mb-0">{{ $start->format('M Y') }}</p>
+                                                <p class="text-muted mb-0" style="margin-top: -3px">-</p>
+
+                                                @if($education->end_date)
+                                                    <p class="fs-8 text-muted mb-0">{{ $end->format('M Y') }}</p>
+                                                @else
+                                                    <p class="fs-8 text-muted mb-0">Present</p>
+                                                @endif
+                                                <i class="bi bi-dot fs-8 text-muted"></i>
+                                                <p class="fs-8 text-muted mb-0">{{ $duration }}</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    @endforeach
                                 </div>
                                 <div class="modal-footer align-items-end border-top">
                                     <button type="button" class="btn btn-primary" data-bs-target="#message{{$app->applicant_id}}" data-bs-toggle="modal">Message</button>
