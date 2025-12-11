@@ -18,7 +18,7 @@ class Messages extends Migration
             $table->string('sender_id', 10);
             $table->string('receiver_id', 10);
             $table->string('status', 10)->default('New');
-            $table->string('category', 10)->default('Connection');
+            $table->string('category', 10)->default('Direct');
             $table->text('message');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();

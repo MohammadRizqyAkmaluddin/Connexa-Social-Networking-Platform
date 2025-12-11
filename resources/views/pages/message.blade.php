@@ -81,14 +81,20 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body scroll-area" style="overflow-y: auto; height:auto">
-                                        <form action="{{route('message.store')}}" method="POST">
+                                        <form action="{{route('message.store')}}" method="POST" onsubmit="copyDescription(this)">
                                             @csrf
+                                            <input type="hidden" name="category" value="Message">
+                                            <input type="hidden" name="title" value="&lt;strong&gt;{{ Auth::user()->name }}&lt;/strong&gt; sent you a message">
+                                            <input type="hidden" name="description" class="description-input">
                                             <input type="hidden" name="sender_id" value="{{Auth::user()->user_id}}">
                                             <input type="hidden" name="receiver_id" value="{{$user->user->user_id}}">
                                             <input type="hidden" name="status" value="New">
+                                            <input type="hidden" name="type" value="Connection">
                                             <input type="hidden" name="active_tab2" value="{{$user->user->user_id}}">
+
                                             <div class="chat-input bg-white p-3 border-top align-items-end justify-content-end">
-                                                <textarea type="text" name="message" class="form-control fs-7 scroll-area chat-style" placeholder="Type a message..." ></textarea>
+                                                <textarea name="message" class="message-textarea form-control fs-7 scroll-area chat-style"
+                                                        placeholder="Type a message..."></textarea>
                                                 <button type="submit" class="border-0 px-4 mt-2 py-1 bg-primary text-light rounded-pill">Send</button>
                                             </div>
                                         </form>
@@ -114,14 +120,18 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body scroll-area" style="overflow-y: auto; height:auto">
-                                        <form action="{{route('message.store')}}" method="POST">
+                                        <form action="{{route('message.store')}}" method="POST" onsubmit="copyDescription(this)">
                                             @csrf
+                                            <input type="hidden" name="category" value="Message">
+                                            <input type="hidden" name="title" value="&lt;strong&gt;{{ Auth::user()->name }}&lt;/strong&gt; sent you a message">
+                                            <input type="hidden" name="description" class="description-input">
                                             <input type="hidden" name="sender_id" value="{{Auth::user()->user_id}}">
                                             <input type="hidden" name="receiver_id" value="{{$user->target->user_id}}">
                                             <input type="hidden" name="status" value="New">
+                                            <input type="hidden" name="type" value="Connection">
                                             <input type="hidden" name="active_tab2" value="{{$user->target->user_id}}">
                                             <div class="chat-input bg-white p-3 border-top align-items-end">
-                                                <textarea type="text" name="message" class="form-control fs-7 scroll-area chat-style" placeholder="Type a message..." ></textarea>
+                                                <textarea type="text" name="message" class="message-textarea form-control fs-7 scroll-area chat-style" placeholder="Type a message..." ></textarea>
                                                 <button type="submit" class="border-0 px-4 mt-2 py-1 bg-primary text-light rounded-pill">Send</button>
                                             </div>
                                         </form>
@@ -277,14 +287,18 @@
                                     @endforeach
                                 </div>
 
-                                <form action="{{route('message.store')}}" method="POST">
+                                <form action="{{route('message.store')}}" method="POST" onsubmit="copyDescription(this)">
                                     @csrf
+                                    <input type="hidden" name="category" value="Message">
+                                    <input type="hidden" name="title" value="&lt;strong&gt;{{ Auth::user()->name }}&lt;/strong&gt; sent you a message">
+                                    <input type="hidden" name="description" class="description-input">
                                     <input type="hidden" name="sender_id" value="{{Auth::user()->user_id}}">
                                     <input type="hidden" name="receiver_id" value="{{$chat['user']->user_id}}">
+                                    <input type="hidden" name="type" value="Connection">
                                     <input type="hidden" name="status" value="New">
                                     <input type="hidden" name="active_tab2" value="{{ $chat['user']->user_id }}">
                                     <div class="chat-input bg-white p-3 border-top align-items-end">
-                                        <textarea type="text" name="message" class="form-control fs-7 scroll-area chat-style" placeholder="Type a message..." ></textarea>
+                                        <textarea type="text" name="message" class="message-textarea form-control fs-7 scroll-area chat-style" placeholder="Type a message..." ></textarea>
                                         <button type="submit" class="border-0 px-4 mt-2 py-1 bg-primary text-light rounded-pill">Send</button>
                                     </div>
                                 </form>
@@ -297,4 +311,16 @@
 
         </div>
     </div>
+
+    <script>
+        function copyDescription(form) {
+            const textarea = form.querySelector('.message-textarea');
+            const description = form.querySelector('.description-input');
+
+            if (textarea && description) {
+                description.value = textarea.value.trim();
+            }
+        }
+    </script>
+
 @endsection

@@ -625,54 +625,106 @@
                                             @endif
                                         </div>
                                     </div>
-                                    @foreach($app->user->userEducations as $education)
-                                     @php
-                                        $start = \Carbon\Carbon::parse($education->start_date);
-                                        $end   = $education->end_date
-                                                    ? \Carbon\Carbon::parse($education->end_date)
-                                                    : \Carbon\Carbon::now();
+                                    <div class="d-block text-start border-bottom">
+                                        <h1 class="fs-6">Educations</h1>
+                                        @foreach($app->user->userEducations->take(2) as $education)
+                                            @php
+                                                $start = \Carbon\Carbon::parse($education->start_date);
+                                                $end   = $education->end_date
+                                                            ? \Carbon\Carbon::parse($education->end_date)
+                                                            : \Carbon\Carbon::now();
 
-                                        // Hitung total bulan (dijamin integer)
-                                        $totalMonths = $start->diffInMonths($end);
+                                                // Hitung total bulan (dijamin integer)
+                                                $totalMonths = $start->diffInMonths($end);
 
-                                        // Pecah jadi tahun dan bulan
-                                        $diffYears  = intdiv($totalMonths, 12);     // pembagian bulat
-                                        $diffMonths = $totalMonths % 12;
+                                                // Pecah jadi tahun dan bulan
+                                                $diffYears  = intdiv($totalMonths, 12);     // pembagian bulat
+                                                $diffMonths = $totalMonths % 12;
 
-                                        // Format durasi
-                                        $duration = '';
-                                        if ($diffYears > 0) {
-                                            $duration .= $diffYears.' yr'.($diffYears > 1 ? 's ' : ' ');
-                                        }
-                                        if ($diffMonths > 0) {
-                                            $duration .= $diffMonths.' mo'.($diffMonths > 1 ? 's' : '');
-                                        }
-                                        $duration = trim($duration);
-                                    @endphp
-                                    <a href="{{route('company.show', $education->company->company_id)}}" class="d-flex text-start gap-2 text-decoration-none text-dark align-items-start {{$index > 0 ? 'border-top pt-2 mt-2' : ''}}">
-                                        <img src="{{asset('IMG/uploads/logo/'.$education->company->logo)}}" width="50" height="50">
-                                        <div class="d-block">
-                                            <h2 class="fs-6 mb-0">{{$education->company->name}}</h2>
-                                            <div class="d-flex">
-                                                <p class="fs-8 mb-0">{{$education->major->major}}</p>
-                                                <i class="bi bi-dot fs-8 text-muted"></i>
-                                                <p class="fs-8 mb-0">GPA {{$education->GPA}} / 4.00</p>
-                                            </div>
-                                            <div class="d-flex gap-1">
-                                                <p class="fs-8 text-muted mb-0">{{ $start->format('M Y') }}</p>
-                                                <p class="text-muted mb-0" style="margin-top: -3px">-</p>
+                                                // Format durasi
+                                                $duration = '';
+                                                if ($diffYears > 0) {
+                                                    $duration .= $diffYears.' yr'.($diffYears > 1 ? 's ' : ' ');
+                                                }
+                                                if ($diffMonths > 0) {
+                                                    $duration .= $diffMonths.' mo'.($diffMonths > 1 ? 's' : '');
+                                                }
+                                                $duration = trim($duration);
+                                            @endphp
+                                            <a href="{{route('company.show', $education->company->company_id)}}" class="d-flex text-start gap-2 text-decoration-none text-dark align-items-start {{$index > 0 ? 'border-top pt-2 mt-2' : ''}}">
+                                                <img src="{{asset('IMG/uploads/logo/'.$education->company->logo)}}" width="50" height="50">
+                                                <div class="d-block">
+                                                    <h2 class="fs-6 mb-0">{{$education->company->name}}</h2>
+                                                    <div class="d-flex">
+                                                        <p class="fs-8 mb-0">{{$education->major->major}}</p>
+                                                        <i class="bi bi-dot fs-8 text-muted"></i>
+                                                        <p class="fs-8 mb-0">GPA {{$education->GPA}} / 4.00</p>
+                                                    </div>
+                                                    <div class="d-flex gap-1">
+                                                        <p class="fs-8 text-muted mb-0">{{ $start->format('M Y') }}</p>
+                                                        <p class="text-muted mb-0" style="margin-top: -3px">-</p>
 
-                                                @if($education->end_date)
-                                                    <p class="fs-8 text-muted mb-0">{{ $end->format('M Y') }}</p>
-                                                @else
-                                                    <p class="fs-8 text-muted mb-0">Present</p>
-                                                @endif
-                                                <i class="bi bi-dot fs-8 text-muted"></i>
-                                                <p class="fs-8 text-muted mb-0">{{ $duration }}</p>
-                                            </div>
+                                                        @if($education->end_date)
+                                                            <p class="fs-8 text-muted mb-0">{{ $end->format('M Y') }}</p>
+                                                        @else
+                                                            <p class="fs-8 text-muted mb-0">Present</p>
+                                                        @endif
+                                                        <i class="bi bi-dot fs-8 text-muted"></i>
+                                                        <p class="fs-8 text-muted mb-0">{{ $duration }}</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                    <div class="d-block text-start mt-4">
+                                        <h2 class="fs-6 mb-4">Detail Submitted</h2>
+                                        <div class="d-flex mb-5 gap-4">
+                                            @if($app->resume_file)
+                                                @php
+                                                    $resume_ext = strtolower(pathinfo($app->resume_file, PATHINFO_EXTENSION));
+                                                    $portfolio_ext = strtolower(pathinfo($app->portfolio_file, PATHINFO_EXTENSION));
+                                                @endphp
+                                                <div class="d-block">
+                                                    <h2 class="fs-8">Resume</h2>
+                                                    <a href="{{ asset('FILE/' . $app->resume_file) }}" download
+                                                       class="btn rounded btn-outline-light border p-0 pe-3 fs-7 d-flex align-items-center gap-2 text-muted">
+                                                        <span class="@if($resume_ext === 'pdf') bg-danger @elseif($resume_ext === 'docx') bg-lightPrimary @endif p-2 text-light rounded-start fw-bold">
+                                                            @if($resume_ext === 'pdf')
+                                                            PDF
+                                                            @elseif($resume_ext === 'docx')
+                                                            DOCX
+                                                            @elseif($resume_ext === 'doc')
+                                                            DOC
+                                                            @endif
+                                                        </span>
+                                                        <p class="fw-semibold mb-0">Download Resume</p>
+                                                    </a>
+                                                </div>
+                                            @endif
+                                            @if($app->portfolio_file)
+                                                <div class="d-block">
+                                                    <h2 class="fs-8">Portfolio</h2>
+                                                    <a href="{{ asset('FILE/' . $app->portfolio_file) }}" download
+                                                        class="btn rounded btn-outline-light border p-0 pe-3 fs-7 d-flex align-items-center gap-2 text-muted">
+                                                        <span class="@if($portfolio_ext === 'pdf') bg-danger @elseif($portfolio_ext === 'docx') bg-lightPrimary @endif p-2 text-light rounded-start fw-bold">
+                                                            @if($portfolio_ext === 'pdf')
+                                                            PDF
+                                                            @elseif($portfolio_ext === 'docx')
+                                                            DOCX
+                                                            @elseif($portfolio_ext === 'doc')
+                                                            DOC
+                                                            @endif
+                                                        </span>
+                                                        <p class="fw-semibold mb-0">Download Portfolio</p>
+                                                    </a>
+                                                </div>
+                                            @endif
                                         </div>
-                                    </a>
-                                    @endforeach
+                                        @if($app->cover_letter)
+                                        <h2 class="fs-8">Cover Letter</h2>
+                                        {!! '<div class="fs-8 border rounded p-3">'.$app->cover_letter.'</div>' !!}
+                                        @endif
+                                    </div>
                                 </div>
                                 <div class="modal-footer align-items-end border-top">
                                     <button type="button" class="btn btn-primary" data-bs-target="#message{{$app->applicant_id}}" data-bs-toggle="modal">Message</button>
@@ -699,14 +751,17 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body scroll-area" style="overflow-y: auto; height:auto">
-                                        <form action="{{route('message.store')}}" method="POST">
+                                        <form action="{{route('message.store')}}" method="POST" onsubmit="copyDescription(this)">
                                             @csrf
+                                            <input type="hidden" name="category" value="Message">
+                                            <input type="hidden" name="title" value="&lt;strong&gt;{{ Auth::user()->name }}&lt;/strong&gt; sent you a message">
+                                            <input type="hidden" name="description" class="description-input">
                                             <input type="hidden" name="sender_id" value="{{Auth::user()->user_id}}">
                                             <input type="hidden" name="receiver_id" value="{{$app->user->user_id}}">
                                             <input type="hidden" name="status" value="New">
-                                            <input type="hidden" name="category" value="Job">
+                                            <input type="hidden" name="type" value="Job">
                                             <div class="chat-input bg-white p-3 border-top align-items-end justify-content-end">
-                                                <textarea type="text" name="message" class="form-control fs-7 scroll-area chat-style" placeholder="Type a message..." ></textarea>
+                                                <textarea type="text" name="message" class="message-textarea form-control fs-7 scroll-area chat-style" placeholder="Type a message..." ></textarea>
                                                 <button type="submit" class="border-0 px-4 mt-2 py-1 bg-primary text-light rounded-pill align-items-end text-end">Send</button>
                                             </div>
                                         </form>
@@ -721,4 +776,16 @@
 
         </div>
     </div>
+
+    <script>
+        function copyDescription(form) {
+            const textarea = form.querySelector('.message-textarea');
+            const description = form.querySelector('.description-input');
+
+            if (textarea && description) {
+                description.value = textarea.value.trim();
+            }
+        }
+    </script>
+
 @endsection

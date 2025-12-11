@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Message;
 use App\Models\Connection;
-use App\Models\User;
+use App\Models\Notification;
 
 class MessageController extends Controller
 {
@@ -21,16 +21,47 @@ class MessageController extends Controller
             'status'      => 'required|string',
             'message'     => 'required|string'
         ]);
+
+        $sender   = $request->sender_id;
+        $receiver = $request->receiver_id;
+
+        $existing = Message::where(function ($q) use ($sender, $receiver) {
+                            $q->where('sender_id', $sender)
+                            ->where('receiver_id', $receiver);
+                        })
+                        ->orWhere(function ($q) use ($sender, $receiver) {
+                            $q->where('sender_id', $receiver)
+                            ->where('receiver_id', $sender);
+                        })
+                        ->orderBy('message_id', 'desc')
+                        ->first();
+
+        if ($existing) {
+            $chatType = $existing->category;
+        } else {
+            $chatType = $request->type;
+        }
+
         Message::create([
-            'sender_id'   => $request->sender_id,
-            'receiver_id' => $request->receiver_id,
+            'sender_id'   => $sender,
+            'receiver_id' => $receiver,
             'status'      => $request->status,
+            'category'    => $chatType,
             'message'     => $request->message
         ]);
-        $activeTab = $request->input('active_tab2');
+
+        Notification::create([
+            'title'       => $request->title,
+            'description' => $request->description,
+            'category'    => $request->category,
+            'user_id'     => $receiver,
+        ]);
+
+        $activeTab = $request->active_tab2;
 
         return redirect()->route('message.page', ['active_tab' => $activeTab]);
     }
+
 
     public function index()
     {
@@ -79,7 +110,7 @@ class MessageController extends Controller
         $activeUsers = DB::table('sessions')
             ->whereNotNull('user_id')
             ->where('last_activity', '>', Carbon::now()->subMinutes(5)->getTimestamp())
-            ->pluck('user_id')  // ambil user_id yang online saja
+            ->pluck('user_id')
             ->toArray();
 
         $connection = Connection::with('user', 'target')

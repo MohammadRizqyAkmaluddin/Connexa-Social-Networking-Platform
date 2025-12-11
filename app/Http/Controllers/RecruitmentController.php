@@ -15,13 +15,9 @@ class RecruitmentController extends Controller
         $job = Job::findOrFail($jobId);
         $majors = Major::all();
 
-        // Ambil semua applicant dari job ini
         $query = Applicant::where('job_id', $jobId)
             ->with('user');
 
-        // =============================
-        // FILTER SEARCH
-        // =============================
         if ($request->search) {
             $query->whereHas('user', function ($q) use ($request) {
                 $q->where('name', 'like', '%' . $request->search . '%')
@@ -29,25 +25,16 @@ class RecruitmentController extends Controller
             });
         }
 
-        // =============================
-        // FILTER MAJOR
-        // =============================
         if ($request->major) {
     $query->whereHas('user.userEducations', function ($q) use ($request) {
         $q->where('major_id', $request->major);
     });
 }
 
-        // =============================
-        // FILTER STATUS
-        // =============================
         if ($request->status) {
             $query->where('status', $request->status);
         }
 
-        // =============================
-        // PAGINATION
-        // =============================
         $applicants = $query->paginate(4)->appends($request->query());
 
         return view('pages.recruitment', compact('job', 'majors', 'applicants'));
