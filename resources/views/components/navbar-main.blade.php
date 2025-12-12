@@ -86,7 +86,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fw-light text-center fs-12 {{ request()->is('notification') ? 'active' : '' }}" href="{{ route('notification.page') }}"><i class="bi bi-bell-fill d-block fs-5"></i>Notification</a>
+                        <a class="nav-link d-flex fw-light text-center fs-12 {{ request()->is('notification') ? 'active' : '' }}" href="{{ route('notification.page') }}">
+                            <div class="d-block">
+                            <i class="bi bi-bell-fill d-block fs-5"></i>Notification
+                            </div>
+                            @if($notificationCount > 0)
+                                <span class="badge d-flex justify-content-center bg-danger fs-10 rounded-circle text-center align-items-center" style="height:15px; width:15px; margin-left: -24px">{{ $notificationCount }}</span>
+                            @endif
+                        </a>
                     </li>
 
                     <li class="nav-item dropdown d-lg-block d-none">

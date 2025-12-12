@@ -10,7 +10,7 @@ class Notification extends Model
     protected $primaryKey = 'notification_id';
     public $timestamps = false;
 
-    protected $fillable = ['title', 'category', 'description', 'user_id', 'applicant_id', 'post_id'];
+    protected $fillable = ['title', 'category', 'description', 'status', 'user_id', 'applicant_id', 'post_id'];
 
     public function user()
     {

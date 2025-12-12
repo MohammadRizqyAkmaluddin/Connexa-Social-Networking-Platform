@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Message;
 use App\Models\Connection;
+use App\Models\Notification;
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -46,9 +47,15 @@ class ViewServiceProvider extends ServiceProvider
             ->orderBy('created_at', 'DESC')
             ->count('user_id');
 
+            $notificationCount = Notification::with('user')
+                ->where('user_id', $user->user_id)
+                ->where('status', 'New')
+                ->count('user_id');
+
             $view->with('companies', $companies)
                  ->with('unreadUsersCount', $unreadUsersCount)
-                 ->with('invitationCount', $invitationCount);
+                 ->with('invitationCount', $invitationCount)
+                 ->with('notificationCount', $notificationCount);
         });
 
     }

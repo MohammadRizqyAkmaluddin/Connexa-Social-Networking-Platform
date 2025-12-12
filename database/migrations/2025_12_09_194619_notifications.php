@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('description');
             $table->string('category');
+            $table->string('status')->default('New');
             $table->string('user_id', 10);
             $table->integer('applicant_id')->unsigned()->nullable();
             $table->integer('post_id')->unsigned()->nullable();

@@ -107,6 +107,31 @@ class MessageController extends Controller
                 ];
             });
 
+        $jobChats = Message::with(['sender', 'receiver'])
+            ->where('category', 'Job')
+            ->whereIn('message_id', $latestMessagesIds)
+            ->orderByDesc('created_at')
+            ->get()
+            ->map(function ($msg) use ($user) {
+                $otherUser = $msg->sender_id == $user->user_id ? $msg->receiver : $msg->sender;
+
+                $allMessages = Message::where(function ($q) use ($user, $otherUser) {
+                    $q->where('sender_id', $user->user_id)
+                        ->where('receiver_id', $otherUser->user_id);
+                })->orWhere(function ($q) use ($user, $otherUser) {
+                    $q->where('sender_id', $otherUser->user_id)
+                        ->where('receiver_id', $user->user_id);
+                })
+                    ->orderBy('message_id', 'asc')
+                    ->get();
+
+                return [
+                    'user' => $otherUser,
+                    'message' => $msg,
+                    'allMessages' => $allMessages,
+                ];
+            });
+
         $activeUsers = DB::table('sessions')
             ->whereNotNull('user_id')
             ->where('last_activity', '>', Carbon::now()->subMinutes(5)->getTimestamp())
@@ -120,7 +145,7 @@ class MessageController extends Controller
             ->where('status', 'Success')
             ->get();
 
-        return view('pages.message', compact('chats', 'activeUsers', 'connection'));
+        return view('pages.message', compact('chats', 'jobChats', 'activeUsers', 'connection'));
     }
 
     public function updateStatus(Request $request)
