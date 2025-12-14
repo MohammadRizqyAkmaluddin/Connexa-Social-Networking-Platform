@@ -118,5 +118,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Notification::class, 'user_id', 'user_id');
     }
-    
+    public function viewSender()
+    {
+        return $this->belongsTo(ProfileView::class, 'user_id', 'user_id');
+    }
+    public function viewTarget()
+    {
+        return $this->belongsTo(ProfileView::class, 'user_target', 'user_id');
+    }
 }

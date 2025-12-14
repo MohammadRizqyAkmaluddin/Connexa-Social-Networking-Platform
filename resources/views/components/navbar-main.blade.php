@@ -203,7 +203,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" class="text-decoration-none d-block text-dark"
+                                            <a href="{{route('create.page')}}" class="text-decoration-none d-block text-dark"
                                                 onmouseover="this.querySelector('h2').style.textDecoration='underline'"
                                                 onmouseout="this.querySelector('h2').style.textDecoration='none'">
                                                 <div class="d-flex align-items-center gap-2">

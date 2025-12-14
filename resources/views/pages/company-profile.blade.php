@@ -9,7 +9,7 @@
             <div class="d-flex">
                 <div class="d-block">
                     <div class="d-block px-10">
-                        <img src="{{ asset('IMG/uploads/logo/' . $company->logo) }}" width="200" class="border p-2 bg-white mb-3" style="margin-top:-140px">
+                        <img src="{{ asset('IMG/uploads/logo/' . $company->logo) }}" class="border p-2 bg-white mb-3" style="margin-top:-140px; width:200px; height:200px; object-fit:contain">
                         <h2 class="ms-3">{{ $company->name }}</h2>
                         <p class="ms-3">{{ $company->tagline }}</p>
                         <div class="d-flex fs-7 gap-2 text-muted ms-3">
@@ -218,7 +218,7 @@
                                     </div>
                                     <div class="d-block">
                                         <h2 class="fs-7">Company Size</h2>
-                                        <p class="fs-9 mb-0 text-muted">{{number_format($company->employee)}}+ Total Employees</p>
+                                        <p class="fs-9 mb-0 text-muted">{{$company->employee}}+ Total Employees</p>
                                         <p class="fs-9 text-muted">{{ $binusStudent->count() }}+ Employees Listed</p>
                                     </div>
                                     <div class="d-block">
@@ -505,7 +505,9 @@
             <div class="tab-pane fade show" id="about" role="tabpanel">
                 <div class="bg-white shadow-sm w-100 rounded py-4 px-11" style="margin-top: 10px">
                     <h2 class="fs-5">Overview</h2>
+                    @if($company->overviews)
                     <p class="fs-9 text-muted">{{$company->overviews->overview}}</p>
+                    @endif
                     <h2 class="fs-6">Website</h2>
                     <p class="fs-9 text-muted">{{$company->website}}</p>
                     <h2 class="fs-6">Page created</h2>
@@ -513,7 +515,7 @@
                     <h2 class="fs-6">Industry</h2>
                     <p class="fs-9 text-muted">{{$company->industry}}</p>
                     <h2 class="fs-6">Company Size</h2>
-                    <p class="fs-9 mb-0 text-muted">{{number_format($company->employee)}}+ Total Employees</p>
+                    <p class="fs-9 mb-0 text-muted">{{$company->employee}}+ Total Employees</p>
                     <p class="fs-9 text-muted">{{ $binusStudent->count() }}+ Employees Listed</p>
                     <h2 class="fs-6">Headquarters</h2>
                     <p class="fs-9 text-muted">{{$company->city}}, {{$company->country}}</p>

@@ -3,6 +3,8 @@
 @section('title', 'Network')
 
 @section('content')
+
+<main>
     <div class="container gap-3 d-flex">
         <div class="" style="width: 300px; height: 87vh; position:sticky; top:88px">
             <div class="bg-white shadow-sm rounded p-3">
@@ -47,7 +49,7 @@
                                     <a href="{{route('company.show', $follow->company->company_id)}}" class="d-flex align-items-center gap-2 text-decoration-none text-dark w-100"
                                         onmouseover="this.querySelector('h2').style.textDecoration='underline'"
                                         onmouseout="this.querySelector('h2').style.textDecoration='none'">
-                                        <img src="{{asset('IMG/uploads/logo/' . $follow->company->logo)}}" style="width: 50px; height:50px; object-fit:cover;">
+                                        <img src="{{asset('IMG/uploads/logo/' . $follow->company->logo)}}" style="width: 50px; height:50px; object-fit:contain;">
                                         <div class="d-block">
                                             <h2 class="fs-7 mb-1">{{$follow->company->name}}</h2>
                                             <p class="fs-11 text-muted lh-1 text-truncate-2 mb-0">{{$follow->company->tagline}}</p>
@@ -243,7 +245,7 @@
                                     <div class="d-block text-center mx-2">
                                         <img src="{{ asset('IMG/uploads/logo/' . $company->logo) }}"
                                             class="p-1 bg-white"
-                                            style="width:80px; height:80px; margin-top:-40px; object-fit: cover;">
+                                            style="width:80px; height:80px; margin-top:-40px; object-fit: contain;">
                                         <div class="d-block mx-2">
                                             <h2 class="fs-8 mt-3 fw-semibold text-dark mb-1">
                                                 {{ Str::limit($company->name, 20) }}
@@ -329,7 +331,7 @@
             </div>
         </div>
     </div>
-
+</main>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
         const items = document.querySelectorAll(".experience-people");

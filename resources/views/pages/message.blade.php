@@ -3,8 +3,9 @@
 @section('title', 'Conversation')
 
 @section('content')
-    <div class="container d-lg-block mx-auto justify-content-center w-100 mt-3 p-2" style="gap: 1rem;">
-        <div class="d-flex align-items-center justify-content-between shadow-sm bg-white rounded px-3 mt-7">
+<main>
+    <div class="container d-lg-block mx-auto justify-content-center w-100 mt-10 p-2" style="gap: 1rem;">
+        <div class="d-flex align-items-center justify-content-between shadow-sm bg-white rounded px-3">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link border-0 active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all-tab-pane" type="button" role="tab" aria-controls="all-tab-pane" aria-selected="true"><i class="bi bi-border-width"></i> All Message</button>
@@ -462,7 +463,7 @@
             </div>
         </div>
     </div>
-
+</main>
     <script>
         function copyDescription(form) {
             const textarea = form.querySelector('.message-textarea');

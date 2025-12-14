@@ -18,8 +18,7 @@
                         @endphp
                         <div class="d-flex text-center align-items-center mx-auto my-auto">
                             <img src="{{ asset('IMG/uploads/logo/' . $edu->company->logo) }}"
-                                alt="Logo" width="40" height="40"
-                                class="rounded me-3" style="object-fit: cover;">
+                                class="rounded me-3" style="width:40px; height:40px; object-fit:contain;">
                             <h2 class="fs-9 mt-2">{{$edu->company->name}}</h2>
                         </div>
                     </div>
@@ -32,12 +31,14 @@
                 </div>
                 <div class="d-flex justify-content-between">
                 <div class="d-block">
-                    <h2 class="fs-10 text-muted">Profile Viewers</h2>
+                    <h2 class="fs-10 text-muted">Viewers</h2>
                     <h2 class="fs-10 text-muted">Connection</h2>
+                    <h2 class="fs-10 text-muted">Applied Jobs</h2>
                 </div>
                 <div class="d-block text-lightPrimary">
-                    <h2 class="fs-10">115</h2>
+                    <h2 class="fs-10">{{$profileView}}</h2>
                     <h2 class="fs-10">{{$connection->count()}}</h2>
+                    <h2 class="fs-10">{{$applied}}</h2>
                 </div>
                 </div>
             </div>
@@ -205,7 +206,7 @@
                         <img src="{{asset('IMG/uploads/cover/' . $company->cover_image)}}" class="rounded-top w-100 border-bottom">
                         <a href="{{ route('company.show', $company->company_id) }}" class="text-decoration-none">
                             <div class="d-block">
-                                <img src="{{asset('IMG/uploads/logo/' . $company->logo)}}" class="p-1 bg-white" width="50" style="margin-top: -20px">
+                                <img src="{{asset('IMG/uploads/logo/' . $company->logo)}}" class="p-1 bg-white" style="margin-top: -20px; width:50px; height:50px; object-fit:contain;">
                                 <h2 class="fs-8 mt-2 text-dark">{{$company->name}}</h2>
                                 <p class="fs-11 lh-0 text-muted">{{$company->industry}}</p>
                             </div>

@@ -11,11 +11,10 @@
 <body class="bg-main overflow-x-hidden align-items-center mx-auto">
     <x-navbar-main/>
 
-        @yield('content')
+    @yield('content')
 
 
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
-    
 
 </body>
 </html>

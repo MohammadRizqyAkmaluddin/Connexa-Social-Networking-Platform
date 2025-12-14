@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Ads;
 use App\Models\Company;
 use App\Models\Connection;
+use App\Models\ProfileView;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -21,6 +22,14 @@ class UserController extends Controller
     public function show ($userId)
     {
         $auth = Auth::user();
+
+        if ($auth->user_id !== $userId) {
+            ProfileView::firstOrCreate([
+                    'user_id'     => $auth->user_id,
+                    'user_target' => $userId
+                ]);
+        }
+
         $ads = Ads::limit(1)->inRandomOrder()->get();
         $companies = Company::with('follows')->get();
 
@@ -40,6 +49,8 @@ class UserController extends Controller
                             'experiences', 'posts', 'follows', 'companyRoles', 'interested')
                     ->where('user_id', $userId)
                     ->firstOrFail();
+
+
 
         $user->userEducations = $user->userEducations->sortByDesc('start_date')->values();
         $user->experiences = $user->experiences->sortByDesc('start_date')->values();

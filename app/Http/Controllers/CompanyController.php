@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Models\User;
 use App\Models\Industry;
+use App\Models\Overview;
+use App\Models\Subsidiary;
 use Illuminate\Support\Facades\Auth;
 
 class CompanyController extends Controller
@@ -33,6 +35,7 @@ class CompanyController extends Controller
             'established_date'  => 'required|date',
             'country'           => 'required|string|max:50',
             'city'              => 'required|string|max:50',
+            'overview'          => 'required|string|max:250',
             'website'           => 'nullable|url',
             'employee'          => 'nullable|string|max:50',
             'logo'              => 'nullable|image|mimes:jpeg,jpg,png'
@@ -47,7 +50,7 @@ class CompanyController extends Controller
             $newId = 'C001';
         }
 
-        $logoName = null;
+        $logoName = 'default_logo.jpg';
 
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
@@ -69,13 +72,26 @@ class CompanyController extends Controller
             'city'              => $request->city,
             'website'           => $request->website,
             'employee'          => $request->employee,
-            'logo'              => $logoName
+            'logo'              => $logoName,
+            'cover_image'       => 'default_cover.jpg',
         ]);
 
         AccessManagement::create([
             'company_id' => $newId,
             'user_id'    => $request->user_id
         ]);
+
+        Overview::create([
+            'company_id' => $newId,
+            'overview'   => $request->overview
+        ]);
+
+        if ($request->filled('subsidiary')) {
+            Subsidiary::create([
+                'company_id' => $newId,
+                'parent_id'  => $request->subsidiary
+            ]);
+        }
 
         return redirect()->back()->with('success', 'Successfully Create Page');
     }
@@ -84,8 +100,8 @@ class CompanyController extends Controller
     public function showCreatePage()
     {
         $industries = Industry::all();
-
-        return view('pages.create-company', compact('industries'));
+        $companies = Company::all();
+        return view('pages.create-company', compact('industries', 'companies'));
     }
 
     public function show($company_id)

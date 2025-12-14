@@ -41,7 +41,8 @@ class DatabaseSeeder extends Seeder
             LanguageSeeder::class,
             UserLanguageSeeder::class,
             InterestedSeeder::class,
-            IndustrySeeder::class
+            IndustrySeeder::class,
+            ProfileViewSeeder::class
         ]);
     }
 }

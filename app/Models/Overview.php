@@ -8,6 +8,7 @@ class Overview extends Model
 {
     protected $table = 'overviews';
     protected $primaryKey = 'overview_id';
+    public $timestamps = false;
     protected $fillable = ['company_id', 'overview'];
 
     public function company()

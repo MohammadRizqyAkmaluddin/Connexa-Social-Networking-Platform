@@ -69,7 +69,7 @@
                                                 <h3 class="fs-9 mb-0">Comapny Size</h3>
                                                 <button class="fs-10 py-0 border-0 align-items-start mb-1 bg-transparent"><i class="bi bi-pencil-square text-muted"></i></button>
                                             </div>
-                                            <p class="mb-0 fs-12 text-muted">{{number_format($company->employee)}}+ total employees</p>
+                                            <p class="mb-0 fs-12 text-muted">{{$company->employee}}+ total employees</p>
                                         </div>
                                     </div>
                                 </div>
@@ -148,7 +148,7 @@
                                                 <h3 class="fs-9 mb-0">Comapny Size</h3>
                                                 <button class="fs-10 py-0 border-0 align-items-start mb-1 bg-transparent"><i class="bi bi-pencil-square text-muted"></i></button>
                                             </div>
-                                            <p class="mb-0 fs-12 text-muted">{{number_format($company->employee)}}+ total employees</p>
+                                            <p class="mb-0 fs-12 text-muted">{{$company->employee}}+ total employees</p>
                                         </div>
                                     </div>
                                 </div>
@@ -314,7 +314,7 @@
                                                 <h3 class="fs-9 mb-0">Comapny Size</h3>
                                                 <button class="fs-10 py-0 border-0 align-items-start mb-1 bg-transparent"><i class="bi bi-pencil-square text-muted"></i></button>
                                             </div>
-                                            <p class="mb-0 fs-12 text-muted">{{number_format($company->employee)}}+ total employees</p>
+                                            <p class="mb-0 fs-12 text-muted">{{$company->employee}}+ total employees</p>
                                         </div>
                                     </div>
                                 </div>

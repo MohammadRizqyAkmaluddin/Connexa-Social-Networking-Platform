@@ -9,6 +9,8 @@ use App\Models\Company;
 use App\Models\Connection;
 use App\Models\Ads;
 use App\Models\Message;
+use App\Models\Applicant;
+use App\Models\ProfileView;
 
 class HomeController extends Controller
 {
@@ -89,7 +91,10 @@ class HomeController extends Controller
             ->where('status', 'Success')
             ->get();
 
-
-        return view('pages.homepage', compact('user', 'educations', 'posts', 'companies', 'peoples', 'ads', 'chats', 'connection'));
+        $applied = Applicant::where('user_id', $user->user_id)
+                ->count();
+        $profileView = ProfileView::where('user_target', $user->user_id)
+                ->count();
+        return view('pages.homepage', compact('user', 'educations', 'posts', 'companies', 'peoples', 'ads', 'chats', 'connection', 'applied', 'profileView'));
     }
 }
