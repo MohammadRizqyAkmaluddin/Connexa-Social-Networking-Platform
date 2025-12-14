@@ -40,7 +40,8 @@ class DatabaseSeeder extends Seeder
             UserSkillSeeder::class,
             LanguageSeeder::class,
             UserLanguageSeeder::class,
-            InterestedSeeder::class
+            InterestedSeeder::class,
+            IndustrySeeder::class
         ]);
     }
 }

@@ -55,6 +55,8 @@ class MessageController extends Controller
             'description' => $request->description,
             'category'    => $request->category,
             'user_id'     => $receiver,
+            'applicant_id'=> $request->applicant_id,
+            'sender_id'   => $sender,
         ]);
 
         $activeTab = $request->active_tab2;
@@ -63,7 +65,7 @@ class MessageController extends Controller
     }
 
 
-    public function index()
+    public function index(Request $request)
     {
 
         $user = Auth::user();
@@ -144,6 +146,15 @@ class MessageController extends Controller
             ->orWhere('user_target', $user->user_id)
             ->where('status', 'Success')
             ->get();
+
+        if ($request->active_tab) {
+            Notification::where('category', 'Message')
+                ->where('user_id', $user->user_id)
+                ->where('sender_id', $request->active_tab)
+                ->where('status', 'New')
+                ->update(['status' => 'Seen']);
+        }
+
 
         return view('pages.message', compact('chats', 'jobChats', 'activeUsers', 'connection'));
     }

@@ -4,9 +4,7 @@
 
 @section('content')
     <div class="d-lg-flex mx-auto justify-content-center w-100 mt-3 p-2" style="gap: 1rem;">
-        <div class="content1"
-            style="width: 280px; height: 89.5vh;
-                    position: sticky; top:75.5px">
+        <div class="content1" style="width: 280px; height: 89.5vh; position: sticky; top:75.5px">
             <div class="bg-white shadow-sm w-100 rounded-top pb-3 mb-3">
                 <a href="{{route('user.page', Auth::user()->user_id)}}" class="text-decoration-none text-dark">
                     <img src="{{asset('IMG/cover/' . Auth::user()->cover_image)}}" class="rounded-top w-100">
@@ -97,8 +95,7 @@
                 @endif
             </div>
         </div>
-        <div class="content2 mt-8 gap-10"
-            style="width: 550px;">
+        <div class="content2 mt-8 gap-10" style="width: 550px;">
             <div class="shadow-sm bg-white w-100 rounded px-4 py-3" style="height: 110px;">
                 <form action="{{route('post.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf

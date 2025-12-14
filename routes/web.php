@@ -18,6 +18,7 @@ use App\Http\Controllers\InterestedController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\JobSavedController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RecruitmentController;
 
@@ -30,29 +31,20 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.su
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
-Route::get('/homepage', [HomeController::class, 'index'])
-    ->name('homepage.page')
-    ->middleware('auth');
-
-Route::get('/business', function() {
-    return view('pages.business');
-})->name('business.page')->middleware('auth');
-
-Route::get('/network', function() {
-    return view('pages.network');
-})->name('network.page')->middleware('auth');
-
-Route::get('/notification', function() {
-    return view('pages.notification');
-})->name('notification.page')->middleware('auth');
+Route::get('/homepage', [HomeController::class, 'index'])->name('homepage.page')->middleware('auth');
 
 Route::get('/learning', function() {
     return view('pages.learning');
 })->name('learning.page')->middleware('auth');
 
-Route::get('/user/{user_id}', [UserController::class, 'show'])->name('user.page')->middleware();
+Route::get('/notification', [NotificationController::class, 'index'])->name('notification.page')->middleware('auth');
 
-Route::get('/network', [ConnectionController::class, 'index'])->name('network.page')->middleware();
+Route::get('/user/{user_id}', [UserController::class, 'show'])->name('user.page')->middleware('auth');
+
+Route::get('/create-page', [CompanyController::class, 'showCreatePage'])->name('create.page')->middleware('auth');
+Route::post('/create-page/store', [CompanyController::class, 'store'])->name('page.store')->middleware('auth');
+
+Route::get('/network', [ConnectionController::class, 'index'])->name('network.page')->middleware('auth');
 Route::get('/company/{company_id}', [CompanyController::class, 'show'])->name('company.show')->middleware('auth');
 
 Route::get('/jobs', [JobController::class, 'index'])->name('jobs.page')->middleware('auth');
@@ -81,7 +73,5 @@ Route::post('/network/cancel', [ConnectionController::class, 'cancelRequest'])->
 Route::post('/ads', [AdsController::class, 'store'])->name('ads.store');
 Route::post('/jobs/store', [JobController::class, 'store'])->name('job.store');
 Route::post('/application', [JobController::class, 'applicationStore'])->name('application.store');
-
-
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 

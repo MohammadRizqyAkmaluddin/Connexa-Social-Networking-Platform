@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AccessManagement;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Models\User;
+use App\Models\Industry;
 use Illuminate\Support\Facades\Auth;
 
 class CompanyController extends Controller
 {
-
     public function index ()
     {
         $userId = Auth::user()->user_id;
@@ -20,27 +21,71 @@ class CompanyController extends Controller
         return view('pages.suggestion', compact('companies'));
     }
 
-    public function store (Request $request)
+
+    public function store(Request $request)
     {
         $request->validate([
             'page_id'           => 'required|exists:pages,page_id',
             'name'              => 'required|string|max:50',
+            'sector'            => 'required|string|max:50',
             'industry'          => 'required|string|max:50',
-            'tagline'           => 'required|string|max:250',
+            'tagline'           => 'nullable|string|max:250',
             'established_date'  => 'required|date',
             'country'           => 'required|string|max:50',
             'city'              => 'required|string|max:50',
+            'website'           => 'nullable|url',
+            'employee'          => 'nullable|string|max:50',
+            'logo'              => 'nullable|image|mimes:jpeg,jpg,png'
         ]);
-        $company = new Company();
-        $company->page_id = $request->page_id;
-        $company->name = $request->name;
-        $company->industry = $request->industry;
-        $company->tagline = $request->tagline;
-        $company->established_date = $request->established_date;
-        $company->country = $request->country;
-        $company->city = $request->city;
-        $company->save();
 
+        $lastCompany = Company::orderBy('company_id', 'desc')->first();
+
+        if ($lastCompany) {
+            $lastNumber = intval(substr($lastCompany->company_id, 1));
+            $newId = 'C' . str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+        } else {
+            $newId = 'C001';
+        }
+
+        $logoName = null;
+
+        if ($request->hasFile('logo')) {
+            $logo = $request->file('logo');
+
+            $logoName = 'logo-' . $newId . '-' . time() . '.' . $logo->getClientOriginalExtension();
+
+            $logo->move(public_path('IMG/uploads/logo'), $logoName);
+        }
+
+        Company::create([
+            'company_id'        => $newId,
+            'page_id'           => $request->page_id,
+            'name'              => $request->name,
+            'sector'            => $request->sector,
+            'industry'          => $request->industry,
+            'tagline'           => $request->tagline,
+            'established_date'  => $request->established_date,
+            'country'           => $request->country,
+            'city'              => $request->city,
+            'website'           => $request->website,
+            'employee'          => $request->employee,
+            'logo'              => $logoName
+        ]);
+
+        AccessManagement::create([
+            'company_id' => $newId,
+            'user_id'    => $request->user_id
+        ]);
+
+        return redirect()->back()->with('success', 'Successfully Create Page');
+    }
+
+
+    public function showCreatePage()
+    {
+        $industries = Industry::all();
+
+        return view('pages.create-company', compact('industries'));
     }
 
     public function show($company_id)

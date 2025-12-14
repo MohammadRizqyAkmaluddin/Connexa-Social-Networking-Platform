@@ -760,6 +760,7 @@
                                             <input type="hidden" name="receiver_id" value="{{$app->user->user_id}}">
                                             <input type="hidden" name="status" value="New">
                                             <input type="hidden" name="type" value="Job">
+                                            <input type="hidden" name="applicant_id" value="{{$app->applicant_id}}">
                                             <div class="chat-input bg-white p-3 border-top align-items-end justify-content-end">
                                                 <textarea type="text" name="message" class="message-textarea form-control fs-7 scroll-area chat-style" placeholder="Type a message..." ></textarea>
                                                 <button type="submit" class="border-0 px-4 mt-2 py-1 bg-primary text-light rounded-pill align-items-end text-end">Send</button>

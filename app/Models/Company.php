@@ -9,16 +9,20 @@ class Company extends Model
     protected $primaryKey = 'company_id';
     public $incrementing = false;
     protected $keyType = 'string';
+    protected $table = 'companies';
 
     protected $fillable = [
         'company_id',
         'page_id',
         'name',
+        'sector',
         'industry',
         'tagline',
         'established_date',
         'country',
         'city',
+        'website',
+        'employee',
         'logo',
         'cover_image'
     ];

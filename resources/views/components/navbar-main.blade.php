@@ -10,7 +10,7 @@
             </div>
             <div class="navbar-brand d-lg-none d-flex">
                 <li class="dropdown list-unstyled">
-                        <a class="dropdown-toggle no-caret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="dropdown-toggle no-caret" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{ asset('IMG/uploads/profile/' . Auth::user()->profile_image) }}"
                                 alt="Profile"
                                 class="rounded-circle border"
@@ -18,7 +18,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-start">
                             <li>
-                                <a class="dropdown-item d-flex" href="#">
+                                <a class="dropdown-item d-flex" href="{{route('user.page', Auth::user()->user_id)}}">
                                     <img src="{{ asset('IMG/uploads/profile/' . Auth::user()->profile_image) }}"
                                     alt="Profile"
                                     class="rounded-circle border"
@@ -105,7 +105,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end shadow-sm" style="top:62px">
                             <li>
-                                <a class="dropdown-item d-flex" href="#">
+                                <a class="dropdown-item d-flex" href="{{route('user.page', Auth::user()->user_id)}}">
                                     <img src="{{ asset('IMG/uploads/profile/' . Auth::user()->profile_image) }}"
                                     alt="Profile"
                                     class="rounded-circle border"
@@ -153,15 +153,17 @@
                                             @endif
                                         </div>
                                         @foreach($companies->take(4) as $company)
-                                            <a class="dropdown-item d-flex align-items-center py-2"
-                                            href="{{route('manage.show', $company->company_id)}}">
-                                                <img src="{{asset('IMG/uploads/logo/' . $company->logo)}}"
-                                                    style="width: 30px; height: 30px" class="me-2">
-                                                <div>
-                                                    <p class="mb-0 fs-8 fw-semibold">{{$company->name}}</p>
-                                                    <p class="mb-0 fs-9 fw-light text-muted">{{$company->sector}}</p>
-                                                </div>
-                                            </a>
+                                            <div class="nav-tabs">
+                                                <a class="dropdown-item nav-link d-flex align-items-center py-2"
+                                                href="{{route('manage.show', $company->company_id)}}">
+                                                    <img src="{{asset('IMG/uploads/logo/' . $company->logo)}}"
+                                                        style="width: 30px; height: 30px; object-fit:contain" class="me-2">
+                                                    <div>
+                                                        <p class="mb-0 fs-8 fw-semibold">{{$company->name}}</p>
+                                                        <p class="mb-0 fs-9 fw-light text-muted">{{$company->sector}}</p>
+                                                    </div>
+                                                </a>
+                                            </div>
                                         @endforeach
                                 </div>
                                 <div class="w-50 ms-5">
@@ -253,7 +255,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" class="text-decoration-none d-block text-dark"
+                                            <a href="{{route('create.page')}}" class="text-decoration-none d-block text-dark"
                                                 onmouseover="this.querySelector('h2').style.textDecoration='underline'"
                                                 onmouseout="this.querySelector('h2').style.textDecoration='none'">
                                                 <div class="d-flex align-items-center gap-2">

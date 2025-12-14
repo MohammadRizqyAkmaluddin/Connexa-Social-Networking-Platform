@@ -7,10 +7,10 @@
         <div class="d-flex align-items-center justify-content-between shadow-sm bg-white rounded px-3 mt-7">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all-tab-pane" type="button" role="tab" aria-controls="all-tab-pane" aria-selected="true"><i class="bi bi-border-width"></i> All Message</button>
+                    <button class="nav-link border-0 active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all-tab-pane" type="button" role="tab" aria-controls="all-tab-pane" aria-selected="true"><i class="bi bi-border-width"></i> All Message</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="jobs-tab" data-bs-toggle="tab" data-bs-target="#jobs-tab-pane" type="button" role="tab" aria-controls="jobs-tab-pane" aria-selected="false"><i class="bi bi-briefcase"></i> Jobs</button>
+                    <button class="nav-link border-0" id="jobs-tab" data-bs-toggle="tab" data-bs-target="#jobs-tab-pane" type="button" role="tab" aria-controls="jobs-tab-pane" aria-selected="false"><i class="bi bi-briefcase"></i> Jobs</button>
                 </li>
             </ul>
             <div class="dropdown">
@@ -158,7 +158,6 @@
                                     ->count();
                                 $isUnread = $chat['message']->status == 'New' && $chat['message']->receiver_id == $authId;
                                 $isActive = $activeTab == $chat['user']->user_id;
-
                             @endphp
                         @if($chats->count() > 0)
                             <li class="nav-item" role="presentation">

@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('notifications', function(Blueprint $table) {
             $table->increments('notification_id');
             $table->string('title');
-            $table->string('description');
+            $table->text('description');
             $table->string('category');
             $table->string('status')->default('New');
             $table->string('user_id', 10);
             $table->integer('applicant_id')->unsigned()->nullable();
             $table->integer('post_id')->unsigned()->nullable();
+            $table->string('sender_id', 10)->nullable();
             $table->datetime('date')->useCurrent();
             $table->engine = 'InnoDB';
 
@@ -31,6 +32,9 @@ return new class extends Migration
                   ->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('post_id')
                   ->references('post_id')->on('posts')
+                  ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('sender_id')
+                  ->references('user_id')->on('users')
                   ->onDelete('cascade')->onUpdate('cascade');
         });
     }

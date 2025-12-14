@@ -14,15 +14,16 @@ class Companies extends Migration
             $table->string('name', 50);
             $table->string('sector', 50);
             $table->string('industry', 50);
-            $table->string('tagline', 250);
-            $table->date('established_date');
+            $table->string('tagline', 250)->nullable();
+            $table->date('established_date')->nullable();
             $table->string('country', 50);
             $table->string('city', 50);
-            $table->text('website');
-            $table->integer('employee');
-            $table->text('logo');
-            $table->text('cover_image');
+            $table->text('website')->nullable();
+            $table->string('employee');
+            $table->text('logo')->nullable();
+            $table->text('cover_image')->nullable();
             $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
             $table->engine = 'InnoDB';
 
             $table->foreign('page_id')

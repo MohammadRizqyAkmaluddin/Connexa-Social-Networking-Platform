@@ -23,7 +23,9 @@
             </div>
             <div class="d-flex align-items-end gap-0">
                 <div class="mt-3 fs-8 post-description truncated" id="desc-{{ $post->post_id }}">{{ $post->description }}</div>
-                <button class="btn btn-link p-0 text-decoration-none fs-8 text-muted toggle-btn" data-target="desc-{{ $post->post_id }}">more</button>
+                @if(str_word_count($post->description) > 30)
+                    <button class="btn btn-link p-0 text-decoration-none fs-8 text-muted toggle-btn" data-target="desc-{{ $post->post_id }}">more</button>
+                @endif
             </div>
         </div>
 

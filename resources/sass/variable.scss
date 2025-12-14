@@ -3,6 +3,8 @@
 
 $primary: #294582;
 $lightPrimary: #335ebc77;
+$lightPrimary2: #e8ebf6;
+$brokenWhite2: #E9E6E0;
 $brokenWhite: #fafafa;
 $lightGrey: #b9b9b9;
 $darkGrey: #919191;
@@ -24,7 +26,9 @@ $theme-colors: map-merge(
   (
     "primary":      $primary,
     "lightPrimary": $lightPrimary,
+    "lightPrimary2":$lightPrimary2,
     "brokenWhite":  $brokenWhite,
+    "brokenWhite2": $brokenWhite2,
     "lightGrey":    $lightGrey,
     "darkGrey":     $darkGrey,
     "black":        $black,

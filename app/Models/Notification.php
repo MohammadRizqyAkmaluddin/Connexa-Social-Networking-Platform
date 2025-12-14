@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Notification extends Model
 {
@@ -10,11 +11,15 @@ class Notification extends Model
     protected $primaryKey = 'notification_id';
     public $timestamps = false;
 
-    protected $fillable = ['title', 'category', 'description', 'status', 'user_id', 'applicant_id', 'post_id'];
+    protected $fillable = ['title', 'category', 'description', 'status', 'user_id', 'applicant_id', 'post_id', 'message_id', 'sender_id'];
 
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'user_id');
+    }
+    public function sender()
+    {
+        return $this->belongsTo(User::class, 'sender_id', 'user_id');
     }
     public function applicant()
     {
@@ -23,5 +28,9 @@ class Notification extends Model
     public function post()
     {
         return $this->belongsTo(Post::class, 'post_id', 'post_id');
+    }
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value);
     }
 }
