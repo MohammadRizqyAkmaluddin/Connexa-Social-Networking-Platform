@@ -120,10 +120,14 @@ class User extends Authenticatable
     }
     public function viewSender()
     {
-        return $this->belongsTo(ProfileView::class, 'user_id', 'user_id');
+        return $this->hasMany(ProfileView::class, 'user_id', 'user_id');
     }
     public function viewTarget()
     {
-        return $this->belongsTo(ProfileView::class, 'user_target', 'user_id');
+        return $this->hasMany(ProfileView::class, 'user_target', 'user_id');
+    }
+    public function userWebsite()
+    {
+        return $this->hasOne(UserWebsite::class, 'user_id', 'user_id');
     }
 }

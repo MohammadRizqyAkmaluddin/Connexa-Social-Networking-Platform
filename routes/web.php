@@ -21,6 +21,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RecruitmentController;
+use App\Http\Controllers\ExploreController;
 
 Route::get('/', function () {
     return view('pages.main');
@@ -55,6 +56,9 @@ Route::get('/manage/{company_id}', [BusinessController::class, 'show'])->name('m
 Route::get('/recruitment/{job_id}', [RecruitmentController::class, 'show'])->name('recruitment.show')->middleware('auth');
 Route::get('/application/{job_id}', [AppliedController::class, 'show'])->name('application.show')->middleware('auth');
 
+Route::get('/search', [ExploreController::class, 'search'])->name('search.page');
+
+
 Route::post('/recruitment/update-progress', [RecruitmentController::class, 'updateApplication'])->name('progress.update');
 Route::post('/recruitment/update-reject', [RecruitmentController::class, 'rejectApplication'])->name('reject.update');
 
@@ -75,3 +79,6 @@ Route::post('/jobs/store', [JobController::class, 'store'])->name('job.store');
 Route::post('/application', [JobController::class, 'applicationStore'])->name('application.store');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::put('/profile/update', [UserController::class, 'update'])
+    ->name('profile.update')
+    ->middleware('auth');

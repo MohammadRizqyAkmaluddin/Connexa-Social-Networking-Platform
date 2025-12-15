@@ -208,10 +208,18 @@ body.search-active #overlay {
   height: 400px;
 }
 
+.ls-1 { letter-spacing: 0.1px; }
+.ls-2 { letter-spacing: 1px; }
+.ls-3 { letter-spacing: 1.5px; }
+
 .post-modal-profile {
   position: sticky;
   top: 0px;
   z-index: 999;
+}
+
+.hover-btn:hover{
+  background-color: #dcdcdc5d;
 }
 
 .connect-btn:hover{
@@ -322,6 +330,17 @@ body.search-active #overlay {
   height: 100%;
   object-fit: contain;
   border-radius: 10px;
+}
+
+.single-img2 {
+    width: 100%;
+    max-height: 600px;
+    object-fit: cover;
+}
+.double-img2 {
+    width: 298px;
+    height: 400px;
+    object-fit: cover;
 }
 
 .single-img {

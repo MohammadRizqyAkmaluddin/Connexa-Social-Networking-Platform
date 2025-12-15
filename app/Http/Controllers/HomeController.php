@@ -24,6 +24,8 @@ class HomeController extends Controller
             ->inRandomOrder()
             ->get();
 
+       
+
         $companies = Company::limit(3)->inRandomOrder()->get();
 
         $connectedIDs = Connection::where(function ($q) use ($user) {
@@ -92,9 +94,14 @@ class HomeController extends Controller
             ->get();
 
         $applied = Applicant::where('user_id', $user->user_id)
-                ->count();
-        $profileView = ProfileView::where('user_target', $user->user_id)
-                ->count();
+                ->with('job.company', 'job.salary', 'job.mode','job.employment')
+                ->get();
+
+        $profileView = ProfileView::with('userSender')
+                ->where('user_target', $user->user_id)
+                ->get();
+
+
         return view('pages.homepage', compact('user', 'educations', 'posts', 'companies', 'peoples', 'ads', 'chats', 'connection', 'applied', 'profileView'));
     }
 }

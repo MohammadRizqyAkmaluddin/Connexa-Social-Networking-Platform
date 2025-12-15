@@ -12,22 +12,24 @@
                         <img src="{{asset('IMG/uploads/profile/' . Auth::user()->profile_image)}}" class="rounded-circle bg-white d-block" style="margin-top:-40px; width: 70px; height: 70px; object-fit:cover">
                         <h2 class="fs-6 mt-3 fw-semi">{{Auth::user()->name}}</h2>
                         <p class="fs-8 lh-1">{{ \Illuminate\Support\Str::words(Auth::user()->headline, 16, ' ...') }}</p>
-                        <p class="fs-8 lh-1 text-muted">{{Auth::user()->city}}, {{Auth::user()->country}}</p>
+                        <p class="fs-8 lh-1 text-muted">{{Auth::user()->city}}</p>
                         @php
                             $edu = $user->userEducations->sortByDesc('start_date')->first();
                         @endphp
+                        @if($edu)
                         <div class="d-flex text-center align-items-center mx-auto my-auto">
                             <img src="{{ asset('IMG/uploads/logo/' . $edu->company->logo) }}"
                                 class="rounded me-3" style="width:40px; height:40px; object-fit:contain;">
                             <h2 class="fs-9 mt-2">{{$edu->company->name}}</h2>
                         </div>
+                        @endif
                     </div>
                 </a>
             </div>
             <div class="bg-white shadow-sm w-100 rounded p-2 mb-3">
                 <div class="d-flex justify-content-between">
                     <h2 class="fs-8">Analytics</h2>
-                    <a href="#" class="text-decoration-none text-muted fs-10">View all</a>
+                    <button class="btn p-0 text-muted fs-10" data-bs-target="#analytics" data-bs-toggle="modal">View all</button>
                 </div>
                 <div class="d-flex justify-content-between">
                 <div class="d-block">
@@ -36,12 +38,15 @@
                     <h2 class="fs-10 text-muted">Applied Jobs</h2>
                 </div>
                 <div class="d-block text-lightPrimary">
-                    <h2 class="fs-10">{{$profileView}}</h2>
+                    <h2 class="fs-10">{{$profileView->count()}}</h2>
                     <h2 class="fs-10">{{$connection->count()}}</h2>
-                    <h2 class="fs-10">{{$applied}}</h2>
+                    <h2 class="fs-10">{{$applied->count()}}</h2>
                 </div>
                 </div>
             </div>
+
+
+
             <div class="bg-white shadow-sm w-100 rounded p-3 mb-3">
                 <a class="text-decoration-none text-dark" href="#"><h2 class="fs-10"><i class="bi bi-globe"></i> Community</h2></a>
                 <a class="text-decoration-none text-dark" href="#"><h2 class="fs-10"><i class="bi bi-postcard"></i> Post Management</h2></a>
@@ -257,6 +262,115 @@
             @foreach($ads as $ad)
                 <a href="{{$ad->link}}"><img src="{{asset('IMG/uploads/ads/' . $ad->image_content)}}" class="rounded" width="270" height="400" style="object-fit:cover"></a>
             @endforeach
+        </div>
+    </div>
+
+    <div class="modal fade" id="analytics" aria-hidden="true" aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-start">
+            <div class="modal-content">
+                <div class="modal-header align-items-center">
+                    <h2 class="modal-title fs-6 d-flex align-items-center fw-bold" id="exampleModalToggleLabel3">My Analytics</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body scroll-area" style="overflow-y: auto; height:500px">
+                    <ul class="nav nav-pills gap-3 mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link bg-transparent p-2 active" id="pills-viewer-tab" data-bs-toggle="pill" data-bs-target="#pills-viewer" type="button" role="tab" aria-controls="pills-viewer" aria-selected="true"><h2 class="fs-7 mb-0 d-flex gap-1">Profile Viewers <p class="text-muted mb-0 fw-light">({{$profileView->count()}})</p></h2></button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link bg-transparent p-2" id="pills-connection-tab" data-bs-toggle="pill" data-bs-target="#pills-connection" type="button" role="tab" aria-controls="pills-connection" aria-selected="false"><h2 class="fs-7 mb-0 d-flex gap-1">Connections <p class="text-muted mb-0 fw-light">({{$connection->count()}})</p></h2></button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link bg-transparent p-2" id="pills-applied-tab" data-bs-toggle="pill" data-bs-target="#pills-applied" type="button" role="tab" aria-controls="pills-applied" aria-selected="false"><h2 class="fs-7 mb-0 d-flex gap-1">Applied Jobs <p class="text-muted mb-0 fw-light">({{$applied->count()}})</p></h2></button>
+                        </li>
+                    </ul>
+                    <div class="tab-content mt-5" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-viewer" role="tabpanel" aria-labelledby="pills-viewer-tab" tabindex="0">
+                            <div class="d-block">
+                                @foreach($profileView as $index => $user)
+                                    <div class="d-flex mt-3 align-items-center border-bottom pb-3">
+                                        <a href="{{route('user.page', $user->userSender->user_id)}}" class="d-flex align-items-center gap-2 text-decoration-none text-dark w-100"
+                                            onmouseover="this.querySelector('h2').style.textDecoration='underline'"
+                                            onmouseout="this.querySelector('h2').style.textDecoration='none'">
+                                            <img src="{{asset('IMG/uploads/profile/' . $user->userSender->profile_image)}}" class="rounded-circle" style="width: 50px; height:50px; object-fit:cover;">
+                                            <div class="d-block">
+                                                <h2 class="fs-7 mb-1">{{$user->userSender->name}}</h2>
+                                                <p class="fs-11 text-muted lh-1 text-truncate-2 mb-0">{{$user->userSender->headline}}</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-connection" role="tabpanel" aria-labelledby="pills-connection-tab" tabindex="0">
+                            <div class="d-block">
+                                @foreach($connection as $index => $user)
+                                    @if($user->user->user_id != Auth::user()->user_id)
+                                        <div class="d-flex mt-3 align-items-center border-bottom pb-3">
+                                            <a href="{{route('user.page', $user->user->user_id)}}" class="d-flex align-items-center gap-2 text-decoration-none text-dark w-100"
+                                                onmouseover="this.querySelector('h2').style.textDecoration='underline'"
+                                                onmouseout="this.querySelector('h2').style.textDecoration='none'">
+                                                <img src="{{asset('IMG/uploads/profile/' . $user->user->profile_image)}}" class="rounded-circle" style="width: 50px; height:50px; object-fit:cover;">
+                                                <div class="d-block">
+                                                    <h2 class="fs-7 mb-1">{{$user->user->name}}</h2>
+                                                    <p class="fs-11 text-muted lh-1 text-truncate-2 mb-0">{{$user->user->headline}}</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    @elseif($user->user->user_id = Auth::user()->user_id)
+                                        <div class="d-flex mt-3 align-items-center border-bottom pb-3">
+                                            <a href="{{route('user.page', $user->target->user_id)}}" class="d-flex align-items-center gap-2 text-decoration-none text-dark w-100"
+                                                onmouseover="this.querySelector('h2').style.textDecoration='underline'"
+                                                onmouseout="this.querySelector('h2').style.textDecoration='none'">
+                                                <img src="{{asset('IMG/uploads/profile/' . $user->target->profile_image)}}" class="rounded-circle" style="width: 50px; height:50px; object-fit:cover;">
+                                                <div class="d-block">
+                                                    <h2 class="fs-7 mb-1">{{$user->target->name}}</h2>
+                                                    <p class="fs-11 text-muted lh-1 text-truncate-2 mb-0">{{$user->target->headline}}</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-applied" role="tabpanel" aria-labelledby="pills-applied-tab" tabindex="0">
+                            <div class="d-block">
+                                 @foreach($applied as $appliedJob)
+                                    <a href="{{route('application.show', $appliedJob->applicant_id)}}" class="d-flex gap-3 w-100 border-0 bg-transparent align-items-start text-dark text-start text-decoration-none"
+                                        onmouseover="this.querySelector('h2').style.textDecoration='underline'"
+                                        onmouseout="this.querySelector('h2').style.textDecoration='none'">
+                                        <img src="{{asset('IMG/uploads/logo/' . $appliedJob->job->company->logo)}}" width="50" height="50" class="mt-3">
+                                        <div class="d-flex border-bottom p-3 w-100">
+                                            <div class="d-block w-50 ">
+                                                <h2 class="fs-6 mb-0 text-primary">{{ $appliedJob->job->title }}</h2>
+                                                <p class="fs-9 mb-0">{{ $appliedJob->job->company->name }}</p>
+                                                <p class="fs-9 mb-0 text-muted">{{ $appliedJob->job->company->city }}, {{ $appliedJob->job->company->country }}</p>
+                                                <p class="fs-11 mb-0 text-muted">{{$appliedJob->job->created_at->diffForHumans()}}</p>
+                                            </div>
+                                            <div class="d-block fs-10 w-25 ms-4 text-muted">
+                                                <div class="d-flex gap-1">
+                                                    <p class="mb-0 text-success">{{ $appliedJob->job->salary ? 'Rp' . number_format($appliedJob->job->salary->min_salary, 0, ',', '.') : 'Not showing salary' }}</p>
+                                                    @if($appliedJob->job->salary)
+                                                    <p class="mb-0">-</p>
+                                                    @endif
+                                                    <p class="mb-0 text-success">{{ $appliedJob->job->salary ? 'Rp' . number_format($appliedJob->job->salary->max_salary, 0, ',', '.') : '' }}</p>
+                                                </div>
+                                                <div class="d-flex gap-1">
+                                                    <p class="mb-0 fw-semibold text-mutedbold">{{$appliedJob->job->employment->employment_type}}</p>|
+                                                    <p class="mb-0">{{$appliedJob->job->mode->mode}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+
+                </div>
+            </div>
         </div>
     </div>
 

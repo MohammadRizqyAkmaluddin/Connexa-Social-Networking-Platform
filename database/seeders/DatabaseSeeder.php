@@ -42,7 +42,9 @@ class DatabaseSeeder extends Seeder
             UserLanguageSeeder::class,
             InterestedSeeder::class,
             IndustrySeeder::class,
-            ProfileViewSeeder::class
+            ProfileViewSeeder::class,
+            UserWebsiteSeeder::class,
+            NotificationSeeder::class
         ]);
     }
 }

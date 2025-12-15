@@ -3,10 +3,19 @@
             <a class="navbar-brand d-lg-flex d-none" href="{{route('homepage.page')}}"><img src="{{asset('IMG/logos/connexa3.png')}}" style="width: 100px" class=""></a>
             <div class="navbar-brand d-lg-none d-flex">
                 <a class="navbar-brand d-lg-none me-3" href="{{route('homepage.page')}}"><img src="{{asset('IMG/logos/connexa3.png')}}" class="mb-3" style="width: 100px" alt=""></a>
-                <form class="position-relative ms-3" role="search" action="/search" method="GET">
-                    <input id="mainSearch2" class="form-control fs-7 ps-6 pb-2 rounded-pill" style="width: 200px" type="search" name="q" placeholder="Search" aria-label="Search" autocomplete="off"/>
+                <form class="position-relative ms-3" role="search" action="{{ route('search.page') }}" method="GET">
+                    <input
+                        class="form-control fs-7 ps-6 pb-2 rounded-pill"
+                        style="width: 200px"
+                        type="search"
+                        name="q"
+                        placeholder="Search"
+                        value="{{ request('q') }}"
+                        autocomplete="off"
+                    />
                     <i class="fa-solid fa-magnifying-glass position-absolute search-icon fs-8 ps-1 pb-2 text-muted"></i>
                 </form>
+
             </div>
             <div class="navbar-brand d-lg-none d-flex">
                 <li class="dropdown list-unstyled">
@@ -37,7 +46,7 @@
                             <li><hr class="dropdown-divider"></li>
                             <li><div class="ps-5"><h2 class="fs-6">Manage</h2></div></li>
                             <li><a class="dropdown-item ps-5 fs-8" href="#">Post & Activity</a></li>
-                            <li><a class="dropdown-item ps-5 fs-8" href="#">Jobs Applicant</a></li>
+                            <li><a class="dropdown-item ps-5 fs-8" href="{{ route('jobs.page', ['modal' => 'applied']) }}">Jobs Applications</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><form action="{{ route('logout') }}" method="POST" class="dropdown-item">
                                     @csrf
@@ -124,7 +133,7 @@
                             <li><hr class="dropdown-divider"></li>
                             <li><div class="ps-5 mt-4"><h2 class="fs-6">Manage</h2></div></li>
                             <li><a class="dropdown-item ps-5 fs-8" href="#">Post & Activity</a></li>
-                            <li><a class="dropdown-item ps-5 fs-8" href="#">Jobs Applicant</a></li>
+                            <li><a class="dropdown-item ps-5 fs-8" href="{{ route('jobs.page', ['modal' => 'applied']) }}">Jobs Applications</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><form action="{{ route('logout') }}" method="POST" class="dropdown-item">
                                     @csrf

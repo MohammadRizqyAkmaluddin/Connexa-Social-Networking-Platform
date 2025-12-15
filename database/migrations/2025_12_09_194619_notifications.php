@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('applicant_id')->unsigned()->nullable();
             $table->integer('post_id')->unsigned()->nullable();
             $table->string('sender_id', 10)->nullable();
-            $table->datetime('date')->useCurrent();
+            $table->datetime('created_at')->useCurrent();
             $table->engine = 'InnoDB';
 
             $table->foreign('user_id')

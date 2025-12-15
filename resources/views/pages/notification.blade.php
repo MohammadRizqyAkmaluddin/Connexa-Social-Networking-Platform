@@ -43,10 +43,12 @@
                     $isNew = $notif->status == 'New';
                 @endphp
                     @if($notif->category === 'Application')
-                        <a href="{{route('application.show', $notif->applicant_id)}}" class="d-flex text-decoration-none text-dark gap-3 py-4 px-4 {{$isNew ? 'bg-lightPrimary2 border-dark' : 'bg-white'}} {{$index > 0 ? 'border-top' : ''}} {{$loop->first ? 'rounded-top' : ''}} {{$loop->last ? 'rounded-bottom' : ''}}">
+                        <a href="{{route('application.show', $notif->applicant_id)}}" class="d-flex justify-content-between text-decoration-none text-dark gap-3 py-4 px-4 {{$isNew ? 'bg-lightPrimary2 border-dark' : 'bg-white'}} {{$index > 0 ? 'border-top' : ''}} {{$loop->first ? 'rounded-top' : ''}} {{$loop->last ? 'rounded-bottom' : ''}}">
+                            <div class="d-flex gap-3">
                             <img src="{{asset('IMG/uploads/logo/' . $notif->applicant->job->company->logo)}}" class="" width="45" height="45">
                             {!! '<div class="fs-8 text-truncate-2">'.$notif->title.' : '. $notif->description.'</div>' !!}
-                            <p class="text-muted fs-9">{{ $notif->created_at->shortDiff() }}</p>
+                            </div>
+                            <p class="text-muted fs-9 d-flex">{{ $notif->created_at->shortDiff() }}</p>
                         </a>
                     @elseif($notif->category === 'Message')
                     <div class="d-flex gap-2 py-4 px-4 {{$isNew ? 'bg-lightPrimary2 border-dark' : 'bg-white'}} {{$index > 0 ? 'border-top' : ''}} {{$loop->first ? 'rounded-top' : ''}} {{$loop->last ? 'rounded-bottom' : ''}}">
