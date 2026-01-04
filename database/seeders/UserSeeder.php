@@ -9,7 +9,7 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('users')->insert([
+        $users = [
             [
                 'user_id'       => 'U001',
                 'name'          => 'Mohammad Rizqy Akmaluddin',
@@ -1438,8 +1438,26 @@ class UserSeeder extends Seeder
                 'profile_image' => 'satya.jpg',
                 'cover_image' => 'basic_cover10.jpg',
             ],
+        ];
 
 
-        ]);
+        foreach ($users as $user) {
+            DB::table('users')->updateOrInsert(
+                ['user_id' => $user['user_id']], // cek primary key
+                [
+                    'name'          => $user['name'],
+                    'email'         => $user['email'],
+                    'password'      => $user['password'],
+                    'gender'        => $user['gender'],
+                    'dob'           => $user['dob'],
+                    'phone_number'  => $user['phone_number'],
+                    'city'          => $user['city'],
+                    'country'       => $user['country'],
+                    'profile_image' => $user['profile_image'],
+                    'cover_image'   => $user['cover_image'],
+                    'headline'      => $user['headline'],
+                ]
+            );
+        }
     }
 }
