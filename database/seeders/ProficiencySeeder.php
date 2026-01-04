@@ -7,9 +7,10 @@ use Illuminate\Support\Facades\DB;
 
 class ProficiencySeeder extends Seeder
 {
-    
+
     public function run()
     {
+        DB::table('proficiencies')->truncate();
         DB::table('proficiencies')->insert([
             [
                 'proficiency_id' => 'EP',
