@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             ProficiencySeeder::class,
             ModeSeeder::class,
             UserSeeder::class,
-            companySeeder::class,
+            CompanySeeder::class,
             SubsidiarySeeder::class,
             MajorSeeder::class,
             CompanyRoleSeeder::class,

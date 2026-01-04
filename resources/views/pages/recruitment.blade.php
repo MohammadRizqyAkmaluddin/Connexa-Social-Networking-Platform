@@ -777,7 +777,6 @@
 
         </div>
     </div>
-
     <script>
         function copyDescription(form) {
             const textarea = form.querySelector('.message-textarea');

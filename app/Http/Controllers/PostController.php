@@ -21,7 +21,7 @@ class PostController extends Controller
         $post->post_type = $request->post_type;
         $post->user_id = Auth::user()->user_id;
         $post->description = $request->description;
-        $post->save();  
+        $post->save();
 
         if($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
@@ -48,7 +48,7 @@ class PostController extends Controller
 
         $post = new Post();
         $post->post_type = $request->post_type;
-        $post->company_id = $company_id; // bukan user
+        $post->company_id = $company_id;
         $post->user_id = Auth::user()->user_id;
         $post->description = $request->description;
         $post->save();

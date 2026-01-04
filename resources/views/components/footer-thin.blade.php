@@ -12,5 +12,6 @@
         <p>Cookie Policy</p>
         <p>Copyright Policy</p>
         <p>Send Feedback</p>
+        
     </div>
 </div>

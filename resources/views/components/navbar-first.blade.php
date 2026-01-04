@@ -22,7 +22,7 @@
                     alt="Logo Desktop"
                     class="d-none d-lg-block"
                     style="width:150px;">
-                    
+
                 <img src="{{ asset('IMG/logos/connexa3.png') }}"
                     alt="Logo Mobile"
                     class="d-block d-lg-none"
