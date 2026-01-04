@@ -10,12 +10,38 @@ class LikeSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
-    {
-        $data = [];
+    // public function run(): void
+    // {
+    //     $data = [];
 
-        // Total kombinasi random yang ingin dibuat (bisa kamu ubah)
-        $totalRecords = 2000; 
+    //     // Total kombinasi random yang ingin dibuat (bisa kamu ubah)
+    //     $totalRecords = 2000;
+
+    //     for ($i = 0; $i < $totalRecords; $i++) {
+    //         $data[] = [
+    //             'post_id' => rand(1, 8),
+    //             'user_id' => 'U' . str_pad(rand(1, 100), 3, '0', STR_PAD_LEFT),
+    //         ];
+    //     }
+
+    //     // Hilangkan duplikat kombinasi (post_id + user_id)
+    //     $unique = [];
+    //     $finalData = [];
+    //     foreach ($data as $row) {
+    //         $key = $row['post_id'] . '-' . $row['user_id'];
+    //         if (!isset($unique[$key])) {
+    //             $unique[$key] = true;
+    //             $finalData[] = $row;
+    //         }
+    //     }
+
+    //     DB::table('likes')->insert($finalData);
+    // }
+
+     public function run(): void
+    {
+        $totalRecords = 2000;
+        $data = [];
 
         for ($i = 0; $i < $totalRecords; $i++) {
             $data[] = [
@@ -24,17 +50,23 @@ class LikeSeeder extends Seeder
             ];
         }
 
-        // Hilangkan duplikat kombinasi (post_id + user_id)
+        // Hilangkan duplikat di array
         $unique = [];
-        $finalData = [];
         foreach ($data as $row) {
             $key = $row['post_id'] . '-' . $row['user_id'];
             if (!isset($unique[$key])) {
-                $unique[$key] = true;
-                $finalData[] = $row;
+                $unique[$key] = $row;
             }
         }
 
-        DB::table('likes')->insert($finalData);
+        foreach ($unique as $row) {
+            DB::table('likes')->updateOrInsert(
+                [
+                    'post_id' => $row['post_id'],
+                    'user_id' => $row['user_id'],
+                ],
+                [] // tidak ada field tambahan
+            );
+        }
     }
 }
