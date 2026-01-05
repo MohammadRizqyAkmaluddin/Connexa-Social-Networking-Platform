@@ -38,7 +38,7 @@ class LikeSeeder extends Seeder
     //     DB::table('likes')->insert($finalData);
     // }
 
-     public function run(): void
+    public function run(): void
     {
         $totalRecords = 2000;
         $data = [];
@@ -50,23 +50,20 @@ class LikeSeeder extends Seeder
             ];
         }
 
-        // Hilangkan duplikat di array
+        // dedup kombinasi post_id + user_id
         $unique = [];
         foreach ($data as $row) {
             $key = $row['post_id'] . '-' . $row['user_id'];
-            if (!isset($unique[$key])) {
-                $unique[$key] = $row;
-            }
+            $unique[$key] = $row;
         }
 
-        foreach ($unique as $row) {
-            DB::table('likes')->updateOrInsert(
-                [
-                    'post_id' => $row['post_id'],
-                    'user_id' => $row['user_id'],
-                ],
-                [] // tidak ada field tambahan
-            );
+        $finalData = array_values($unique);
+
+        // 🚀 batch insert (super cepat)
+        $chunks = array_chunk($finalData, 500);
+
+        foreach ($chunks as $chunk) {
+            DB::table('likes')->insertOrIgnore($chunk);
         }
     }
 }
