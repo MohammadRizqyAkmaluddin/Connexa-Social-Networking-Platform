@@ -62,16 +62,17 @@ class ConnectionSeeder extends Seeder
     public function run(): void
     {
         $faker = Faker::create();
+        $now = now();
 
         $statusList = ['Pending', 'Success'];
 
-        // generate user list U001 - U100
+        // generate user list
         $users = [];
         for ($i = 1; $i <= 100; $i++) {
             $users[] = 'U' . str_pad($i, 3, '0', STR_PAD_LEFT);
         }
 
-        // buat semua kombinasi user → target (kecuali diri sendiri)
+        // generate combinations
         $combinations = [];
 
         foreach ($users as $user) {
@@ -80,37 +81,22 @@ class ConnectionSeeder extends Seeder
                     $combinations[] = [
                         'user_id'     => $user,
                         'user_target' => $target,
+                        'status'      => $statusList[array_rand($statusList)],
+                        'created_at'  => $now,
+                        'updated_at'  => $now,
                     ];
                 }
             }
         }
 
-        // acak semua kombinasi
         shuffle($combinations);
 
-        // tentukan jumlah insert
-        $totalInsert = min(1500, count($combinations));
+        $totalInsert = 1500;
+        $chunks = array_chunk(array_slice($combinations, 0, $totalInsert), 500);
 
-        for ($i = 0; $i < $totalInsert; $i++) {
-
-            $pair = $combinations[$i];
-
-            $created_at = $faker->dateTimeBetween('-1 month', 'now');
-
-            DB::table('connections')->updateOrInsert(
-                [
-                    // PRIMARY KEY
-                    'user_id'     => $pair['user_id'],
-                    'user_target' => $pair['user_target'],
-                ],
-                [
-                    'status'       => $faker->randomElement($statusList),
-                    'created_at'   => $created_at,
-                    'updated_at'   => $faker->dateTimeBetween($created_at, 'now'),
-                ]
-            );
+        foreach ($chunks as $chunk) {
+            DB::table('connections')->insertOrIgnore($chunk);
         }
-
     }
 
 }
