@@ -1441,23 +1441,41 @@ class UserSeeder extends Seeder
         ];
 
 
+        $payload = [];
+
         foreach ($users as $user) {
-            DB::table('users')->updateOrInsert(
-                ['user_id' => $user['user_id']], // cek primary key
-                [
-                    'name'          => $user['name'],
-                    'email'         => $user['email'],
-                    'password'      => $user['password'],
-                    'gender'        => $user['gender'],
-                    'dob'           => $user['dob'],
-                    'phone_number'  => $user['phone_number'],
-                    'city'          => $user['city'],
-                    'country'       => $user['country'],
-                    'profile_image' => $user['profile_image'],
-                    'cover_image'   => $user['cover_image'],
-                    'headline'      => $user['headline'],
-                ]
-            );
+            $payload[] = [
+                'user_id'        => $user['user_id'],
+                'name'           => $user['name'],
+                'email'          => $user['email'],
+                'password'       => $user['password'],
+                'gender'         => $user['gender'],
+                'dob'            => $user['dob'],
+                'phone_number'   => $user['phone_number'],
+                'city'           => $user['city'],
+                'country'        => $user['country'],
+                'profile_image'  => $user['profile_image'],
+                'cover_image'    => $user['cover_image'],
+                'headline'       => $user['headline'],
+            ];
         }
+
+        DB::table('users')->upsert(
+            $payload,
+            ['user_id'], // primary key
+            [
+                'name',
+                'email',
+                'password',
+                'gender',
+                'dob',
+                'phone_number',
+                'city',
+                'country',
+                'profile_image',
+                'cover_image',
+                'headline',
+            ]
+        );
     }
 }

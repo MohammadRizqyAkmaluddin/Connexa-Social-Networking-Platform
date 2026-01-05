@@ -71,6 +71,14 @@ class JobSalarySeeder extends Seeder
 
         ];
 
-        DB::table('job_salary')->insert($jobSallary);
+         foreach ($jobSallary as $row) {
+            DB::table('job_salary')->updateOrInsert(
+                ['job_id' => $row['job_id']], // PRIMARY KEY
+                [
+                    'min_salary' => $row['min_salary'],
+                    'max_salary' => $row['max_salary'],
+                ]
+            );
+        }
     }
 }
