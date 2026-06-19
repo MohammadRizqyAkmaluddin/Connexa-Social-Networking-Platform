@@ -51,8 +51,8 @@
 
             <!-- DESKTOP BUTTONS (kanan di desktop) -->
             <div class="d-none d-lg-flex gap-2">
-                <a class="btn btn-outline-primary fs-6 fw-bold p-3 px-4 rounded-pill" href="{{ route('login.form') }}">Sign in</a>
-                <a class="btn btn-primary fs-6 fw-bold p-3 px-4 rounded-pill" href="{{ route('register.form') }}">Join now</a>
+                <a class="btn btn-outline-primary fs-6 fw-bold p-2 px-4 rounded-pill" href="{{ route('login.form') }}">Sign in</a>
+                <a class="btn btn-primary fs-6 fw-bold p-2 px-4 rounded-pill" href="{{ route('register.form') }}">Join now</a>
             </div>
 
         </div>

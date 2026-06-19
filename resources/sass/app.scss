@@ -1,42 +1,11 @@
-@import "bootstrap/scss/functions";
+
+
+
+// override di sini
+
 
 $primary: #294582;
-$theme-colors: (
-  "lightPrimary": #335ebc77,
-  "lightPrimary2": #e8ebf6,
-  "brokenWhite": #fafafa,
-  "brokenWhite2": #E9E6E0,
-  "lightGrey": #b9b9b9,
-  "darkGrey": #919191,
-  "black": black,
-  "main": #F3F2EE,
-  "main2": #eae9e6,
-  "like": #9a4949,
-  "reject": #d43d3d93,
-  "pass": #e9f5dd,
-  "progress": #f0f4ff2d,
-  "rejected": #ece1e12d,
-  "notification": #d32121,
-  "unread": #f3f6fa,
-  "mutedbold": #5e5e5e,
-  "mutedlight": #ababab
-);
 
-.page-link:focus {
-    box-shadow: none !important;
-    outline: none !important;
-}
-
-$custom-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-$box-shadow: $custom-shadow;
-$box-shadow-sm: 0 0 6px rgba(0, 0, 0, 0.2);
-$box-shadow-lg: 0 0 40px rgba(0, 0, 0, 0.35);
-
-
-.py-2-5 {
-  padding-top: 0.6rem !important;
-  padding-bottom: 0.6rem !important;
-}
 
 $spacers: (
   0: 0,
@@ -109,14 +78,67 @@ $font-sizes: (
   13: 0.650rem,
   14: 0.600rem,
   15: 0.550rem
-);
-
-.fw-semi {
-  font-weight: 600;
-}
+  );
+  
+  .fw-semi {
+    font-weight: 600;
+  }
+  .page-link:focus {
+      box-shadow: none !important;
+      outline: none !important;
+  }
+  
+  $custom-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  $box-shadow: $custom-shadow;
+  $box-shadow-sm: 0 0 6px rgba(0, 0, 0, 0.2);
+  $box-shadow-lg: 0 0 40px rgba(0, 0, 0, 0.35);
+  
+  
+  .py-2-5 {
+    padding-top: 0.6rem !important;
+    padding-bottom: 0.6rem !important;
+  }
 
 @import 'bootstrap/scss/bootstrap';
+
+$custom-colors: (
+  "lightPrimary": #335ebc77,
+  "lightPrimary2": #e8ebf6,
+  "brokenWhite": #fafafa,
+  "brokenWhite2": #E9E6E0,
+  "lightGrey": #b9b9b9,
+  "darkGrey": #919191,
+  "black": black,
+  "main": #F3F2EE,
+  "main2": #eae9e6,
+  "like": #9a4949,
+  "reject": #d43d3d93,
+  "pass": #e9f5dd,
+  "progress": #f0f4ff2d,
+  "rejected": #ece1e12d,
+  "notification": #d32121,
+  "unread": #f3f6fa,
+  "mutedbold": #5e5e5e,
+  "mutedlight": #ababab
+);
+
+// AUTO GENERATE
+@each $name, $color in $custom-colors {
+  .bg-#{$name} {
+    background-color: $color !important;
+  }
+
+  .text-#{$name} {
+    color: $color !important;
+  }
+
+  .border-#{$name} {
+    border-color: $color !important;
+  }
+}
+
 @import 'custom';
 @import 'component';
+
 
 
