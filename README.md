@@ -1,92 +1,90 @@
-# Connexa – Smart Communication & Collaboration Platform
+# Connexa (Full-Stack)
+Connexa-Social-Networking-Platform
 
-Connexa is a modern full-stack web application designed to streamline communication, collaboration, and workflow management within teams and organizations. Built with a scalable architecture and clean UI/UX, Connexa aims to centralize messaging, task coordination, and productivity tools in one platform.
+Connexa is a full-stack web application built using Laravel that focuses on improving communication, collaboration, and workflow management within teams. The system is designed with a structured monolithic architecture using Blade templating and modular backend design, making it maintainable, scalable, and production-ready.
 
 ---
 
-## 📸 Preview
+## UI Preview
 
 ![Connexa Preview](https://raw.githubusercontent.com/MohammadRizqyAkmaluddin/Readme-Assets/main/Connexa/asset1.png)
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
-- 💬 Real-time messaging system for team communication  
-- 🧑‍🤝‍🧑 Workspace-based collaboration structure  
-- 📌 Task & activity management for productivity tracking  
-- 🔔 Notification system for updates and mentions  
-- 🔐 Secure authentication and user management  
-- 📱 Fully responsive UI (mobile-first design)  
-
----
-
-## 🧠 Project Concept
-
-Connexa was built with the idea of combining communication + collaboration into a single unified platform. Instead of switching between chat apps, task managers, and notification tools, users can manage everything in one place.
+- Internal messaging system for user communication  
+- Workspace-based collaboration model  
+- Task and activity tracking system  
+- Notification system for updates and interactions  
+- Authentication and role-based access control  
+- Responsive UI built with Bootstrap  
 
 ---
 
-## 🛠 Tech Stack
+## Project Concept
 
-**Frontend**
-- Nuxt.js
-- Tailwind CSS
-- Pinia (State Management)
-
-**Backend**
-- Laravel
-- MySQL
-- RESTful API Architecture
-
-**Deployment**
-- Ubuntu VPS
-- Nginx
-- PM2 / Supervisor (if applicable)
+Connexa is designed as an all-in-one collaboration platform that combines communication and task management in a single system. The goal is to reduce fragmentation between tools by centralizing workflows inside one application.
 
 ---
 
-## ⚙️ System Architecture
+## Tech Stack
 
-- Modular backend design using Laravel service pattern  
-- REST API communication between frontend & backend  
-- Scalable database structure for multi-workspace system  
-- Component-based frontend architecture (Nuxt.js)  
+- **Backend Framework:** Laravel  
+- **Frontend:** Blade Templates  
+- **UI Framework:** Bootstrap  
+- **Database:** MySQL  
+- **Architecture:** Monolithic MVC (Laravel)  
+- **Deployment:** Ubuntu VPS, Nginx  
 
 ---
 
-## 📂 Core Modules
+## System Architecture
+
+Even though built as a monolith, the project follows a structured and modular design approach:
+
+- MVC separation with clean controller responsibility  
+- Reusable Blade components and layouts  
+- Service-oriented logic separation (where needed)  
+- Organized routing structure (feature-based grouping)  
+- Scalable database schema design  
+
+---
+
+## Core Modules
 
 - Authentication & Authorization  
 - Workspace Management  
 - Messaging System  
-- Task Management  
-- Notification Engine  
-- User Profile System  
+- Task & Activity Management  
+- Notification System  
+- User Profile & Settings  
 
 ---
 
-## 🧩 Database Design
+## Database Design
 
-Connexa uses a relational database structure to manage users, workspaces, messages, and tasks efficiently.
+Connexa uses a relational database designed for structured collaboration workflows:
 
-- Normalized schema for scalability  
-- Many-to-many relationships for workspace members  
-- Optimized indexing for message & task queries  
+- Proper normalization for scalability  
+- Relationship handling between users, workspaces, and tasks  
+- Optimized queries for messaging and activity feeds  
+- Clear separation of transactional and relational data  
 
 ---
 
-## ⚙️ Installation
+## Installation
 
 ```bash
 git clone https://github.com/MohammadRizqyAkmaluddin/Connexa-Social-Networking-Platform.git
 cd Connexa-Social-Networking-Platform
 
-# frontend setup
+composer install
+cp .env.example .env
+php artisan key:generate
+
+php artisan migrate
+php artisan serve
+
 npm install
 npm run dev
-
-# backend setup
-composer install
-php artisan migrate:fresh --seed
-php artisan serve
