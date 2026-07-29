@@ -11,7 +11,7 @@
 
             <!-- SIGN IN (MOBILE LEFT) -->
             <div class="d-flex d-lg-none">
-                <a class="btn btn-outline-primary fs-6 fw-bold p-3 px-4 rounded-pill" href="{{ route('login.form') }}">
+                <a class="btn btn-outline-primary fs-6 fw-bold p-1 px-3 rounded-pill" href="{{ route('login.form') }}">
                 Sign in
                 </a>
             </div>
@@ -31,7 +31,7 @@
 
             <!-- JOIN NOW (MOBILE RIGHT) -->
             <div class="d-flex d-lg-none">
-                <a class="btn btn-primary fs-6 fw-bold p-3 px-4 rounded-pill" href="{{ route('register.form') }}">
+                <a class="btn btn-primary fs-6 fw-bold p-1 px-3 rounded-pill" href="{{ route('register.form') }}">
                 Join now
                 </a>
             </div>
@@ -58,13 +58,13 @@
         </div>
 
         <!-- MOBILE LINKS (row bawah di mobile) -->
-        <div class="d-flex d-lg-none w-100 justify-content-center mt-4">
-        <div class="nav-links-mobile d-flex gap-2 gap-sm-4 gap-md-5 flex-row flex-wrap justify-content-center">
-            <a class="nav-link text-muted text-center px-2" href="#"><i class="fa-solid fa-briefcase d-block"></i>Jobs</a>
-            <a class="nav-link text-muted text-center px-2" href="#"><i class="fa-solid fa-people-group d-block"></i>People</a>
-            <a class="nav-link text-muted text-center px-2" href="#"><i class="fa-solid fa-arrow-trend-up d-block"></i>Top Content</a>
-            <a class="nav-link text-muted text-center px-2" href="#"><i class="fa-solid fa-building d-block"></i>Companies</a>
-        </div>
+        <div class="d-flex d-lg-none w-100 justify-content-center mt-5">
+            <div class="nav-links-mobile d-flex gap-2 gap-sm-4 gap-md-5 flex-row flex-wrap justify-content-center">
+                <a class="nav-link text-muted text-center px-2" href="#"><i class="fa-solid fa-briefcase d-block"></i>Jobs</a>
+                <a class="nav-link text-muted text-center px-2" href="#"><i class="fa-solid fa-people-group d-block"></i>People</a>
+                <a class="nav-link text-muted text-center px-2" href="#"><i class="fa-solid fa-arrow-trend-up d-block"></i>Top Content</a>
+                <a class="nav-link text-muted text-center px-2" href="#"><i class="fa-solid fa-building d-block"></i>Companies</a>
+            </div>
         </div>
 
     </div>

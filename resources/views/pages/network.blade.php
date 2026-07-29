@@ -5,8 +5,8 @@
 @section('content')
 
 <main>
-    <div class="container gap-3 d-flex">
-        <div class="" style="width: 300px; height: 87vh; position:sticky; top:88px">
+    <div class="container gap-3 d-flex flex-column flex-lg-row">
+        <div class="network-sidebar" style="width: 300px; height: 87vh; position:sticky; top:88px">
             <div class="bg-white shadow-sm rounded p-3">
                 <ul class="nav nav-tabs d-block" id="myTab" role="tablist">
                     <li class="nav-item">
@@ -29,7 +29,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="content-4 shadow-sm bg-white rounded mt-3">
+            <div class="content-4 shadow-sm bg-white rounded mt-3 d-none d-lg-block">
                 @foreach($ads as $ad)
                     <a href="{{$ad->link}}"><img src="{{asset('IMG/uploads/ads/' . $ad->image_content)}}" class="rounded" width="300" height="410" style="object-fit:cover"></a>
                 @endforeach
@@ -159,7 +159,7 @@
              </div>
         </div>
 
-        <div class="d-block align-items-center" style="width: 645px; margin-top:88px; min-height: 87vh">
+        <div class="network-main d-block align-items-center" style="width: 645px; margin-top:88px; min-height: 87vh">
             <div class="bg-white shadow-sm mx-auto p-3 rounded">
                 <div class="d-flex mb-2 border-bottom justify-content-between">
                     <h2 class="fs-8 d-flex">Invitations <p class="mb-0 ms-1">({{$invitation->count()}})</p></h2>
@@ -233,34 +233,34 @@
             </div>
             <div class="mt-3 bg-white shadow-sm mx-auto p-3 rounded">
                 <h2 class="fs-8 mb-3">Companies Suggestions</h2>
-                <div class="row g-3" id="experienceContainer" style="width: 630px;">
+                <div class="row g-2 g-md-3 network-container-width mx-auto" id="experienceContainer" style="width: 630px;">
                     @foreach($companies as $index => $company)
                         @php $isFollowed = $company->follows->contains('user_id', Auth::user()->user_id); @endphp
                         <div class="col-6 col-md-4 experience-company"
                             style="{{ $index >= 9 ? 'display:none;' : '' }}">
-                            <a href="{{route('company.show', $company->company_id)}}" class="rounded shadow-hover bg-white border d-block text-decoration-none" style="height:100%; width:200px;">
+                            <a href="{{route('company.show', $company->company_id)}}" class="rounded shadow-hover bg-white border d-block text-decoration-none h-100 w-100">
                                 <div class="d-block pb-3 text-center">
                                     <img src="{{ asset('IMG/uploads/cover/' . $company->cover_image) }}"
-                                        class="rounded-top" width="100%" style="object-fit: cover;">
+                                        class="rounded-top w-100" style="object-fit: cover; height: 60px;">
                                     <div class="d-block text-center mx-2">
                                         <img src="{{ asset('IMG/uploads/logo/' . $company->logo) }}"
-                                            class="p-1 bg-white"
-                                            style="width:80px; height:80px; margin-top:-40px; object-fit: contain;">
-                                        <div class="d-block mx-2">
-                                            <h2 class="fs-8 mt-3 fw-semibold text-dark mb-1">
-                                                {{ Str::limit($company->name, 20) }}
+                                            class="p-1 bg-white border rounded"
+                                            style="width:60px; height:60px; margin-top:-30px; object-fit: contain;">
+                                        <div class="d-block mx-1">
+                                            <h2 class="fs-8 mt-2 fw-semibold text-dark mb-1 text-truncate">
+                                                {{ $company->name }}
                                             </h2>
-                                            <p class="fs-13 lh-1 text-truncate-2 text-muted" style="height: 20px">
+                                            <p class="fs-13 lh-1 text-truncate-2 text-muted" style="height: 24px">
                                                 {{ $company->tagline }}
                                             </p>
                                         </div>
                                     </div>
-                                    <p class="text-muted fs-9">{{$company->follows->count()}} Followers</p>
-                                    <div class="align-items-center text-center px-auto">
+                                    <p class="text-muted fs-9 mb-2">{{$company->follows->count()}} Followers</p>
+                                    <div class="align-items-center text-center px-2">
                                         <form action="{{route('follow.store')}}" method="POST">
                                             @csrf
                                             <input type="hidden" name="company_id" value="{{$company->company_id}}">
-                                            <button type="submit" class="btn follow-btn fs-9 text-primary border-primary py-0 px-5 rounded-pill">
+                                            <button type="submit" class="btn follow-btn fs-9 text-primary border-primary py-0 px-2 w-100 rounded-pill">
                                                 @if($isFollowed)
                                                     Unfollow
                                                 @else
@@ -284,35 +284,35 @@
             </div>
             <div class="mt-3 bg-white shadow-sm mx-auto p-3 rounded" style="margin-bottom:28px">
                 <h2 class="fs-8 mb-3">People Suggestions</h2>
-                <div class="row g-3" id="experienceContainer" style="width: 630px;">
+                <div class="row g-2 g-md-3 network-container-width mx-auto" id="experienceContainer" style="width: 630px;">
                     @foreach($users as $index => $user)
                         <div class="col-6 col-md-4 experience-people"
                             style="{{ $index >= 9 ? 'display:none;' : '' }}">
-                            <a href="{{route('user.page', $user->user_id)}}" class="rounded bg-white shadow-hover border d-block text-decoration-none" style="height:100%; width:200px;">
+                            <a href="{{route('user.page', $user->user_id)}}" class="rounded bg-white shadow-hover border d-block text-decoration-none h-100 w-100">
                                 <div class="d-block pb-3">
                                     <img src="{{ asset('IMG/cover/' . $user->cover_image) }}"
-                                        class="rounded-top" width="100%" style="object-fit: cover;">
+                                        class="rounded-top w-100" style="object-fit: cover; height: 60px;">
                                     <div class="d-block text-center mx-2">
                                         <img src="{{ asset('IMG/uploads/profile/' . $user->profile_image) }}"
-                                            class="rounded-circle"
-                                            style="width:60px; height:60px; margin-top:-40px; object-fit: cover;">
-                                        <div class="d-block mx-2">
-                                            <h2 class="fs-8 mt-3 fw-semibold text-dark mb-1">
-                                                {{ Str::limit($user->name, 20) }}
+                                            class="rounded-circle border"
+                                            style="width:55px; height:55px; margin-top:-28px; object-fit: cover;">
+                                        <div class="d-block mx-1">
+                                            <h2 class="fs-8 mt-2 fw-semibold text-dark mb-1 text-truncate">
+                                                {{ $user->name }}
                                             </h2>
-                                            <p class="fs-13 lh-1 text-truncate-2 text-muted">
+                                            <p class="fs-13 lh-1 text-truncate-2 text-muted" style="height: 24px">
                                                 {{ $user->headline }}
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="align-items-center text-center px-auto">
+                                    <div class="align-items-center text-center px-2">
                                     <form action="{{route('connect.store')}}" method="POST">
                                         @csrf
                                         <input type="hidden" name="user_id" value="{{$user->user_id}}">
                                         @if($isRequested)
-                                            <button type="submit" class="btn connect-btn fs-9 text-primary border-primary py-0 px-5 rounded-pill"><i class="bi bi-clock-history"></i> Pending</button>
+                                            <button type="submit" class="btn connect-btn fs-9 text-primary border-primary py-0 px-2 w-100 rounded-pill"><i class="bi bi-clock-history"></i> Pending</button>
                                         @else
-                                            <button type="submit" class="btn connect-btn fs-9 text-primary border-primary py-0 px-5 rounded-pill"><i class="bi bi-person-plus-fill"></i> Connect</button>
+                                            <button type="submit" class="btn connect-btn fs-9 text-primary border-primary py-0 px-2 w-100 rounded-pill"><i class="bi bi-person-plus-fill"></i> Connect</button>
                                         @endif
                                     </form>
                                     </div>

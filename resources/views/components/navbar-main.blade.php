@@ -1,64 +1,66 @@
-    <nav class="navbar navbar-expand-lg bg-white nav-main sticky-top border-bottom">
-        <div class="container mx-auto">
+    <nav class="navbar navbar-expand-lg bg-white nav-main sticky-top border-bottom px-2 px-lg-0">
+        <div class="container mx-auto px-1">
+            <!-- DESKTOP LOGO -->
             <a class="navbar-brand d-lg-flex d-none" href="{{route('homepage.page')}}"><img src="{{asset('IMG/logos/connexa3.png')}}" style="width: 100px" class=""></a>
-            <div class="navbar-brand d-lg-none d-flex">
-                <a class="navbar-brand d-lg-none me-3" href="{{route('homepage.page')}}"><img src="{{asset('IMG/logos/connexa3.png')}}" class="mb-3" style="width: 100px" alt=""></a>
-                <form class="position-relative ms-3" role="search" action="{{ route('search.page') }}" method="GET">
+            
+            <!-- MOBILE TOP BAR -->
+            <div class="d-lg-none d-flex align-items-center justify-content-between w-100 py-1">
+                <a class="navbar-brand me-1 p-0" href="{{route('homepage.page')}}">
+                    <img src="{{asset('IMG/logos/connexa3.png')}}" style="width: 85px" alt="Connexa Logo">
+                </a>
+                <form class="position-relative flex-grow-1 mx-2" role="search" action="{{ route('search.page') }}" method="GET" style="max-width: 170px;">
                     <input
-                        class="form-control fs-7 ps-6 pb-2 rounded-pill"
-                        style="width: 200px"
+                        class="form-control fs-8 ps-5 pe-2 py-1 rounded-pill"
                         type="search"
                         name="q"
                         placeholder="Search"
                         value="{{ request('q') }}"
                         autocomplete="off"
                     />
-                    <i class="fa-solid fa-magnifying-glass position-absolute search-icon fs-8 ps-1 pb-2 text-muted"></i>
+                    <i class="fa-solid fa-magnifying-glass position-absolute search-icon fs-8 text-muted" style="left: 10px; top: 50%; transform: translateY(-50%);"></i>
                 </form>
-
-            </div>
-            <div class="navbar-brand d-lg-none d-flex">
-                <li class="dropdown list-unstyled">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="dropdown">
                         <a class="dropdown-toggle no-caret" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{ asset('IMG/uploads/profile/' . Auth::user()->profile_image) }}"
                                 alt="Profile"
                                 class="rounded-circle border"
-                                style="width: 35px; height: 35px">
+                                style="width: 32px; height: 32px; object-fit: cover;">
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-start">
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm">
                             <li>
-                                <a class="dropdown-item d-flex" href="{{route('user.page', Auth::user()->user_id)}}">
+                                <a class="dropdown-item d-flex align-items-center" href="{{route('user.page', Auth::user()->user_id)}}">
                                     <img src="{{ asset('IMG/uploads/profile/' . Auth::user()->profile_image) }}"
                                     alt="Profile"
                                     class="rounded-circle border"
-                                    style="width: 60px; height: 60px">
-                                    <div class="d-block ms-3 mt-1 align-items-center gap-0" style="width: 250px">
-                                        <h2 class="fs-6 lf-1" style="white-space: normal; word-wrap: break-word;">{{ Auth::user()->name }}</h2>
-                                        <p class="fs-8 text-truncate mb-3 lh-1"  style="white-space: normal; word-wrap: break-word;">{{ \Illuminate\Support\Str::words(Auth::user()->headline, 11, ' ...') }}</p>
+                                    style="width: 45px; height: 45px; object-fit: cover;">
+                                    <div class="d-block ms-2" style="max-width: 180px">
+                                        <h6 class="mb-0 fs-7 fw-bold text-dark">{{ Auth::user()->name }}</h6>
+                                        <p class="fs-9 text-muted mb-0 text-truncate">{{ Auth::user()->headline }}</p>
                                     </div>
                                 </a>
                             </li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><div class="ps-5"><h2 class="fs-6">Accounts</h2></div></li>
-                            <li><a class="dropdown-item ps-5 fs-8" href="#">Settings & Privacy</a></li>
-                            <li><a class="dropdown-item ps-5 fs-8" href="#">Help</a></li>
-                            <li><a class="dropdown-item ps-5 fs-8" href="#">Language</a></li>
+                            <li><div class="px-3"><h6 class="fs-8 text-muted fw-bold mb-1">Accounts</h6></div></li>
+                            <li><a class="dropdown-item px-3 fs-8" href="#">Settings & Privacy</a></li>
+                            <li><a class="dropdown-item px-3 fs-8" href="#">Help</a></li>
+                            <li><a class="dropdown-item px-3 fs-8" href="#">Language</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><div class="ps-5"><h2 class="fs-6">Manage</h2></div></li>
-                            <li><a class="dropdown-item ps-5 fs-8" href="#">Post & Activity</a></li>
-                            <li><a class="dropdown-item ps-5 fs-8" href="{{ route('jobs.page', ['modal' => 'applied']) }}">Jobs Applications</a></li>
+                            <li><div class="px-3"><h6 class="fs-8 text-muted fw-bold mb-1">Manage</h6></div></li>
+                            <li><a class="dropdown-item px-3 fs-8" href="#">Post & Activity</a></li>
+                            <li><a class="dropdown-item px-3 fs-8" href="{{ route('jobs.page', ['modal' => 'applied']) }}">Jobs Applications</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><form action="{{ route('logout') }}" method="POST" class="dropdown-item">
+                            <li><form action="{{ route('logout') }}" method="POST" class="dropdown-item p-0">
                                     @csrf
-                                    <button class="fs-8 ps-3 ms-1 pe-30 bg-transparent border-0" type="submit">Sign Out</button>
+                                    <button class="w-100 text-start px-3 py-1 bg-transparent border-0 fs-8 text-danger fw-bold" type="submit">Sign Out</button>
                                 </form>
                             </li>
                         </ul>
-
-                    </li>
-                <button class="navbar-toggler ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                    </div>
+                    <button class="navbar-toggler p-1 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon" style="width: 1.25em; height: 1.25em;"></span>
+                    </button>
+                </div>
             </div>
             <div class="collapse navbar-collapse bg-white rounded" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">

@@ -1,3 +1,5 @@
+@props(['posts', 'user', 'companies' => collect(), 'peoples' => collect(), 'ads' => collect()])
+
 @foreach($posts as $post)
     <div class="shadow-sm bg-white rounded mt-3" style="height: auto; ">
         <div class="d-flex justify-content-center gap-2 border-bottom">
@@ -30,8 +32,40 @@
         </div>
 
         <div class="post-wrapper mt-2">
-            <div class="modalTrigger" data-bs-toggle="modal" data-bs-target="#postModal{{ $post->post_id }}">
-                @php $count = $post->postImages->count(); @endphp
+            @php $count = $post->postImages->count(); @endphp
+
+            {{-- MOBILE VIEW: First image full width + horizontal slide carousel for multiple images --}}
+            <div class="d-block d-md-none">
+                @if ($count == 1)
+                    <div class="modalTrigger" data-bs-toggle="modal" data-bs-target="#postModal{{ $post->post_id }}">
+                        <img src="{{ asset('IMG/uploads/post/' . $post->postImages[0]->image) }}" class="single-img w-100" style="max-height: 400px; object-fit: cover;" alt="post image">
+                    </div>
+                @elseif ($count > 1)
+                    <div id="mobileCarousel{{ $post->post_id }}" class="carousel slide position-relative" data-bs-touch="true" data-bs-interval="false">
+                        <div class="position-absolute top-0 end-0 m-2 px-2 py-1 bg-dark bg-opacity-75 text-white rounded-pill fs-10 z-3">
+                            <span class="current-slide-{{ $post->post_id }}">1</span>/{{ $count }}
+                        </div>
+                        <div class="carousel-inner modalTrigger" data-bs-toggle="modal" data-bs-target="#postModal{{ $post->post_id }}">
+                            @foreach ($post->postImages as $key => $image)
+                                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                    <img src="{{ asset('IMG/uploads/post/' . $image->image) }}" class="d-block w-100" style="max-height: 380px; object-fit: cover;" alt="post image">
+                                </div>
+                            @endforeach
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#mobileCarousel{{ $post->post_id }}" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon bg-dark bg-opacity-50 rounded-circle p-2" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#mobileCarousel{{ $post->post_id }}" data-bs-slide="next">
+                            <span class="carousel-control-next-icon bg-dark bg-opacity-50 rounded-circle p-2" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                @endif
+            </div>
+
+            {{-- DESKTOP VIEW: Original grid layout --}}
+            <div class="d-none d-md-block modalTrigger" data-bs-toggle="modal" data-bs-target="#postModal{{ $post->post_id }}">
                 @if ($count == 1)
                     <img src="{{ asset('IMG/uploads/post/' . $post->postImages[0]->image) }}" class="single-img" alt="post image">
                 @elseif ($count == 2)
@@ -80,7 +114,7 @@
             <div class="modal align-items-center justify-content-center" tabindex="-1" id="postModal{{ $post->post_id }}">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable scroll-area" style="max-width: 1000px;">
                     <div class="modal-content">
-                    <div class="modal-body d-flex gap-3 p-0" style="overflow-y: auto;">
+                    <div class="modal-body d-flex flex-column flex-lg-row gap-3 p-0" style="overflow-y: auto;">
                         @if($count > 1)
                             <div id="carousel{{ $post->post_id }}" class="carousel carousel-post slide bg-dark flex-shrink-0 border-end" data-bs-ride="carousel" >
                                 <div class="carousel-inner">
@@ -99,12 +133,12 @@
                             </div>
                         @else
                             @foreach ($post->postImages as $key => $image)
-                            <div class="one-image bg-dark border-end" style="width: 900px">
+                            <div class="one-image bg-dark border-end">
                                 <img src="{{ asset('IMG/uploads/post/' . $image->image) }}" class="d-block bg-dark">
                             </div>
                             @endforeach
                         @endif
-                        <div class="d-block pe-3 w-50 flex-grow-1 overflow-auto" style="max-height: 600px">
+                        <div class="d-block pe-3 w-100 w-lg-50 flex-grow-1 overflow-auto" style="max-height: 600px">
                             <div class="d-flex pt-3 gap-3 post-modal-profile bg-white pb-3 w-100">
                                 @if($post->user)
                                     <img src="{{asset('IMG/uploads/profile/' . $post->user->profile_image)}}" width="50" height="50" class="mt-1 b-white rounded-circle">
@@ -249,4 +283,88 @@
             </div>
         </div>
     </div>
+
+    {{-- IN-FEED SUGGESTIONS (MOBILE ONLY, AFTER 2nd POST) --}}
+    @if($loop->iteration == 2)
+        <div class="d-block d-lg-none bg-white rounded shadow-sm p-3 mt-3">
+            <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom">
+                <h6 class="fw-bold mb-0 text-dark fs-7"><i class="bi bi-stars text-primary me-1"></i> Recommended for You</h6>
+                <a href="{{ route('network.page') }}" class="text-decoration-none text-primary fs-9 fw-semibold">View all</a>
+            </div>
+
+            {{-- COMPANY SUGGESTIONS (2 ITEMS SIDE-BY-SIDE) --}}
+            @if(isset($companies) && $companies->count() > 0)
+                <p class="fs-9 text-muted mb-2 fw-semibold">Pages to Follow</p>
+                <div class="row g-2 mb-3">
+                    @foreach($companies->take(2) as $company)
+                        @php $isFollowed = $company->follows->contains('user_id', Auth::user()->user_id); @endphp
+                        <div class="col-6">
+                            <div class="border rounded p-2 text-center h-100 d-flex flex-column justify-content-between bg-light bg-opacity-50">
+                                <a href="{{ route('company.show', $company->company_id) }}" class="text-decoration-none text-dark d-block">
+                                    <img src="{{asset('IMG/uploads/logo/' . $company->logo)}}" class="rounded p-1 bg-white border mb-2" style="width:45px; height:45px; object-fit:contain;">
+                                    <h6 class="fs-8 fw-bold mb-0 text-truncate">{{$company->name}}</h6>
+                                    <p class="fs-10 text-muted mb-2 text-truncate">{{$company->industry}}</p>
+                                </a>
+                                <form action="{{route('follow.store')}}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="company_id" value="{{$company->company_id}}">
+                                    <button type="submit" class="btn follow-btn fs-9 text-primary border-primary w-100 py-1 rounded-pill">
+                                        {{ $isFollowed ? 'Unfollow' : 'Follow' }}
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+
+            {{-- PEOPLE CONNECT SUGGESTIONS (2 ITEMS SIDE-BY-SIDE) --}}
+            @if(isset($peoples) && $peoples->count() > 0)
+                <p class="fs-9 text-muted mb-2 fw-semibold">People You May Know</p>
+                <div class="row g-2">
+                    @foreach($peoples->take(2) as $people)
+                        @php $isRequested = \App\Models\Connection::where('user_id', Auth::user()->user_id)
+                                            ->where('user_target', $people->user_id)
+                                            ->exists(); @endphp
+                        <div class="col-6">
+                            <div class="border rounded p-2 text-center h-100 d-flex flex-column justify-content-between bg-light bg-opacity-50">
+                                <a href="{{route('user.page', $people->user_id)}}" class="text-decoration-none text-dark d-block">
+                                    <img src="{{asset('IMG/uploads/profile/' . $people->profile_image)}}" class="rounded-circle border mb-2" style="width:45px; height:45px; object-fit:cover;">
+                                    <h6 class="fs-8 fw-bold mb-0 text-truncate">{{$people->name}}</h6>
+                                    <p class="fs-10 text-muted mb-2 text-truncate">{{$people->headline}}</p>
+                                </a>
+                                <form action="{{route('connect.store')}}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="user_id" value="{{$people->user_id}}">
+                                    <button type="submit" class="btn connect-btn fs-9 text-primary border-primary w-100 py-1 rounded-pill">
+                                        @if($isRequested)
+                                            <i class="bi bi-clock-history"></i> Pending
+                                        @else
+                                            <i class="bi bi-person-plus-fill"></i> Connect
+                                        @endif
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+        </div>
+    @endif
 @endforeach
+
+{{-- IN-FEED ADS BANNER (MOBILE ONLY, AT THE VERY END OF FEED) --}}
+@if(isset($ads) && $ads->count() > 0)
+    <div class="d-block d-lg-none bg-white rounded shadow-sm p-3 mt-3 w-100">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="fs-10 text-muted fw-bold text-uppercase tracking-wider">Promoted</span>
+            <i class="bi bi-info-circle text-muted fs-9"></i>
+        </div>
+        @foreach($ads->take(1) as $ad)
+            <a href="{{$ad->link}}" class="d-block text-decoration-none">
+                <img src="{{asset('IMG/uploads/ads/' . $ad->image_content)}}" class="rounded w-100 img-fluid" style="height: auto; max-height: 400px; object-fit: contain;">
+            </a>
+        @endforeach
+    </div>
+@endif
+

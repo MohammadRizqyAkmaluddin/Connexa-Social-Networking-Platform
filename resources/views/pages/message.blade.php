@@ -4,7 +4,7 @@
 
 @section('content')
 <main>
-    <div class="container d-lg-block mx-auto justify-content-center w-100 mt-10 p-2" style="gap: 1rem;">
+    <div class="container d-lg-block mx-auto justify-content-center w-100 mt-3 mt-lg-10 p-2" style="gap: 1rem;">
         <div class="d-flex align-items-center justify-content-between shadow-sm bg-white rounded px-3">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
@@ -142,13 +142,13 @@
             </div>
         </div>
 
-        <div class="d-flex tab-content" id="myTabContent" style="height: 85vh">
-            <div class="tab-pane fade show active" id="all-tab-pane" role="tabpanel" aria-labelledby="all-tab" tabindex="0" >
-                <div class="d-flex w-100 shadow-sm bg-white rounded mt-3">
+        <div class="d-flex tab-content" id="myTabContent" style="min-height: 85vh">
+            <div class="tab-pane fade show active w-100" id="all-tab-pane" role="tabpanel" aria-labelledby="all-tab" tabindex="0" >
+                <div class="d-flex w-100 shadow-sm bg-white rounded mt-3 chat-container chat-container-box show-list-mobile">
                     @php
                         $activeTab = request('active_tab') ?? ($chats->count() > 0 ? $chats[0]['user']->user_id : '');
                     @endphp
-                    <ul class="nav flex-column nav-tabs border-end scroll-area" id="myTab" role="tablist" style="width: 430px; height:700p; overflow-y:auto;">
+                    <ul class="nav flex-column nav-tabs border-end scroll-area chat-list-panel" id="myTab" role="tablist" style="width: 430px; height:700px; overflow-y:auto;">
                         @foreach ($chats as $chat)
                             @php
                                 $senderId = $chat['user']->user_id ?? null;
@@ -169,7 +169,7 @@
                                     <input type="hidden" name="active_tab" value="{{ $chat['user']->user_id }}">
 
                                     <button
-                                        class="nav-link border-bottom d-flex align-items-center justify-content-between {{ $isActive ? 'active' : '' }} {{ $isUnread ? 'bg-unread' : '' }} w-100"
+                                        class="nav-link border-bottom d-flex align-items-center justify-content-between chat-list-item-btn {{ $isActive ? 'active' : '' }} {{ $isUnread ? 'bg-unread' : '' }} w-100"
                                         id="chat-tab-{{ $chat['user']->user_id }}"
                                         data-bs-toggle="tab"
                                         data-bs-target="#chat-pane-{{ $chat['user']->user_id }}"
@@ -191,7 +191,7 @@
                                             </div>
                                             <div class="flex-grow-1 text-start">
                                                 <h2 class="fs-6 ms-3 lh-0 mb-1 text-dark">{{ $chat['user']->name }}</h2>
-                                                <p class="fs-9 ms-3 text-mutedbold text-truncate-2 mb-0" style="width: 300px">
+                                                <p class="fs-9 ms-3 text-mutedbold text-truncate-2 mb-0" style="max-width: 300px">
                                                     @if($chat['message']->receiver_id == $authId)
                                                         {{ Str::before($chat['user']->name, ' ') }}: {{ $chat['message']->message }}
                                                     @else
@@ -214,7 +214,7 @@
                         @endif
                         @endforeach
                     </ul>
-                    <div class="tab-content flex-grow-1" style="width: 500px">
+                    <div class="tab-content flex-grow-1 chat-conversation-panel" style="width: 500px">
                         @foreach ($chats as $chat)
                             @php
                                 $isActive = $activeTab == $chat['user']->user_id;
@@ -223,10 +223,13 @@
                                 id="chat-pane-{{ $chat['user']->user_id }}"
                                 role="tabpanel"
                                 aria-labelledby="chat-tab-{{ $chat['user']->user_id }}">
-                                <div class="d-flex px-3 pt-3 pb-1 border-bottom align-items-start">
-                                    <img src="{{ asset('IMG/uploads/profile/' . $chat['user']->profile_image) }}" width="55" height="55" class="rounded-circle me-3">
-                                    <div class="d-block">
-                                        <h5 class="fs-6 mb-1">{{ $chat['user']->name }}</h5>
+                                <div class="d-flex px-3 pt-3 pb-1 border-bottom align-items-center">
+                                    <button type="button" class="btn border-0 p-0 me-2 d-lg-none back-to-list-btn" title="Back to chat list">
+                                        <i class="bi bi-arrow-left fs-4 text-dark"></i>
+                                    </button>
+                                    <img src="{{ asset('IMG/uploads/profile/' . $chat['user']->profile_image) }}" width="50" height="50" class="rounded-circle me-3 flex-shrink-0" style="object-fit:cover;">
+                                    <div class="d-block flex-grow-1 overflow-hidden">
+                                        <h5 class="fs-6 mb-1 text-truncate">{{ $chat['user']->name }}</h5>
                                         <p class="fs-8 text-muted mb-0 text-truncate-1 lh-1">{{ $chat['user']->headline }}</p>
                                         <div class="d-flex align-items-center gap-1 mt-1">
                                             @if(in_array($chat['user']->user_id, $activeUsers))
@@ -302,12 +305,12 @@
                 </div>
             </div>
 
-            <div class="tab-pane fade " id="jobs-tab-pane" role="tabpanel" aria-labelledby="all-tab" tabindex="0" >
-                <div class="d-flex w-100 shadow-sm bg-white rounded mt-3">
+            <div class="tab-pane fade w-100" id="jobs-tab-pane" role="tabpanel" aria-labelledby="all-tab" tabindex="0" >
+                <div class="d-flex w-100 shadow-sm bg-white rounded mt-3 chat-container chat-container-box show-list-mobile">
                     @php
                         $activeTab = request('active_tab') ?? ($jobChats->count() > 0 ? $jobChats[0]['user']->user_id : '');
                     @endphp
-                    <ul class="nav flex-column nav-tabs border-end scroll-area" id="myTab" role="tablist" style="width: 430px; height:700p; overflow-y:auto;">
+                    <ul class="nav flex-column nav-tabs border-end scroll-area chat-list-panel" id="myTab" role="tablist" style="width: 430px; height:700px; overflow-y:auto;">
                         @foreach ($jobChats as $chat)
                             @php
                                 $senderId = $chat['user']->user_id ?? null;
@@ -329,7 +332,7 @@
                                     <input type="hidden" name="active_tab" value="{{ $chat['user']->user_id }}">
 
                                     <button
-                                        class="nav-link border-bottom d-flex align-items-center justify-content-between {{ $isActive ? 'active' : '' }} {{ $isUnread ? 'bg-unread' : '' }} w-100"
+                                        class="nav-link border-bottom d-flex align-items-center justify-content-between chat-list-item-btn {{ $isActive ? 'active' : '' }} {{ $isUnread ? 'bg-unread' : '' }} w-100"
                                         id="chat-tab-{{ $chat['user']->user_id }}"
                                         data-bs-toggle="tab"
                                         data-bs-target="#chat-pane-{{ $chat['user']->user_id }}"
@@ -351,7 +354,7 @@
                                             </div>
                                             <div class="flex-grow-1 text-start">
                                                 <h2 class="fs-6 ms-3 lh-0 mb-1 text-dark">{{ $chat['user']->name }}</h2>
-                                                <p class="fs-9 ms-3 text-mutedbold text-truncate-2 mb-0" style="width: 300px">
+                                                <p class="fs-9 ms-3 text-mutedbold text-truncate-2 mb-0" style="max-width: 300px">
                                                     @if($chat['message']->receiver_id == $authId)
                                                         {{ Str::before($chat['user']->name, ' ') }}: {{ $chat['message']->message }}
                                                     @else
@@ -374,7 +377,7 @@
                         @endif
                         @endforeach
                     </ul>
-                    <div class="tab-content flex-grow-1" style="width: 500px">
+                    <div class="tab-content flex-grow-1 chat-conversation-panel" style="width: 500px">
                         @foreach ($jobChats as $chat)
                             @php
                                 $isActive = $activeTab == $chat['user']->user_id;
@@ -383,10 +386,13 @@
                                 id="chat-pane-{{ $chat['user']->user_id }}"
                                 role="tabpanel"
                                 aria-labelledby="chat-tab-{{ $chat['user']->user_id }}">
-                                <div class="d-flex px-3 pt-3 pb-1 border-bottom align-items-start">
-                                    <img src="{{ asset('IMG/uploads/profile/' . $chat['user']->profile_image) }}" width="55" height="55" class="rounded-circle me-3">
-                                    <div class="d-block">
-                                        <h5 class="fs-6 mb-1">{{ $chat['user']->name }}</h5>
+                                <div class="d-flex px-3 pt-3 pb-1 border-bottom align-items-center">
+                                    <button type="button" class="btn border-0 p-0 me-2 d-lg-none back-to-list-btn" title="Back to chat list">
+                                        <i class="bi bi-arrow-left fs-4 text-dark"></i>
+                                    </button>
+                                    <img src="{{ asset('IMG/uploads/profile/' . $chat['user']->profile_image) }}" width="50" height="50" class="rounded-circle me-3 flex-shrink-0" style="object-fit:cover;">
+                                    <div class="d-block flex-grow-1 overflow-hidden">
+                                        <h5 class="fs-6 mb-1 text-truncate">{{ $chat['user']->name }}</h5>
                                         <p class="fs-8 text-muted mb-0 text-truncate-1 lh-1">{{ $chat['user']->headline }}</p>
                                         <div class="d-flex align-items-center gap-1 mt-1">
                                             @if(in_array($chat['user']->user_id, $activeUsers))
@@ -473,6 +479,55 @@
                 description.value = textarea.value.trim();
             }
         }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const hasActiveTab = urlParams.has('active_tab') || urlParams.has('active_tab2');
+
+            function setupMobileChatView() {
+                const containers = document.querySelectorAll(".chat-container");
+                containers.forEach(container => {
+                    if (window.innerWidth < 992) {
+                        if (hasActiveTab) {
+                            container.classList.add("show-chat-mobile");
+                            container.classList.remove("show-list-mobile");
+                        } else {
+                            container.classList.add("show-list-mobile");
+                            container.classList.remove("show-chat-mobile");
+                        }
+                    } else {
+                        container.classList.remove("show-chat-mobile", "show-list-mobile");
+                    }
+
+                    // Handle chat item click
+                    const chatBtns = container.querySelectorAll(".chat-list-item-btn");
+                    chatBtns.forEach(btn => {
+                        btn.addEventListener("click", function() {
+                            if (window.innerWidth < 992) {
+                                container.classList.add("show-chat-mobile");
+                                container.classList.remove("show-list-mobile");
+                            }
+                        });
+                    });
+
+                    // Handle back button click
+                    const backBtns = container.querySelectorAll(".back-to-list-btn");
+                    backBtns.forEach(btn => {
+                        btn.addEventListener("click", function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            if (window.innerWidth < 992) {
+                                container.classList.add("show-list-mobile");
+                                container.classList.remove("show-chat-mobile");
+                            }
+                        });
+                    });
+                });
+            }
+
+            setupMobileChatView();
+            window.addEventListener("resize", setupMobileChatView);
+        });
     </script>
 
 @endsection

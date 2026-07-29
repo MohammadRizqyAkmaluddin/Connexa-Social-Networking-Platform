@@ -195,7 +195,7 @@
             </div>
         </div>
         <hr class="flex-grow-1">
-        <x-home-post :posts="$posts" :user="$user" />
+        <x-home-post :posts="$posts" :user="$user" :companies="$companies" :peoples="$peoples" :ads="$ads" />
     </div>
 
     <div class="content3 mt-8">

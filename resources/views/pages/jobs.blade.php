@@ -70,20 +70,38 @@
                                         onmouseout="this.querySelector('h2').style.textDecoration='none'">
 
                                         <img src="{{asset('IMG/uploads/logo/' . $appliedJob->job->company->logo)}}" width="50" height="50" class="mt-3">
-                                        <div class="d-flex border-bottom p-3 w-100">
-                                            <div class="d-block w-50 ">
+                                        <div class="d-flex border-bottom p-3 w-100 flex-column flex-md-row">
+                                            <div class="d-block w-100 w-md-50">
                                                 <h2 class="fs-6 mb-0 text-primary">{{ $appliedJob->job->title }}</h2>
                                                 <p class="fs-9 mb-0">{{ $appliedJob->job->company->name }}</p>
                                                 <p class="fs-9 mb-0 text-muted">{{ $appliedJob->job->company->city }}, {{ $appliedJob->job->company->country }}</p>
-                                                <p class="fs-11 mb-0 text-muted">{{$appliedJob->job->created_at->diffForHumans()}}</p>
+                                                
+                                                {{-- MOBILE ONLY: Salary, employment_type & job mode right under city, country --}}
+                                                <div class="d-block d-md-none fs-10 text-muted mt-2">
+                                                    <div class="d-flex gap-1">
+                                                        <p class="mb-0 text-success fw-semibold">{{ $appliedJob->job->salary ? 'Rp' . number_format($appliedJob->job->salary->min_salary, 0, ',', '.') : 'Not showing salary' }}</p>
+                                                        @if($appliedJob->job->salary)
+                                                        <p class="mb-0 text-success fw-semibold">-</p>
+                                                        <p class="mb-0 text-success fw-semibold">{{ 'Rp' . number_format($appliedJob->job->salary->max_salary, 0, ',', '.') }}</p>
+                                                        @endif
+                                                    </div>
+                                                    <div class="d-flex gap-1 mt-1">
+                                                        <p class="mb-0 fw-semibold text-mutedbold">{{$appliedJob->job->employment->employment_type}}</p>|
+                                                        <p class="mb-0">{{$appliedJob->job->mode->mode}}</p>
+                                                    </div>
+                                                </div>
+
+                                                <p class="fs-11 mb-0 text-muted mt-1 mt-md-0">{{$appliedJob->job->created_at->diffForHumans()}}</p>
                                             </div>
-                                            <div class="d-block fs-10 w-25 ms-4 text-muted">
+
+                                            {{-- DESKTOP ONLY: Right side salary & employment info --}}
+                                            <div class="d-none d-md-block fs-10 w-25 ms-4 text-muted">
                                                 <div class="d-flex gap-1">
                                                     <p class="mb-0 text-success">{{ $appliedJob->job->salary ? 'Rp' . number_format($appliedJob->job->salary->min_salary, 0, ',', '.') : 'Not showing salary' }}</p>
                                                     @if($appliedJob->job->salary)
                                                     <p class="mb-0">-</p>
+                                                    <p class="mb-0 text-success">{{ 'Rp' . number_format($appliedJob->job->salary->max_salary, 0, ',', '.') }}</p>
                                                     @endif
-                                                    <p class="mb-0 text-success">{{ $appliedJob->job->salary ? 'Rp' . number_format($appliedJob->job->salary->max_salary, 0, ',', '.') : '' }}</p>
                                                 </div>
                                                 <div class="d-flex gap-1">
                                                     <p class="mb-0 fw-semibold text-mutedbold">{{$appliedJob->job->employment->employment_type}}</p>|
@@ -114,20 +132,38 @@
                                     onmouseover="this.querySelector('h2').style.textDecoration='underline'"
                                     onmouseout="this.querySelector('h2').style.textDecoration='none'">
                                     <img src="{{asset('IMG/uploads/logo/' . $savedJob->job->company->logo)}}" width="50" height="50" class="mt-3">
-                                    <div class="d-flex border-bottom p-3 w-100">
-                                            <div class="d-block w-50 ">
+                                    <div class="d-flex border-bottom p-3 w-100 flex-column flex-md-row">
+                                            <div class="d-block w-100 w-md-50">
                                                 <h2 class="fs-6 mb-0 text-primary">{{ $savedJob->job->title }}</h2>
                                                 <p class="fs-9 mb-0">{{ $savedJob->job->company->name }}</p>
                                                 <p class="fs-9 mb-0 text-muted">{{ $savedJob->job->company->city }}, {{ $savedJob->job->company->country }}</p>
-                                                <p class="fs-11 mb-0 text-muted">{{$savedJob->job->created_at->diffForHumans()}}</p>
+                                                
+                                                {{-- MOBILE ONLY: Salary, employment_type & job mode right under city, country --}}
+                                                <div class="d-block d-md-none fs-10 text-muted mt-2">
+                                                    <div class="d-flex gap-1">
+                                                        <p class="mb-0 text-success fw-semibold">{{ $savedJob->job->salary ? 'Rp' . number_format($savedJob->job->salary->min_salary, 0, ',', '.') : 'Not showing salary' }}</p>
+                                                        @if($savedJob->job->salary)
+                                                        <p class="mb-0 text-success fw-semibold">-</p>
+                                                        <p class="mb-0 text-success fw-semibold">{{ 'Rp' . number_format($savedJob->job->salary->max_salary, 0, ',', '.') }}</p>
+                                                        @endif
+                                                    </div>
+                                                    <div class="d-flex gap-1 mt-1">
+                                                        <p class="mb-0 fw-semibold text-mutedbold">{{$savedJob->job->employment->employment_type}}</p>|
+                                                        <p class="mb-0">{{$savedJob->job->mode->mode}}</p>
+                                                    </div>
+                                                </div>
+
+                                                <p class="fs-11 mb-0 text-muted mt-1 mt-md-0">{{$savedJob->job->created_at->diffForHumans()}}</p>
                                             </div>
-                                            <div class="d-block fs-10 w-25 ms-4 text-muted">
+
+                                            {{-- DESKTOP ONLY: Right side salary & employment info --}}
+                                            <div class="d-none d-md-block fs-10 w-25 ms-4 text-muted">
                                                 <div class="d-flex gap-1">
                                                     <p class="mb-0 text-success">{{ $savedJob->job->salary ? 'Rp' . number_format($savedJob->job->salary->min_salary, 0, ',', '.') : 'Not showing salary' }}</p>
                                                     @if($savedJob->job->salary)
                                                     <p class="mb-0">-</p>
+                                                    <p class="mb-0 text-success">{{ 'Rp' . number_format($savedJob->job->salary->max_salary, 0, ',', '.') }}</p>
                                                     @endif
-                                                    <p class="mb-0 text-success">{{ $savedJob->job->salary ? 'Rp' . number_format($savedJob->job->salary->max_salary, 0, ',', '.') : '' }}</p>
                                                 </div>
                                                 <div class="d-flex gap-1">
                                                     <p class="mb-0 fw-semibold text-mutedbold">{{$savedJob->job->employment->employment_type}}</p>|
@@ -220,20 +256,38 @@
                             onmouseover="this.querySelector('h2').style.textDecoration='underline'"
                             onmouseout="this.querySelector('h2').style.textDecoration='none'">
                             <img src="{{asset('IMG/uploads/logo/' . $job->company->logo)}}" width="50" height="50" class="mt-3">
-                            <div class="d-flex border-bottom p-3 w-100">
-                                    <div class="d-block w-50 ">
+                            <div class="d-flex border-bottom p-3 w-100 flex-column flex-md-row">
+                                    <div class="d-block w-100 w-md-50">
                                         <h2 class="fs-6 mb-0 text-primary">{{ $job->title }}</h2>
                                         <p class="fs-9 mb-0">{{ $job->company->name }}</p>
                                         <p class="fs-9 mb-0 text-muted">{{ $job->company->city }}, {{ $job->company->country }}</p>
-                                        <p class="fs-11 mb-0 text-muted">{{$job->created_at->diffForHumans()}}</p>
+                                        
+                                        {{-- MOBILE ONLY: Salary, employment_type & job mode right under city, country --}}
+                                        <div class="d-block d-md-none fs-10 text-muted mt-2">
+                                            <div class="d-flex gap-1">
+                                                <p class="mb-0 text-success fw-semibold">{{ $job->salary ? 'Rp' . number_format($job->salary->min_salary, 0, ',', '.') : 'Not showing salary' }}</p>
+                                                @if($job->salary)
+                                                <p class="mb-0 text-success fw-semibold">-</p>
+                                                <p class="mb-0 text-success fw-semibold">{{ 'Rp' . number_format($job->salary->max_salary, 0, ',', '.') }}</p>
+                                                @endif
+                                            </div>
+                                            <div class="d-flex gap-1 mt-1">
+                                                <p class="mb-0 fw-semibold text-mutedbold">{{$job->employment->employment_type}}</p>|
+                                                <p class="mb-0">{{$job->mode->mode}}</p>
+                                            </div>
+                                        </div>
+
+                                        <p class="fs-11 mb-0 text-muted mt-1 mt-md-0">{{$job->created_at->diffForHumans()}}</p>
                                     </div>
-                                    <div class="d-block fs-10 w-25 ms-4 text-muted">
+
+                                    {{-- DESKTOP ONLY: Right side salary & employment info --}}
+                                    <div class="d-none d-md-block fs-10 w-25 ms-4 text-muted">
                                         <div class="d-flex gap-1">
                                             <p class="mb-0 text-success">{{ $job->salary ? 'Rp' . number_format($job->salary->min_salary, 0, ',', '.') : 'Not showing salary' }}</p>
                                             @if($job->salary)
                                             <p class="mb-0">-</p>
+                                            <p class="mb-0 text-success">{{ 'Rp' . number_format($job->salary->max_salary, 0, ',', '.') }}</p>
                                             @endif
-                                            <p class="mb-0 text-success">{{ $job->salary ? 'Rp' . number_format($job->salary->max_salary, 0, ',', '.') : '' }}</p>
                                         </div>
                                         <div class="d-flex gap-1">
                                             <p class="mb-0 fw-semibold text-mutedbold">{{$job->employment->employment_type}}</p>|
@@ -437,3 +491,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 @endsection
+
+
